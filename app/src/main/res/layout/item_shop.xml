@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="shopData"
+            type="com.example.konsinyasiapp.database.ShopData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:background="@drawable/item_background"
+        android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:text="@{shopData.name}"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_item_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:text="@{shopData.address}"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_product_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:fontFamily="@font/lato"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:text="@{shopData.ownerName}"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:fontFamily="@font/lato"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:text="@{shopData.phoneNumber}"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+    </LinearLayout>
+</layout>

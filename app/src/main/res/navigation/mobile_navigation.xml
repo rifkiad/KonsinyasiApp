@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.konsinyasiapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_shop"
+        android:name="com.example.konsinyasiapp.ui.shop.ShopFragment"
+        android:label="@string/toko"
+        tools:layout="@layout/fragment_shop">
+
+        <action
+            android:id="@+id/action_nav_shop_to_action_navshop_add"
+            app:destination="@id/action_navshop_add"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_deposit"
+        android:name="com.example.konsinyasiapp.ui.deposit.DepositFragment"
+        android:label="@string/deposit"
+        tools:layout="@layout/fragment_deposit" />
+
+    <fragment
+        android:id="@+id/nav_myProduct"
+        android:name="com.example.konsinyasiapp.ui.product.FragmentProduct"
+        android:label="@string/barang"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_nav_myProduct_to_action_navProduct_add"
+            app:destination="@id/action_navProduct_add"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_kategori_produk"
+        android:name="com.example.konsinyasiapp.ui.categoryProduct.CategoryFragment"
+        android:label="@string/kategori_produk"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_nav_kategori_produk_to_action_navCategory_add"
+            app:destination="@id/action_navCategory_add"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_navshop_add"
+        android:name="com.example.konsinyasiapp.ui.shop.AddShopFragment"
+        android:label="Tambah Toko"
+        tools:layout="@layout/fragment_add_shop">
+        <action
+            android:id="@+id/action_action_navshop_topshop_to_nav_shop"
+            app:destination="@id/nav_shop"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_navProduct_add"
+        android:name="com.example.konsinyasiapp.ui.product.AddProductFragment"
+        android:label="Tambah Produk"
+        tools:layout="@layout/fragment_add_product">
+        <action
+            android:id="@+id/action_action_navProduct_add_to_nav_myProduct"
+            app:destination="@id/nav_myProduct"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_navCategory_add"
+        android:name="com.example.konsinyasiapp.ui.categoryProduct.AddCategoryFragment"
+        android:label="Tambah Kategori"
+        tools:layout="@layout/fragment_add_category">
+        <action
+            android:id="@+id/action_action_navCategory_add_to_nav_kategori_produk"
+            app:destination="@id/nav_kategori_produk"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+
+</navigation>

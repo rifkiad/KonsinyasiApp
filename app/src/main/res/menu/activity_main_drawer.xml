@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/beranda" />
+        <item
+            android:id="@+id/nav_shop"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="@string/toko" />
+        <item
+            android:id="@+id/nav_deposit"
+            android:icon="@drawable/ic_wallet"
+            android:title="@string/deposit" />
+        <item
+            android:id="@+id/nav_myProduct"
+            android:icon="@drawable/ic_product"
+            android:title="@string/barang" />
+        <item
+            android:id="@+id/nav_kategori_produk"
+            android:icon="@drawable/ic_category"
+            android:title="@string/kategori_produk" />
+    </group>
+</menu>
