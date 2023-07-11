@@ -1,8 +1,8 @@
 package com.example.konsinyasiapp.repository
 
 import androidx.lifecycle.LiveData
-import com.example.konsinyasiapp.database.ShopDao
-import com.example.konsinyasiapp.database.ShopData
+import com.example.konsinyasiapp.data.ShopDao
+import com.example.konsinyasiapp.data.ShopData
 
 class ShopRepository(private val shopDao: ShopDao) {
 
@@ -18,5 +18,13 @@ class ShopRepository(private val shopDao: ShopDao) {
 
     suspend fun deleteItem(shopData: ShopData) {
         shopDao.deleteItem(shopData)
+    }
+
+    suspend fun deleteAll() {
+        shopDao.deleteAll()
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<ShopData>> {
+        return shopDao.searchDatabase(searchQuery)
     }
 }

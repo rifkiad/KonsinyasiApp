@@ -1,7 +1,7 @@
-package com.example.konsinyasiapp.helper
+package com.example.konsinyasiapp.ui.shop.Adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.konsinyasiapp.database.ShopData
+import com.example.konsinyasiapp.data.ShopData
 
 class ShopDiffCallback(private val oldShopList: List<ShopData>, private val newShopList: List<ShopData>) :
     DiffUtil.Callback() {

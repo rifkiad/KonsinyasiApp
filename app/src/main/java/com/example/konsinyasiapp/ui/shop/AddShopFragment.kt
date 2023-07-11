@@ -1,7 +1,6 @@
 package com.example.konsinyasiapp.ui.shop
 
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.SharedViewModel
-import com.example.konsinyasiapp.database.ShopData
+import com.example.konsinyasiapp.data.ShopData
 import com.example.konsinyasiapp.databinding.FragmentAddShopBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -47,7 +46,7 @@ class AddShopFragment : Fragment() {
     }
 
     private fun insertDataToShop() {
-        val mName = binding.edtName.text.toString()
+        val mName = binding.edtNamaToko.text.toString()
         val mAddress = binding.edtAlamat.text.toString()
         val mProductOwner = binding.edtNamaPemilik.text.toString()
         val mPhoneNumber = binding.edtNomorTelepon.text.toString()

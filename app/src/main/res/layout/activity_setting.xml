@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/_10sdp"
         android:text="Light Theme"
+        android:fontFamily="@font/lato"
         android:textSize="@dimen/_24sdp"
         android:textOff="Light Theme"
         android:textOn="Dark Theme"

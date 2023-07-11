@@ -3,12 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
-
 }
 
 android {
     namespace 'com.example.konsinyasiapp'
     compileSdk 34
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.konsinyasiapp"

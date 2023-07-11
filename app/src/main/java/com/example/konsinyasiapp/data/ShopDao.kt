@@ -1,4 +1,4 @@
-package com.example.konsinyasiapp.database
+package com.example.konsinyasiapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -21,4 +21,10 @@ interface ShopDao {
 
     @Delete
     suspend fun deleteItem(shopData: ShopData)
+
+    @Query("DELETE FROM shop_table")
+    suspend fun deleteAll()
+
+    @Query("SELECT * FROM shop_table WHERE name LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): LiveData<List<ShopData>>
 }

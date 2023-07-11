@@ -23,7 +23,7 @@
         app:boxStrokeWidthFocused="0dp">
 
         <EditText
-            android:id="@+id/edt_name"
+            android:id="@+id/edt_nama_toko"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
