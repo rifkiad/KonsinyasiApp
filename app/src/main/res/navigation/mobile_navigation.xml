@@ -24,6 +24,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_nav_shop_to_action_navShopDetail"
+            app:destination="@id/action_navShopDetail"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 
     <fragment
@@ -92,6 +99,19 @@
         <action
             android:id="@+id/action_action_navCategory_add_to_nav_kategori_produk"
             app:destination="@id/nav_kategori_produk"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/action_navShopDetail"
+        android:name="com.example.konsinyasiapp.ui.shop.DetailShopFragment"
+        android:label="Rincian Toko"
+        tools:layout="@layout/fragment_detail_shop">
+
+        <action
+            android:id="@+id/action_action_navShopDetail_to_nav_shop"
+            app:destination="@id/nav_shop"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_right" />
     </fragment>

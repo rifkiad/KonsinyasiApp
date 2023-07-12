@@ -13,10 +13,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.data.ShopData
+import com.example.konsinyasiapp.data.ShopDatabase
 import com.example.konsinyasiapp.databinding.EditShopBinding
 import com.example.konsinyasiapp.databinding.ItemShopBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ShopAdapter(val c: Context, var userList: List<ShopData>) :
+class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
     RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
 
 
@@ -31,7 +36,7 @@ class ShopAdapter(val c: Context, var userList: List<ShopData>) :
             }
         }
 
-        @SuppressLint("InflateParams")
+        @SuppressLint("InflateParams", "NotifyDataSetChanged")
         private fun popupMenus(v: View) {
             val position = userList[adapterPosition]
             val popupMenus = PopupMenu(c, v)
@@ -60,13 +65,22 @@ class ShopAdapter(val c: Context, var userList: List<ShopData>) :
                                 position.address = address.text.toString()
                                 position.ownerName = ownerShop.text.toString()
                                 position.phoneNumber = phoneNumber.text.toString()
-                                notifyDataSetChanged()
-                                Toast.makeText(
-                                    c,
-                                    "User Information is Edited",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                dialog.dismiss()
+
+                                // Update data menggunakan Room Database
+                                val shopDao = ShopDatabase.getDatabase(c).shopDao()
+                                GlobalScope.launch {
+                                    shopDao.updateData(position)
+
+                                    withContext(Dispatchers.Main) {
+                                        notifyDataSetChanged()
+                                        Toast.makeText(
+                                            c,
+                                            "User Information is Edited",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        dialog.dismiss()
+                                    }
+                                }
                             }
                         }
 
@@ -81,12 +95,25 @@ class ShopAdapter(val c: Context, var userList: List<ShopData>) :
                             .setIcon(R.drawable.ic_warning)
                             .setMessage("Are you sure you want to delete this information?")
                             .setPositiveButton("Yes") { dialog, _ ->
-                                //this motherFucker
-                                //userList.removeAt(adapterPosition)
-                                notifyItemRemoved(adapterPosition)
-                                Toast.makeText(c, "Deleted this Information", Toast.LENGTH_SHORT)
-                                    .show()
-                                dialog.dismiss()
+                                // delete data menggunakan Room Database
+                                val shopDao = ShopDatabase.getDatabase(c).shopDao()
+                                GlobalScope.launch {
+                                    shopDao.deleteItem(position)
+
+                                    withContext(Dispatchers.Main) {
+                                        //perlu digaris bawahi khususnya saya sendiri 'userList' harus berupa arrayList agar dapat memanggil sebuah removeAt terimakasih
+                                        userList.removeAt(adapterPosition)
+                                        notifyItemRemoved(adapterPosition)
+                                        notifyDataSetChanged()
+                                        Toast.makeText(
+                                            c,
+                                            "Deleted this Information",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                        dialog.dismiss()
+                                    }
+                                }
                             }
                             .setNegativeButton("No") { dialog, _ ->
                                 dialog.dismiss()
@@ -96,6 +123,7 @@ class ShopAdapter(val c: Context, var userList: List<ShopData>) :
 
                         true
                     }
+
                     else -> true
                 }
             }
@@ -106,28 +134,28 @@ class ShopAdapter(val c: Context, var userList: List<ShopData>) :
             menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                 .invoke(menu, true)
         }
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int {
-        return userList.size
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = userList[position]
-        holder.bind(currentItem)
-    }
-
-    fun setData(data: List<ShopData>) {
-        val toDoDiffUtil = ShopDiffCallback(userList, data)
-        val toDoDiffResult = DiffUtil.calculateDiff(toDoDiffUtil)
-        this.userList = data
-        toDoDiffResult.dispatchUpdatesTo(this)
-    }
 }
+
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            val binding =
+                ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return MyViewHolder(binding)
+        }
+
+        override fun getItemCount(): Int {
+            return userList.size
+        }
+
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            val currentItem = userList[position]
+            holder.bind(currentItem)
+        }
+
+        fun setData(data: ArrayList<ShopData>) {
+            val toDoDiffUtil = ShopDiffCallback(userList, data)
+            val toDoDiffResult = DiffUtil.calculateDiff(toDoDiffUtil)
+            this.userList = data
+            toDoDiffResult.dispatchUpdatesTo(this)
+        }
+    }

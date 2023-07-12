@@ -56,7 +56,7 @@ class ShopFragment : Fragment() {
 
         //observe livedata
         mShopViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
-            shopAdapter.setData(data)
+            shopAdapter.setData(data as ArrayList<ShopData>)
         })
 
         val menuHost: MenuHost = requireActivity()
@@ -64,11 +64,6 @@ class ShopFragment : Fragment() {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.shop_fragment_menu, menu)
 
-//                val search = menu.findItem(R.id.menu_search)
-//                val searchView = search.actionView as? SearchView
-//                searchView?.isSubmitButtonEnabled = true
-//                searchView?.setOnQueryTextListener(this@ShopFragment)
-//
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -79,6 +74,8 @@ class ShopFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
+
 
     private fun setupRecyclerView() {
         val recyclerView = binding.rvShop
@@ -100,5 +97,9 @@ class ShopFragment : Fragment() {
         builder.setTitle("Delete Everything?")
         builder.setMessage("Are you sure you want remove this Everything")
         builder.create().show()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
