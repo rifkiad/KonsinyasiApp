@@ -1,4 +1,4 @@
-package com.example.konsinyasiapp.ui.product
+package com.example.konsinyasiapp.ui.product.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

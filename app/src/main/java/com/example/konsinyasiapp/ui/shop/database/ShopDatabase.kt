@@ -1,9 +1,11 @@
-package com.example.konsinyasiapp.data
+package com.example.konsinyasiapp.ui.shop.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.konsinyasiapp.ui.shop.database.dao.ShopDao
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 
 @Database(entities = [ShopData::class], version = 1, exportSchema = false)
 abstract class ShopDatabase : RoomDatabase() {

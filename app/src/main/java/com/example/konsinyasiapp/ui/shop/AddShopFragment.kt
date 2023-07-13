@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.SharedViewModel
-import com.example.konsinyasiapp.data.ShopData
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentAddShopBinding
 import com.google.android.material.snackbar.Snackbar
 

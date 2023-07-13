@@ -1,8 +1,8 @@
 package com.example.konsinyasiapp.repository
 
 import androidx.lifecycle.LiveData
-import com.example.konsinyasiapp.data.ShopDao
-import com.example.konsinyasiapp.data.ShopData
+import com.example.konsinyasiapp.ui.shop.database.dao.ShopDao
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 
 class ShopRepository(private val shopDao: ShopDao) {
 

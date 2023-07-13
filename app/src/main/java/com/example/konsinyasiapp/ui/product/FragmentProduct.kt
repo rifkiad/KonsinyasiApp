@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.konsinyasiapp.databinding.FragmentProductBinding
+import com.example.konsinyasiapp.ui.product.viewmodel.ProductViewModel
 
 
 class FragmentProduct : Fragment() {

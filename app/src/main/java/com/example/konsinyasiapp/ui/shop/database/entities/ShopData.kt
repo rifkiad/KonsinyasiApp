@@ -1,4 +1,4 @@
-package com.example.konsinyasiapp.data
+package com.example.konsinyasiapp.ui.shop.database.entities
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

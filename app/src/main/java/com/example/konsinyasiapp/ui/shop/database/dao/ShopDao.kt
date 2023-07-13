@@ -1,4 +1,4 @@
-package com.example.konsinyasiapp.data
+package com.example.konsinyasiapp.ui.shop.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 
 @Dao
 interface ShopDao {

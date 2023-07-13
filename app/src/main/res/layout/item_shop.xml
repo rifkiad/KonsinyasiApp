@@ -6,14 +6,14 @@
 
         <variable
             name="shopData"
-            type="com.example.konsinyasiapp.data.ShopData" />
+            type="com.example.konsinyasiapp.ui.shop.database.entities.ShopData" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/white"
+        app:cardBackgroundColor="#344955"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
         app:cardMaxElevation="5dp">
@@ -37,9 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_6sdp"
                     android:fontFamily="@font/lato"
-                    android:maxLength="30"
                     android:text="@{shopData.name}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -51,7 +50,7 @@
                     android:maxLength="300"
                     android:maxLines="20"
                     android:text="@{shopData.address}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -61,7 +60,7 @@
                     android:layout_margin="@dimen/_6sdp"
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.ownerName}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -71,7 +70,7 @@
                     android:layout_margin="@dimen/_6sdp"
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.phoneNumber}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -82,10 +81,12 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_8sdp"
-                android:src="@drawable/ic_more" />
+                android:src="@drawable/ic_more"
+                app:tint="@color/white" /> <!-- Tint warna sesuai tema -->
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 </layout>

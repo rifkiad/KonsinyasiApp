@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentDetailShopBinding
 
 class DetailShopFragment : Fragment() {
+
+    private val args by navArgs<DetailShopFragmentArgs>()
 
     private var _binding: FragmentDetailShopBinding? = null
     private val binding get() = _binding!!
@@ -18,6 +22,31 @@ class DetailShopFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailShopBinding.inflate(inflater, container, false)
+        binding.args = args
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val shop = arguments?.getParcelable<ShopData>("shop")
+
+        // Mengisi data ke tampilan detail
+        binding.tvShopNameDetail.text = shop?.name
+        binding.tvShopAddress.text = shop?.address
+        binding.tvOwnerName.text = shop?.ownerName
+        binding.tvPhoneNumber.text = shop?.phoneNumber
+    }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.main, menu)
+//        menu.removeItem(R.id.menu_delete_all) // Menghapus item "Setting" dari menu
+//        menu.removeItem(R.id.menu_search) // Menghapus item "Setting" dari menu
+//    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

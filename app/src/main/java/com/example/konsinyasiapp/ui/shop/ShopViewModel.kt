@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.konsinyasiapp.data.ShopData
-import com.example.konsinyasiapp.data.ShopDatabase
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.ui.shop.database.ShopDatabase
 import com.example.konsinyasiapp.repository.ShopRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -10,16 +10,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.data.ShopData
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentShopBinding
 import com.example.konsinyasiapp.ui.shop.Adapter.ShopAdapter
 
@@ -103,3 +101,23 @@ class ShopFragment : Fragment() {
         _binding = null
     }
 }
+
+//        val navController = findNavController()
+//        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
+//
+//        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+//
+//        // Hide NavigationView when DrawerLayout is closed
+//        binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+//            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+//
+//            override fun onDrawerOpened(drawerView: View) {}
+//
+//            override fun onDrawerClosed(drawerView: View) {
+//                binding.navView.visibility = View.GONE
+//            }
+//
+//            override fun onDrawerStateChanged(newState: Int) {}
+//        })
+//
+//        binding.navView.setupWithNavController(navController)

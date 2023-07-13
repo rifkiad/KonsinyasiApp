@@ -6,23 +6,23 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.data.ShopData
-import com.example.konsinyasiapp.data.ShopDatabase
+import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.ui.shop.database.ShopDatabase
 import com.example.konsinyasiapp.databinding.EditShopBinding
 import com.example.konsinyasiapp.databinding.ItemShopBinding
+import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
-    RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
+class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(private val binding: ItemShopBinding) :
@@ -34,13 +34,17 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
             binding.mMenus.setOnClickListener {
                 popupMenus(it)
             }
+            itemView.setOnClickListener { view ->
+                val action = ShopFragmentDirections.actionNavShopToActionNavShopDetail(shopData)
+                view.findNavController().navigate(action)
+            }
         }
 
         @SuppressLint("InflateParams", "NotifyDataSetChanged")
         private fun popupMenus(v: View) {
             val position = userList[adapterPosition]
             val popupMenus = PopupMenu(c, v)
-            popupMenus.inflate(R.menu.shop_fragment_menu)
+            popupMenus.inflate(R.menu.shop_fragment_menu_more)
             popupMenus.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.edit_text -> {
@@ -50,10 +54,16 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
                         val ownerShop = binding.edtNamaPemilikEdit
                         val phoneNumber = binding.edtNomorTeleponEdit
 
+                        // mengeset data akan muncul di edit text
+                        name.setText(position.name)
+                        address.setText(position.address)
+                        ownerShop.setText(position.ownerName)
+                        phoneNumber.setText(position.phoneNumber)
+
                         val dialogView = binding.root
 
                         val dialogBuilder = AlertDialog.Builder(c)
-                            .setTitle("Edit Shop")
+                            .setTitle("Edit Toko")
                             .setView(dialogView)
                             .setPositiveButton("Ok", null)
                             .setNegativeButton("Cancel", null)
