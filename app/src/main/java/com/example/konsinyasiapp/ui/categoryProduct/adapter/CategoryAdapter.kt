@@ -1,37 +1,55 @@
 package com.example.konsinyasiapp.ui.categoryProduct.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.databinding.ItemCategoryBinding
-import com.example.konsinyasiapp.ui.product.database.entities.CategoryData
-import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
+import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+
+class CategoryAdapter(private val onDeleteItemClick: (deletedItem: CategoryData, categoryData: CategoryData) -> Unit)  : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+
+    var dataCategory = emptyList<CategoryData>()
 
     inner class MyViewHolder(private val binding: ItemCategoryBinding) :
-    RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
-//        fun bind(categoryData: CategoryData) {
-//            binding.categoryData = categoryData
-//            binding.executePendingBindings()
-//
-//            itemView.setOnClickListener { view ->
-//                val action = ShopFragmentDirections.actionNavShopToActionNavShopDetail(categoryData)
-//                view.findNavController().navigate(action)
-//            }
-//        }
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onDeleteItemClick(dataCategory[position], dataCategory[position])
+                }
+            }
+        }
+
+        fun bind(categoryData: CategoryData) {
+            binding.categoryData = categoryData
+            binding.executePendingBindings()
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("Not yet implemented")
+        val binding =
+            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return dataCategory.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = dataCategory[position]
+        holder.bind(currentItem)
+    }
+
+    fun setData(data: List<CategoryData>) {
+        val categoryDiffUtil = CategoryDiffCallback(dataCategory, data)
+        val categoryDiffUtilResult = DiffUtil.calculateDiff(categoryDiffUtil)
+        this.dataCategory = data
+        categoryDiffUtilResult.dispatchUpdatesTo(this)
     }
 }

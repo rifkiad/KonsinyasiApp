@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import com.example.konsinyasiapp.databinding.FragmentProductBinding
-import com.example.konsinyasiapp.ui.product.viewmodel.ProductViewModel
 
 
 class FragmentProduct : Fragment() {
@@ -24,17 +21,8 @@ class FragmentProduct : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productViewModel =
-            ViewModelProvider(this).get(ProductViewModel::class.java)
-
         _binding = FragmentProductBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.tvMyProduct
-        productViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

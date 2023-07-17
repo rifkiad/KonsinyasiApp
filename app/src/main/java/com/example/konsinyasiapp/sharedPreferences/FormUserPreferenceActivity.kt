@@ -31,20 +31,16 @@ class FormUserPreferenceActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
 
             val userName = binding.edtName.text.toString().trim()
-            val address = binding.edtAlamat.text.toString().trim()
 
             // Simpan nilai userName ke dalam SharedPreferences
             sharedPreferences.edit().putString("user_name", userName).apply()
-
-            // Simpan nilai address ke dalam SharedPreferences
-            sharedPreferences.edit().putString("user_address", address).apply()
 
             // Simpan status isFirstTime menjadi false
             sharedPreferences.edit().putBoolean("is_first_time", false).apply()
 
             val intent = Intent(this@FormUserPreferenceActivity, MainActivity::class.java)
             startActivity(intent)
-            finish() // Opsional, jika Anda ingin menutup Activity saat berpindah ke NextActivity
+            finish()
 
         }
     }

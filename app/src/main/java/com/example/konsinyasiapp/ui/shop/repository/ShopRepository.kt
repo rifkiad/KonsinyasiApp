@@ -1,4 +1,4 @@
-package com.example.konsinyasiapp.repository
+package com.example.konsinyasiapp.ui.shop.repository
 
 import androidx.lifecycle.LiveData
 import com.example.konsinyasiapp.ui.shop.database.dao.ShopDao
@@ -10,14 +10,6 @@ class ShopRepository(private val shopDao: ShopDao) {
 
     suspend fun insertData(shopData: ShopData) {
         shopDao.insertData(shopData)
-    }
-
-    suspend fun updateData(shopData: ShopData) {
-        shopDao.updateData(shopData)
-    }
-
-    suspend fun deleteItem(shopData: ShopData) {
-        shopDao.deleteItem(shopData)
     }
 
     suspend fun deleteAll() {

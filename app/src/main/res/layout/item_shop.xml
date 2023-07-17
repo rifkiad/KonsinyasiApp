@@ -82,7 +82,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_8sdp"
                 android:src="@drawable/ic_more"
-                app:tint="@color/white" /> <!-- Tint warna sesuai tema -->
+                app:tint="@color/white" />
 
         </LinearLayout>
 

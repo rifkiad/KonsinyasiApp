@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 import com.example.konsinyasiapp.ui.shop.database.ShopDatabase
-import com.example.konsinyasiapp.repository.ShopRepository
+import com.example.konsinyasiapp.ui.shop.repository.ShopRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -30,23 +30,12 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun updateData(shopData: ShopData) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updateData(shopData)
-        }
-    }
-
-    fun deleteItem(shopData: ShopData) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteItem(shopData)
-        }
-    }
-
     fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAll()
         }
     }
+
     fun searchDatabase(searchQuery: String): LiveData<List<ShopData>> {
         return repository.searchDatabase(searchQuery)
     }

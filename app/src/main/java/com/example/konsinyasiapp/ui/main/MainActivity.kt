@@ -70,14 +70,8 @@ class MainActivity : AppCompatActivity() {
         // Mengubah teks pada nav_header_main
         val headerView = binding.navView.getHeaderView(0)
         val textViewUsername = headerView.findViewById<TextView>(R.id.tv_nav_header_name)
-        val textViewAlamat =
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tv_nav_header_alamat)
 
         textViewUsername.text = userModel.name ?: "Nama Pengguna"
-
-        val userAddress = sharedPreferences.getString("user_address", null)
-        textViewAlamat.text = userAddress ?: "Alamat Pengguna"
-
 
         setSupportActionBar(binding.appBarMain.toolbar)
 

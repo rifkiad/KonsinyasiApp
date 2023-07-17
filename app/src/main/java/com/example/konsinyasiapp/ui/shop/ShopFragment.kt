@@ -20,18 +20,19 @@ import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentShopBinding
 import com.example.konsinyasiapp.ui.shop.Adapter.ShopAdapter
+import com.google.android.material.snackbar.Snackbar
 
 
 class ShopFragment : Fragment() {
 
-    private val mShopViewModel: ShopViewModel by viewModels()
-
     private var _binding: FragmentShopBinding? = null
     private val binding get() = _binding!!
 
-    //private val adapter: ShopAdapter by lazy { ShopAdapter() }
+    private val mShopViewModel: ShopViewModel by viewModels()
+
 
     private lateinit var shopAdapter: ShopAdapter
+
     private var list = arrayListOf<ShopData>()
 
     override fun onCreateView(
@@ -74,7 +75,6 @@ class ShopFragment : Fragment() {
     }
 
 
-
     private fun setupRecyclerView() {
         val recyclerView = binding.rvShop
         recyclerView.adapter = shopAdapter
@@ -85,10 +85,10 @@ class ShopFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             mShopViewModel.deleteAll()
-            Toast.makeText(
-                requireContext(),
+            Snackbar.make(
+                requireView(),
                 "Succsecfully Removed Everything!",
-                Toast.LENGTH_SHORT
+                Snackbar.LENGTH_SHORT
             ).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
@@ -96,28 +96,9 @@ class ShopFragment : Fragment() {
         builder.setMessage("Are you sure you want remove this Everything")
         builder.create().show()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 }
-
-//        val navController = findNavController()
-//        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-//
-//        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-//
-//        // Hide NavigationView when DrawerLayout is closed
-//        binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
-//            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-//
-//            override fun onDrawerOpened(drawerView: View) {}
-//
-//            override fun onDrawerClosed(drawerView: View) {
-//                binding.navView.visibility = View.GONE
-//            }
-//
-//            override fun onDrawerStateChanged(newState: Int) {}
-//        })
-//
-//        binding.navView.setupWithNavController(navController)

@@ -1,7 +1,6 @@
-package com.example.konsinyasiapp.ui.product.database.entities
+package com.example.konsinyasiapp.ui.categoryProduct.database.entities
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -11,8 +10,7 @@ import kotlinx.parcelize.Parcelize
 class CategoryData(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    var nameCategory: String
 
-    @ColumnInfo(name = "name")
-    var name: String? = null,
 
-) : Parcelable
+    ) : Parcelable

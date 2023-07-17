@@ -85,7 +85,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
                                         notifyDataSetChanged()
                                         Toast.makeText(
                                             c,
-                                            "User Information is Edited",
+                                            "Informasi Telah TerUpdate",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                         dialog.dismiss()
@@ -101,10 +101,10 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
 
                     R.id.delete -> {
                         AlertDialog.Builder(c)
-                            .setTitle("Delete")
+                            .setTitle("Hapus")
                             .setIcon(R.drawable.ic_warning)
-                            .setMessage("Are you sure you want to delete this information?")
-                            .setPositiveButton("Yes") { dialog, _ ->
+                            .setMessage("Apa Kamu Yakin Ingin Menghapus Informasi Ini?")
+                            .setPositiveButton("Ya") { dialog, _ ->
                                 // delete data menggunakan Room Database
                                 val shopDao = ShopDatabase.getDatabase(c).shopDao()
                                 GlobalScope.launch {
@@ -117,7 +117,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
                                         notifyDataSetChanged()
                                         Toast.makeText(
                                             c,
-                                            "Deleted this Information",
+                                            "Informasi Terhapus",
                                             Toast.LENGTH_SHORT
                                         )
                                             .show()
@@ -125,7 +125,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
                                     }
                                 }
                             }
-                            .setNegativeButton("No") { dialog, _ ->
+                            .setNegativeButton("Tidak") { dialog, _ ->
                                 dialog.dismiss()
                             }
                             .create()
@@ -162,10 +162,10 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
             holder.bind(currentItem)
         }
 
-        fun setData(data: ArrayList<ShopData>) {
-            val toDoDiffUtil = ShopDiffCallback(userList, data)
-            val toDoDiffResult = DiffUtil.calculateDiff(toDoDiffUtil)
-            this.userList = data
-            toDoDiffResult.dispatchUpdatesTo(this)
+        fun setData(shopdata: ArrayList<ShopData>) {
+            val shopDiffUtil = ShopDiffCallback(userList, shopdata)
+            val shopDiffUtilResult = DiffUtil.calculateDiff(shopDiffUtil)
+            this.userList = shopdata
+            shopDiffUtilResult.dispatchUpdatesTo(this)
         }
     }

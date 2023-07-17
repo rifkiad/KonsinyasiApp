@@ -7,18 +7,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.konsinyasiapp.ui.product.database.entities.CategoryData
+import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
 
 @Dao
 interface CategoryDao {
     @Query("SELECT * FROM category_table ORDER BY id ASC")
-    fun getAllProduct(): LiveData<List<CategoryData>>
+    fun getAllCategory(): LiveData<List<CategoryData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(categoryData: CategoryData)
-
-    @Update
-    suspend fun updateData(categoryData: CategoryData)
 
     @Delete
     suspend fun deleteItem(categoryData: CategoryData)

@@ -2,18 +2,18 @@ package com.example.konsinyasiapp.ui.categoryProduct.repository
 
 import androidx.lifecycle.LiveData
 import com.example.konsinyasiapp.ui.categoryProduct.database.dao.CategoryDao
-import com.example.konsinyasiapp.ui.product.database.entities.CategoryData
+import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
 
 class CategoryRepository(private val categoryDao: CategoryDao) {
 
-    val getAllProduct: LiveData<List<CategoryData>> = categoryDao.getAllProduct()
+    val getAllCategory: LiveData<List<CategoryData>> = categoryDao.getAllCategory()
 
-    suspend fun insertData(categoryData: CategoryData) {
+    suspend fun insertCategory(categoryData: CategoryData) {
         categoryDao.insertData(categoryData)
     }
 
-    suspend fun updateData(categoryData: CategoryData) {
-        categoryDao.updateData(categoryData)
+    suspend fun insertData(categoryData: CategoryData) {
+        categoryDao.insertData(categoryData)
     }
 
     suspend fun deleteItem(categoryData: CategoryData) {

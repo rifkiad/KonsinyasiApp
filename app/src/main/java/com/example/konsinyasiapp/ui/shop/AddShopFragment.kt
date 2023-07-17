@@ -40,11 +40,6 @@ class AddShopFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     private fun insertDataToShop() {
         val mName = binding.edtNamaToko.text.toString()
         val mAddress = binding.edtAlamat.text.toString()
@@ -62,7 +57,7 @@ class AddShopFragment : Fragment() {
                 mPhoneNumber
             )
             mShopViewModel.insertData(newData)
-            Toast.makeText(requireContext(), "Berhasil DItambahkan!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "Berhasil Ditambahkan!", Snackbar.LENGTH_SHORT).show()
             //navigateBack
             findNavController().navigate(R.id.action_action_navshop_topshop_to_nav_shop)
         } else {

@@ -19,4 +19,13 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
             false
         } else !(name.isEmpty() || address.isEmpty() || productOwner.isEmpty() || phoneNumber.isEmpty())
     }
+
+    fun verifyDataFromCategory(
+        name: String,
+    ): Boolean {
+        return if (TextUtils.isEmpty(name)
+        ) {
+            false
+        } else !(name.isEmpty())
+    }
 }

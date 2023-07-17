@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.konsinyasiapp.ui.categoryProduct.database.dao.CategoryDao
-import com.example.konsinyasiapp.ui.product.database.entities.CategoryData
+import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
 
-@Database(entities = [CategoryData::class], version = 2, exportSchema = false)
+@Database(entities = [CategoryData::class], version = 1, exportSchema = false)
 abstract class CategoryDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
@@ -26,7 +26,7 @@ abstract class CategoryDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CategoryDatabase::class.java,
-                    "todo_database"
+                    "category_database"
                 ).build()
                 INSTANCE = instance
                 return instance
