@@ -6,7 +6,7 @@
 
         <variable
             name="shopData"
-            type="com.example.konsinyasiapp.ui.shop.database.entities.ShopData" />
+            type="com.example.konsinyasiapp.entities.ShopData" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -23,7 +23,7 @@ import com.example.konsinyasiapp.databinding.ActivityMainBinding
 import com.example.konsinyasiapp.setting.SettingActivity
 import com.example.konsinyasiapp.setting.SettingPrefereces
 import com.example.konsinyasiapp.sharedPreferences.UserModel
-import com.example.konsinyasiapp.ui.home.HomeViewModel
+import com.example.konsinyasiapp.viewModel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 

@@ -4,7 +4,7 @@
     <data>
         <variable
         name="categoryData"
-        type="com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData"/>
+        type="com.example.konsinyasiapp.entities.CategoryData"/>
     </data>
 
     <LinearLayout

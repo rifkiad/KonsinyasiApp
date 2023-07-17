@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.konsinyasiapp.databinding.FragmentDepositBinding
+import com.example.konsinyasiapp.viewModel.DepositViewModel
 
 
 class DepositFragment : Fragment() {

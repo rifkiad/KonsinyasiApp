@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.SharedViewModel
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.viewModel.SharedViewModel
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentAddShopBinding
+import com.example.konsinyasiapp.viewModel.ShopViewModel
 import com.google.android.material.snackbar.Snackbar
 
 

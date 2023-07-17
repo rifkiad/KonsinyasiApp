@@ -1,6 +1,5 @@
 package com.example.konsinyasiapp.ui.categoryProduct
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,14 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.SharedViewModel
+import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.databinding.FragmentAddCategoryBinding
-import com.example.konsinyasiapp.databinding.FragmentAddShopBinding
-import com.example.konsinyasiapp.databinding.FragmentCategoryBinding
-import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
-import com.example.konsinyasiapp.ui.categoryProduct.viewmodel.CategoryViewModel
-import com.example.konsinyasiapp.ui.shop.ShopViewModel
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.entities.CategoryData
+import com.example.konsinyasiapp.viewModel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class AddCategoryFragment : Fragment() {

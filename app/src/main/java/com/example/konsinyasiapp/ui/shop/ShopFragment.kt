@@ -9,7 +9,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -17,9 +16,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentShopBinding
-import com.example.konsinyasiapp.ui.shop.Adapter.ShopAdapter
+import com.example.konsinyasiapp.adapter.ShopAdapter
+import com.example.konsinyasiapp.viewModel.ShopViewModel
 import com.google.android.material.snackbar.Snackbar
 
 

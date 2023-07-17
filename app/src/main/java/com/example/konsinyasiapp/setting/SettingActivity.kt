@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.konsinyasiapp.databinding.ActivitySettingBinding
+import com.example.konsinyasiapp.viewModel.SettingViewModel
 
 class SettingActivity : AppCompatActivity() {
 

@@ -12,16 +12,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.product.FragmentProduct">
 
-        <TextView
-            android:id="@+id/tv_myProduct"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_product" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_add_myProduct"

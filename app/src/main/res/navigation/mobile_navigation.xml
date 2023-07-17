@@ -116,7 +116,7 @@
             app:exitAnim="@anim/to_right" />
         <argument
             android:name="currentItem"
-            app:argType="com.example.konsinyasiapp.ui.shop.database.entities.ShopData" />
+            app:argType="com.example.konsinyasiapp.entities.ShopData" />
     </fragment>
 
 </navigation>

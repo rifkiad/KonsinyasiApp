@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentDetailShopBinding
 
 class DetailShopFragment : Fragment() {

@@ -1,11 +1,10 @@
 package com.example.konsinyasiapp.databinding.adapter
 
 import android.widget.LinearLayout
-import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 

@@ -6,7 +6,7 @@
 
         <variable
             name="args"
-            type="com.example.konsinyasiapp.ui.shop.DetailShopFragmentArgs" />
+            type="com.example.konsinyasiapp.ui.shop.DetailShopFragmentArgs"/>
     </data>
 
     <androidx.cardview.widget.CardView

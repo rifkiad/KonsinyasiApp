@@ -1,22 +1,18 @@
 package com.example.konsinyasiapp.ui.categoryProduct
 
 import android.app.AlertDialog
-import android.icu.util.ULocale
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.konsinyasiapp.databinding.FragmentCategoryBinding
-import com.example.konsinyasiapp.ui.categoryProduct.adapter.CategoryAdapter
-import com.example.konsinyasiapp.ui.categoryProduct.database.entities.CategoryData
-import com.example.konsinyasiapp.ui.categoryProduct.viewmodel.CategoryViewModel
-import com.example.konsinyasiapp.ui.shop.Adapter.ShopAdapter
-import com.example.konsinyasiapp.ui.shop.database.entities.ShopData
+import com.example.konsinyasiapp.adapter.CategoryAdapter
+import com.example.konsinyasiapp.entities.CategoryData
+import com.example.konsinyasiapp.viewModel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
 
 
