@@ -5,22 +5,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.konsinyasiapp.dao.CategoryDao
-import com.example.konsinyasiapp.entities.CategoryData
 import com.example.konsinyasiapp.dao.ProductDao
+import com.example.konsinyasiapp.dao.ShopDao
+import com.example.konsinyasiapp.entities.CategoryData
 import com.example.konsinyasiapp.entities.ProductData
+import com.example.konsinyasiapp.entities.ShopData
 
-@Database(entities = [ProductData::class, CategoryData::class], version = 1, exportSchema = false)
-abstract class ProductDatabase : RoomDatabase() {
+@Database(entities = [ProductData::class, CategoryData::class, ShopData::class], version = 1, exportSchema = false)
+abstract class MyDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun shopDao(): ShopDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: ProductDatabase? = null
+        private var INSTANCE: MyDatabase? = null
 
-        fun getDatabase(context: Context): ProductDatabase {
+        fun getDatabase(context: Context): MyDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -28,8 +31,8 @@ abstract class ProductDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ProductDatabase::class.java,
-                    "product_database"
+                    MyDatabase::class.java,
+                    "my_database"
 
                 ).fallbackToDestructiveMigration()
                     .build()

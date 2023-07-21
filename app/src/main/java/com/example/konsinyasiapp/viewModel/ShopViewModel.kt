@@ -3,10 +3,9 @@ package com.example.konsinyasiapp.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.ShopData
-import com.example.konsinyasiapp.database.ShopDatabase
 import com.example.konsinyasiapp.repository.ShopRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class ShopViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val shopDao = ShopDatabase.getDatabase(application).shopDao()
+    private val shopDao = MyDatabase.getDatabase(application).shopDao()
     private val repository: ShopRepository = ShopRepository(shopDao)
 
     val getAllData: LiveData<List<ShopData>> = repository.getAllData

@@ -12,8 +12,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.R
+import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.ShopData
-import com.example.konsinyasiapp.database.ShopDatabase
 import com.example.konsinyasiapp.databinding.EditShopBinding
 import com.example.konsinyasiapp.databinding.ItemShopBinding
 import com.example.konsinyasiapp.utils.ShopDiffCallback
@@ -78,7 +78,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
                                 position.phoneNumber = phoneNumber.text.toString()
 
                                 // Update data menggunakan Room Database
-                                val shopDao = ShopDatabase.getDatabase(c).shopDao()
+                                val shopDao = MyDatabase.getDatabase(c).shopDao()
                                 GlobalScope.launch {
                                     shopDao.updateData(position)
 
@@ -107,7 +107,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
                             .setMessage("Apa Kamu Yakin Ingin Menghapus Informasi Ini?")
                             .setPositiveButton("Ya") { dialog, _ ->
                                 // delete data menggunakan Room Database
-                                val shopDao = ShopDatabase.getDatabase(c).shopDao()
+                                val shopDao = MyDatabase.getDatabase(c).shopDao()
                                 GlobalScope.launch {
                                     shopDao.deleteItem(position)
 
