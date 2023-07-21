@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="productData"
-            type="com.example.konsinyasiapp.entities.ProductData" />
+            name="productWithCategory"
+            type="com.example.konsinyasiapp.entities.ProductWithCategory" />
     </data>
 
 
@@ -36,26 +36,31 @@
                     android:id="@+id/tv_nama_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/lato"
+                    android:text="@{productWithCategory.productData.namaProduct}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_pilihan_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/darker_gray" />
+                    android:fontFamily="@font/lato"
+                    android:text="@{productWithCategory.categoryData.nameCategory}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_harga_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="@{productWithCategory.productData.hargaProduct}"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@android:color/black" />
-
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

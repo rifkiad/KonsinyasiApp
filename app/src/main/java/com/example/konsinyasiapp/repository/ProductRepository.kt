@@ -1,14 +1,20 @@
 package com.example.konsinyasiapp.repository
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.konsinyasiapp.dao.ProductDao
 import com.example.konsinyasiapp.entities.ProductData
+import com.example.konsinyasiapp.entities.ProductWithCategory
+import com.example.konsinyasiapp.entities.ShopData
 
 class ProductRepository(private val productDao: ProductDao) {
 
-    fun getAllProduct(idKategoriProduk: Int): LiveData<List<ProductData>> {
-        return productDao.getAllProduct(idKategoriProduk)
+    val getAllProduct: LiveData<List<ProductData>> = productDao.getAllProduct()
+
+    fun getAllProductsWithCategories(): LiveData<List<ProductWithCategory>> {
+        return productDao.getProductsWithCategories()
     }
+
 
     suspend fun insertData(productData: ProductData) {
         productDao.insertData(productData)

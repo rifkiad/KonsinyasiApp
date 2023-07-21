@@ -4,9 +4,11 @@ import android.app.Application
 import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
 
-class SharedViewModel(application: Application) : AndroidViewModel(application)  {
+class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
-     fun verifyDataFromUser(
+    var categoryId: Int = 0
+
+    fun verifyDataFromUser(
         name: String,
         address: String,
         productOwner: String,
@@ -27,5 +29,19 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         ) {
             false
         } else !(name.isEmpty())
+    }
+
+    fun verifyDataFromProduct(
+        name: String,
+        addCategory: String,
+        priceProduct: String
+
+    ): Boolean {
+        return if (TextUtils.isEmpty(name) || TextUtils.isEmpty(addCategory) || TextUtils.isEmpty(
+                priceProduct
+            )
+        ) {
+            false
+        } else !(name.isEmpty() || name.isEmpty() || addCategory.isEmpty() || priceProduct.isEmpty())
     }
 }

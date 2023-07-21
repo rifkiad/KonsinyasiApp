@@ -19,11 +19,6 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
 
     val getAllData: LiveData<List<ShopData>> = repository.getAllData
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is shop Fragment"
-    }
-    val text: LiveData<String> = _text
-
     fun insertData(shopData: ShopData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(shopData)

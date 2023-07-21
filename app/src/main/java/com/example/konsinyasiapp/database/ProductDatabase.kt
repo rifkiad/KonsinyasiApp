@@ -12,8 +12,8 @@ import com.example.konsinyasiapp.entities.ProductData
 @Database(entities = [ProductData::class, CategoryData::class], version = 1, exportSchema = false)
 abstract class ProductDatabase : RoomDatabase() {
 
-    abstract fun categoryDao(): CategoryDao
     abstract fun productDao(): ProductDao
+    abstract fun categoryDao(): CategoryDao
 
     companion object {
 
@@ -30,7 +30,9 @@ abstract class ProductDatabase : RoomDatabase() {
                     context.applicationContext,
                     ProductDatabase::class.java,
                     "product_database"
-                ).build()
+
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
             }

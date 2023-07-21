@@ -4,37 +4,49 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.konsinyasiapp.database.CategoryDatabase
 import com.example.konsinyasiapp.repository.CategoryRepository
 import com.example.konsinyasiapp.repository.ProductRepository
 import com.example.konsinyasiapp.database.ProductDatabase
+import com.example.konsinyasiapp.entities.CategoryData
 import com.example.konsinyasiapp.entities.ProductData
+import com.example.konsinyasiapp.entities.ProductWithCategory
+import com.example.konsinyasiapp.entities.ShopData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
+
     private val productDao = ProductDatabase.getDatabase(application).productDao()
-    private val categoryDao = ProductDatabase.getDatabase(application).categoryDao()
+    private val repository: ProductRepository = ProductRepository(productDao)
 
-    private val productRepository: ProductRepository = ProductRepository(productDao)
-    private val categoryRepository: CategoryRepository = CategoryRepository(categoryDao)
+    val getAllProduct: LiveData<List<ProductData>> = repository.getAllProduct
 
-    val getAllProduct: LiveData<List<ProductData>> = productRepository.getAllProduct(0)
+    fun getAllProductsWithCategories(): LiveData<List<ProductWithCategory>> {
+        return repository.getAllProductsWithCategories()
+    }
 
     fun insertData(productData: ProductData) {
         viewModelScope.launch(Dispatchers.IO) {
-            productRepository.insertData(productData)
+            repository.insertData(productData)
         }
     }
 
     fun updateData(productData: ProductData) {
         viewModelScope.launch(Dispatchers.IO) {
-            productRepository.updateData(productData)
+            repository.updateData(productData)
         }
     }
 
     fun deleteItem(productData: ProductData) {
         viewModelScope.launch(Dispatchers.IO) {
-            productRepository.deleteItem(productData)
+            repository.deleteItem(productData)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
         }
     }
 

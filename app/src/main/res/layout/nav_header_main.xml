@@ -15,11 +15,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:contentDescription="@string/nav_header_desc"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_troli" />
 

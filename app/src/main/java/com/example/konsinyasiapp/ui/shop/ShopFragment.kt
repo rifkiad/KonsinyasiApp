@@ -14,6 +14,8 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.entities.ShopData
@@ -69,7 +71,7 @@ class ShopFragment : Fragment() {
                 when (menuItem.itemId) {
                     R.id.menu_delete_all -> confirmRemoval()
                 }
-                return true
+                return NavigationUI.onNavDestinationSelected(menuItem, view.findNavController())
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
@@ -83,17 +85,17 @@ class ShopFragment : Fragment() {
 
     private fun confirmRemoval() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") { _, _ ->
+        builder.setPositiveButton("Ya") { _, _ ->
             mShopViewModel.deleteAll()
             Snackbar.make(
                 requireView(),
-                "Succsecfully Removed Everything!",
+                "Berhasil Semua Item",
                 Snackbar.LENGTH_SHORT
             ).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete Everything?")
-        builder.setMessage("Are you sure you want remove this Everything")
+        builder.setTitle("Hapus semua item?")
+        builder.setMessage("Anda akan menghapus seluruh isi. Lanjutkan?")
         builder.create().show()
     }
 

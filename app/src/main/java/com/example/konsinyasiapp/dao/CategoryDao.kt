@@ -10,7 +10,7 @@ import com.example.konsinyasiapp.entities.CategoryData
 
 @Dao
 interface CategoryDao {
-    @Query("SELECT * FROM category_table ORDER BY id ASC")
+    @Query("SELECT * FROM category_table ORDER BY id_category ASC")
     fun getAllCategory(): LiveData<List<CategoryData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

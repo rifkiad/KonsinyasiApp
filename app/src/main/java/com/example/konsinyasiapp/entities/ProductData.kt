@@ -2,24 +2,22 @@ package com.example.konsinyasiapp.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "product_table",
-    foreignKeys = [
-        ForeignKey(
-            entity = CategoryData::class,
-            parentColumns = ["id"],
-            childColumns = ["idKategoriProduk"],
-            onDelete = ForeignKey.CASCADE
-        )
-    ]
-)
+@Entity(tableName = "product_table")
 data class ProductData(
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "product_id")
     val id: Int,
-    @ColumnInfo(name = "idKategoriProduk")
-    val idKategoriProduk: Int,
-    val nama: String,
-    val harga: Double
+
+    @ColumnInfo(name = "category_id")
+    var categoryId: Int,
+
+    @ColumnInfo(name = "product_name")
+    var namaProduct: String,
+
+    @ColumnInfo(name = "product_harga")
+    var hargaProduct: String
 )
+
+
