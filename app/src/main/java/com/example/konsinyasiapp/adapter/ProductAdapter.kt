@@ -2,6 +2,7 @@ package com.example.konsinyasiapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.databinding.ItemProductBinding
@@ -9,13 +10,23 @@ import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.entities.ProductWithCategory
 import com.example.konsinyasiapp.utils.ProductDiffCallback
 
-class ProductAdapter(var dataProduct: (ProductData) -> Unit) :
+
+class ProductAdapter(
+    private val showMorePopupMenu: (ProductData, ImageView) -> Unit
+) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
     private var productWithCategory = listOf<ProductWithCategory>()
 
     inner class MyViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.mMenus.setOnClickListener {
+                val productData = productWithCategory[adapterPosition].productData
+                showMorePopupMenu(productData, binding.mMenus)
+            }
+        }
 
         fun bind(productWithCategory: ProductWithCategory) {
             binding.productWithCategory = productWithCategory
@@ -28,9 +39,9 @@ class ProductAdapter(var dataProduct: (ProductData) -> Unit) :
 //                    productWithCategory.categoryData?.nameCategory
 //            }
 
-            binding.mMenus.setOnClickListener {
-                dataProduct(productWithCategory.productData)
-            }
+//            binding.mMenus.setOnClickListener {
+//                showMorePopupMenu(productWithCategory.productData)
+//            }
         }
     }
 

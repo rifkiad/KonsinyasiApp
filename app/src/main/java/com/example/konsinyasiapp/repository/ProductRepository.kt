@@ -1,11 +1,9 @@
 package com.example.konsinyasiapp.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.konsinyasiapp.dao.ProductDao
 import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.entities.ProductWithCategory
-import com.example.konsinyasiapp.entities.ShopData
 
 class ProductRepository(private val productDao: ProductDao) {
 

@@ -8,18 +8,18 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.PopupMenu
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.adapter.ProductAdapter
-import com.example.konsinyasiapp.databinding.EditProductBinding
 import com.example.konsinyasiapp.databinding.FragmentProductBinding
 import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.viewModel.ProductViewModel
@@ -34,11 +34,12 @@ class FragmentProduct : Fragment() {
     private val mProductViewModel: ProductViewModel by viewModels()
 
     private val productAdapter by lazy {
-        ProductAdapter { dataProduct ->
-            showAlertDialog(dataProduct)
+        ProductAdapter { dataProduct, mMenus ->
+            showMorePopupMenu(dataProduct, mMenus)
             data = dataProduct
         }
     }
+
 
     var data: ProductData? = null
 
@@ -48,6 +49,8 @@ class FragmentProduct : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProductBinding.inflate(inflater, container, false)
+
+
         return binding.root
     }
 
@@ -67,15 +70,11 @@ class FragmentProduct : Fragment() {
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.shop_fragment_menu, menu)
-                menuInflater.inflate(R.menu.shop_fragment_menu_more, menu)
-
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.menu_delete_all -> confirmRemoval()
-                    R.id.edit_text -> data?.let { editText(it) }
-                    R.id.delete -> deleteProduct()
 
                 }
                 return NavigationUI.onNavDestinationSelected(menuItem, view.findNavController())
@@ -105,64 +104,73 @@ class FragmentProduct : Fragment() {
         builder.create().show()
     }
 
-    private fun deleteProduct() {
+    private fun showMorePopupMenu(productData: ProductData, mMenus: ImageView) {
+        val popupMenu = PopupMenu(requireContext(), mMenus)
+        popupMenu.menuInflater.inflate(R.menu.shop_fragment_menu_more, popupMenu.menu)
 
+        popupMenu.setOnMenuItemClickListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.edit_text -> {
+                    showEditDialog(productData)
+                    true
+                }
+
+                R.id.delete -> {
+                    showDeleteConfirmationDialog(productData)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        popupMenu.show()
     }
 
-    private fun editText(productData: ProductData) {
+    private fun showEditDialog(productData: ProductData) {
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.edit_product, null)
         val builder = AlertDialog.Builder(requireContext())
+            .setTitle("Edit Produk")
+            .setView(dialogView)
+
         builder.setPositiveButton("Ya") { _, _ ->
             mProductViewModel.updateData(productData)
-            // Panggil fungsi untuk menampilkan dialog edit produk
-            //showDialogEditProduct(dataProduct)
+            Snackbar.make(
+                requireView(),
+                "Berhasil Mengedit Item",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
         builder.setNegativeButton("Tidak", null)
-        builder.setTitle("Edit Item?")
-        builder.setMessage("Anda akan mengedit item. Lanjutkan? ")
-        builder.create().show()
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
     }
 
-    private fun showAlertDialog(data: ProductData) {
-    }
+    private fun showDeleteConfirmationDialog(productData: ProductData) {
+        val builder = AlertDialog.Builder(requireContext())
+            .setTitle("Hapus Produk")
+            .setMessage("Anda akan menghapus item ini. Lanjutkan? ")
 
+        builder.setPositiveButton("Ya") { _, _ ->
+            // Perform delete operation here with productData
+            mProductViewModel.deleteItem(productData)
+            Snackbar.make(
+                requireView(),
+                "Berhasil Menghapus Item",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+
+        builder.setNegativeButton("Tidak", null)
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
-
-//private fun showDialogEditProduct(dataProduct: ProductData) {
-//    val binding = EditProductBinding.inflate(layoutInflater)
-//    val name = binding.edtNamaProdukEdit
-//    val categoryItem = binding.autoCompleteTextViewCategoryEdit
-//    val price = binding.edtHargaProdukEdit
-//
-//    // mengeset data akan muncul di edit text
-//    name.setText(dataProduct.namaProduct)
-//    categoryItem.setText(dataProduct.categoryId.toString())
-//    price.setText(dataProduct.hargaProduct)
-//
-//    val dialogView = binding.root
-//
-//    val dialogBuilder = AlertDialog.Builder(requireContext())
-//        .setTitle("Edit Product")
-//        .setView(dialogView)
-//        .setPositiveButton("Ok") { dialog, _ ->
-//            dataProduct.namaProduct = name.text.toString()
-//            dataProduct.categoryId = categoryItem.text.toString().toInt()
-//            dataProduct.hargaProduct = price.text.toString()
-//
-//            // Update data menggunakan Room Database
-//            mProductViewModel.updateData(dataProduct)
-//            Snackbar.make(
-//                requireView(),
-//                "Informasi Telah Terupdate",
-//                Snackbar.LENGTH_SHORT
-//            ).show()
-//        }
-//        .setNegativeButton("Cancel", null)
-//
-//    val dialog = dialogBuilder.create()
-//    dialog.show()
-//}

@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.database.MyDatabase
-import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.EditShopBinding
 import com.example.konsinyasiapp.databinding.ItemShopBinding
-import com.example.konsinyasiapp.utils.ShopDiffCallback
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
+import com.example.konsinyasiapp.utils.ShopDiffCallback
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
