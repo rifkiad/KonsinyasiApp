@@ -11,7 +11,7 @@ import com.example.konsinyasiapp.entities.ShopData
 
 @Dao
 interface ShopDao {
-    @Query("SELECT * FROM shop_table ORDER BY id ASC")
+    @Query("SELECT * FROM shop_table ORDER BY id_shop ASC")
     fun getAllData(): LiveData<List<ShopData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

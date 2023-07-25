@@ -29,6 +29,8 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
     inner class MyViewHolder(private val binding: ItemShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
+
         fun bind(shopData: ShopData) {
             binding.shopData = shopData
             binding.executePendingBindings()

@@ -43,6 +43,17 @@ class BindingAdapters {
             }
         }
 
+        @BindingAdapter("android:navigateToAddDepositFragment")
+        @JvmStatic
+        fun navigateToAddDepositFragment(view: ExtendedFloatingActionButton, navigate: Boolean) {
+            view.setOnClickListener {
+                if (navigate) {
+                    view.findNavController()
+                        .navigate(R.id.action_nav_deposit_to_action_navDeposit_add)
+                }
+            }
+        }
+
         @BindingAdapter("android:sendDataDetailFragment")
         @JvmStatic
         fun sendDataDetailFragment(view: LinearLayout, currentItem: ShopData) {

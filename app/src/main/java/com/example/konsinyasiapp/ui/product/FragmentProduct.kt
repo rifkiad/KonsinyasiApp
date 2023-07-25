@@ -92,6 +92,9 @@ class FragmentProduct : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ya") { _, _ ->
             mProductViewModel.deleteAll()
+
+            productAdapter.setData(emptyList())
+
             Snackbar.make(
                 requireView(),
                 "Berhasil Semua Item",
@@ -104,8 +107,8 @@ class FragmentProduct : Fragment() {
         builder.create().show()
     }
 
-    private fun showMorePopupMenu(productData: ProductData, mMenus: ImageView) {
-        val popupMenu = PopupMenu(requireContext(), mMenus)
+    private fun showMorePopupMenu(productData: ProductData, anchorView: ImageView) {
+        val popupMenu = PopupMenu(requireContext(), anchorView)
         popupMenu.menuInflater.inflate(R.menu.shop_fragment_menu_more, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { item: MenuItem ->

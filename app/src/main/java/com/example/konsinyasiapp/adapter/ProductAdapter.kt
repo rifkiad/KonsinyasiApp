@@ -31,17 +31,7 @@ class ProductAdapter(
         fun bind(productWithCategory: ProductWithCategory) {
             binding.productWithCategory = productWithCategory
             binding.executePendingBindings()
-            //            binding.also {
-//                it.tvHargaProduct.text =
-//                    productWithCategory.productData.hargaProduct
-//                it.tvNamaProduct.text = productWithCategory.productData.namaProduct
-//                it.tvPilihanProduct.text =
-//                    productWithCategory.categoryData?.nameCategory
-//            }
 
-//            binding.mMenus.setOnClickListener {
-//                showMorePopupMenu(productWithCategory.productData)
-//            }
         }
     }
 
@@ -68,4 +58,14 @@ class ProductAdapter(
 }
 
 
+//            binding.also {
+//                it.tvHargaProduct.text =
+//                    productWithCategory.productData.hargaProduct
+//                it.tvNamaProduct.text = productWithCategory.productData.namaProduct
+//                it.tvPilihanProduct.text =
+//                    productWithCategory.categoryData?.nameCategory
+//            }
 
+//            binding.mMenus.setOnClickListener {
+//                showMorePopupMenu(productWithCategory.productData)
+//            }

@@ -9,10 +9,7 @@
     android:paddingStart="@dimen/_16sdp"
     android:paddingTop="@dimen/_16sdp"
     android:paddingEnd="@dimen/_16sdp"
-    android:paddingBottom="@dimen/_16sdp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:paddingBottom="@dimen/_16sdp">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -27,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
+            android:fontFamily="@font/lato"
             android:hint="Nama Produk"
             android:inputType="text"
             android:maxLines="1" />
@@ -39,12 +37,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp">
 
-            <AutoCompleteTextView
+        <AutoCompleteTextView
             android:id="@+id/autoCompleteTextViewCategory"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Pilih Category"
             android:layout_weight="1"
+            android:fontFamily="@font/lato"
+            android:hint="Pilih Category"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
+            android:fontFamily="@font/lato"
             android:hint="Harga Produk"
             android:inputType="numberDecimal"
             android:maxLines="1" />

@@ -10,6 +10,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 class ShopData(
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_shop")
     var id: Int,
 
     @ColumnInfo(name = "name")
