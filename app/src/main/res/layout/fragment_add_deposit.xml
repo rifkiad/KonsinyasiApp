@@ -17,7 +17,11 @@
         android:layout_marginBottom="16dp">
 
         <AutoCompleteTextView
+<<<<<<< HEAD
             android:id="@+id/autoCompleteTextViewShop"
+=======
+            android:id="@+id/autoCompleteTextViewProduct"
+>>>>>>> origin/master
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
