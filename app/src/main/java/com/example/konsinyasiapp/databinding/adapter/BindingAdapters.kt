@@ -1,5 +1,6 @@
 package com.example.konsinyasiapp.databinding.adapter
 
+import android.widget.Button
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
@@ -49,7 +50,20 @@ class BindingAdapters {
             view.setOnClickListener {
                 if (navigate) {
                     view.findNavController()
-                        .navigate(R.id.action_nav_deposit_to_action_navDeposit_add)
+                        .navigate(R.id.action_nav_deposit_to_deposit_add)
+
+                }
+            }
+        }
+
+        @BindingAdapter("android:NavigateToAddProductInDeposit")
+        @JvmStatic
+        fun NavigateToAddProductInDeposit(button: Button, navigate: Boolean) {
+            button.setOnClickListener {
+                if (navigate) {
+                    button.findNavController()
+                        .navigate(R.id.action_deposit_add_to_addProductInDeposit)
+
                 }
             }
         }

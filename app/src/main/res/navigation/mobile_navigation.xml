@@ -37,7 +37,30 @@
         android:id="@+id/nav_deposit"
         android:name="com.example.konsinyasiapp.ui.deposit.DepositFragment"
         android:label="@string/deposit"
-        tools:layout="@layout/fragment_deposit" />
+        tools:layout="@layout/fragment_deposit" >
+        <action
+            android:id="@+id/action_nav_deposit_to_deposit_add"
+            app:destination="@id/deposit_add" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/deposit_add"
+        android:name="com.example.konsinyasiapp.ui.deposit.AddDepositFragment"
+        android:label="Tambah Deposit"
+        tools:layout="@layout/fragment_add_deposit">
+        <action
+            android:id="@+id/action_deposit_add_to_nav_deposit"
+            app:destination="@id/nav_deposit" />
+        <action
+            android:id="@+id/action_deposit_add_to_addProductInDeposit"
+            app:destination="@id/addProductInDeposit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addProductInDeposit"
+        android:name="com.example.konsinyasiapp.ui.deposit.AddProductInDepositFragment"
+        android:label="Tambah Produk &amp; Jumlah"
+        tools:layout="@layout/fragment_add_product_in_deposit"/>
 
     <fragment
         android:id="@+id/nav_myProduct"

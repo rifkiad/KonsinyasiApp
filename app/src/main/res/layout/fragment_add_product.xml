@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/lato"
-            android:hint="Pilih Category"
+            android:hint="Pilih Kategori"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>

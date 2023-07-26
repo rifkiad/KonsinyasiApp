@@ -12,7 +12,8 @@ import com.example.konsinyasiapp.utils.ProductDiffCallback
 
 
 class ProductAdapter(
-    private val showMorePopupMenu: (ProductData, ImageView) -> Unit
+    private val onItemClick: (ProductWithCategory) -> Unit,
+    private val onDeleteClick: (ProductWithCategory) -> Unit
 ) :
     RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
 
@@ -21,12 +22,26 @@ class ProductAdapter(
     inner class MyViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
         init {
+            // Set click listener for the entire item view
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val product = productWithCategory[position]
+                    onItemClick(product)
+                }
+            }
+            // Set click listener for the "Delete" option in the menu
             binding.mMenus.setOnClickListener {
-                val productData = productWithCategory[adapterPosition].productData
-                showMorePopupMenu(productData, binding.mMenus)
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val product = productWithCategory[position]
+                    onDeleteClick(product)
+                }
             }
         }
+
 
         fun bind(productWithCategory: ProductWithCategory) {
             binding.productWithCategory = productWithCategory
@@ -57,6 +72,14 @@ class ProductAdapter(
     }
 }
 
+//init {
+//    binding.mMenus.setOnClickListener {
+//        //val productData = productWithCategory[adapterPosition].productData
+//        val productWithCategory = productWithCategory[adapterPosition]
+//        showPopupMenu(productWithCategory)
+//    }
+//}
+
 
 //            binding.also {
 //                it.tvHargaProduct.text =
@@ -69,3 +92,5 @@ class ProductAdapter(
 //            binding.mMenus.setOnClickListener {
 //                showMorePopupMenu(productWithCategory.productData)
 //            }
+
+

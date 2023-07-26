@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-<<<<<<< HEAD
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -17,17 +16,12 @@ import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
-=======
-import androidx.fragment.app.Fragment
-import com.example.konsinyasiapp.DatePickerFragment
-import com.example.konsinyasiapp.databinding.FragmentAddDepositBinding
->>>>>>> origin/master
+
 
 class AddDepositFragment : Fragment() {
     private var _binding: FragmentAddDepositBinding? = null
     private val binding get() = _binding!!
 
-<<<<<<< HEAD
     private lateinit var autoCompleteTextViewShop: AutoCompleteTextView
     private lateinit var shopAdapter: ArrayAdapter<String>
 
@@ -40,9 +34,6 @@ class AddDepositFragment : Fragment() {
     private var shopId = 0
     private var shopName = listOf<ShopData>()
 
-
-=======
->>>>>>> origin/master
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +61,7 @@ class AddDepositFragment : Fragment() {
 
         return binding.root
 
-<<<<<<< HEAD
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,8 +86,5 @@ class AddDepositFragment : Fragment() {
                 shopId = selectedShop.id
             }
         }
-=======
-
->>>>>>> origin/master
     }
 }
