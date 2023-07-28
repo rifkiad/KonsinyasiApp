@@ -44,4 +44,15 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
             false
         } else !(name.isEmpty() || name.isEmpty() || addCategory.isEmpty() || priceProduct.isEmpty())
     }
+
+    fun verifyDataFromDeposit(
+        dateDeposit: String,
+        addShop: String
+    ): Boolean {
+        return if (TextUtils.isEmpty(dateDeposit) || TextUtils.isEmpty(addShop)
+
+        ) {
+            false
+        } else !(dateDeposit.isEmpty() || dateDeposit.isEmpty() || addShop.isEmpty())
+    }
 }

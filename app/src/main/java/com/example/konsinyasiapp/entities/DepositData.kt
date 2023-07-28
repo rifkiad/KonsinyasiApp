@@ -14,7 +14,10 @@ class DepositData(
     var id: Int,
 
     @ColumnInfo(name = "shop_id")
-    var shopId: Int,
+    var shopId: Long,
+
+    @ColumnInfo(name = "id_product")
+    var productId: Long,
 
     @ColumnInfo(name = "deposit_date")
     var depositDate: String,

@@ -50,8 +50,8 @@
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
             android:hint="Alamat"
-            android:inputType="none"
             android:maxLines="1"
+            android:inputType=""
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 

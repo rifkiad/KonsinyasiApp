@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.DatePickerFragment
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.FragmentAddDepositBinding
+import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
@@ -31,7 +34,7 @@ class AddDepositFragment : Fragment() {
 
     private var shopData = arrayListOf<String>()
     private var listShop = listOf<ShopData>()
-    private var shopId = 0
+    private var shopId = 0L
     private var shopName = listOf<ShopData>()
 
     override fun onCreateView(
@@ -59,6 +62,10 @@ class AddDepositFragment : Fragment() {
             }
         }
 
+        binding.btnLanjut.setOnClickListener {
+            insertDataToDeposit()
+        }
+
         return binding.root
 
 
@@ -80,11 +87,38 @@ class AddDepositFragment : Fragment() {
         }
 
         binding.autoCompleteTextViewShop
-        object : AdapterView.OnItemClickListener {
-            override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                val selectedShop = listShop[p2]
-                shopId = selectedShop.id
-            }
+        AdapterView.OnItemClickListener { _, _, p3, _ ->
+            val selectedShop = listShop[p3]
+            shopId = selectedShop.id.toLong()
         }
+    }
+
+    private fun insertDataToDeposit() {
+        val mShopData = shopId
+        val mDate = binding.tvDatePickerDeposit.text.toString()
+
+
+        val validation = mSharedViewModel.verifyDataFromDeposit(mShopData.toString(), mDate)
+        if (validation) {
+            //insert to Database
+            val newDeposit = DepositData(
+                0,
+                mShopData,
+                0,
+                mDate
+            )
+            mDepositViewModel.insertData(newDeposit)
+            Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
+                .show()
+            // Navigate back
+            findNavController().navigate(R.id.action_deposit_add_to_addProductInDeposit)
+        } else {
+            Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

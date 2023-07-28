@@ -9,15 +9,12 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="light_gray">#E6E6E6</color>
-
     <color name="reply_blue">#344955</color>
-
     <color name="background">#F0F0F0</color>
-
     <color name="dark_grey">#AAAAAA</color>
-
     <color name="hint_Text">#808080</color>
-
+    <color name="gray">#DDDDDD</color>
+    <color name="teal">#FF009688</color>
 
 
 </resources>

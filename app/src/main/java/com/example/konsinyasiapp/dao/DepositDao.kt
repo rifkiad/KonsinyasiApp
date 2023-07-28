@@ -9,6 +9,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.example.konsinyasiapp.entities.DepositData
+import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
 
 @Dao
@@ -16,6 +17,10 @@ interface DepositDao {
 
     @Query("SELECT * FROM deposit_table ORDER BY id_deposit ASC")
     fun getAllDeposit(): LiveData<List<DepositData>>
+
+    @Transaction
+    @Query("SELECT * FROM deposit_table")
+    fun getDepositWithProduct(): LiveData<List<DepositWithProduct>>
 
     @Transaction
     @Query("SELECT * FROM deposit_table")
@@ -30,3 +35,6 @@ interface DepositDao {
     @Delete
     suspend fun deleteItem(depositData: DepositData)
 }
+
+//    @Query("SELECT * FROM deposit_table ORDER BY id_product")
+//    fun getAllDepositProduct(): LiveData<List<DepositData>>

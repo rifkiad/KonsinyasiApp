@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.DepositData
+import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.repository.DepositRepository
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,10 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
 
     fun getAllShopWithDeposit(): LiveData<List<DepositWithShop>> {
         return repository.getAllShopWithDeposit()
+    }
+
+    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
+        return repository.getAllProductWithDeposit()
     }
 
     fun insertData(depositData: DepositData) {

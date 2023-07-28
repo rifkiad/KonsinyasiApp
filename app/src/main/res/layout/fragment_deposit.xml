@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         tools:context=".ui.deposit.DepositFragment">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_deposit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_deposit"/>
+
+
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_add_tambah_deposit"
             android:layout_width="wrap_content"

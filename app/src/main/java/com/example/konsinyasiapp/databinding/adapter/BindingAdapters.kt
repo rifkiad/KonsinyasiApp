@@ -56,14 +56,13 @@ class BindingAdapters {
             }
         }
 
-        @BindingAdapter("android:NavigateToAddProductInDeposit")
+        @BindingAdapter("android:NavigateToDepositFragment")
         @JvmStatic
-        fun NavigateToAddProductInDeposit(button: Button, navigate: Boolean) {
+        fun NavigateToDepositFragment(button: Button, navigate: Boolean) {
             button.setOnClickListener {
                 if (navigate) {
                     button.findNavController()
-                        .navigate(R.id.action_deposit_add_to_addProductInDeposit)
-
+                        .navigate(R.id.action_addProductInDeposit_to_nav_deposit)
                 }
             }
         }

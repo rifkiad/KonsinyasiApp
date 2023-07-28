@@ -60,7 +60,11 @@
         android:id="@+id/addProductInDeposit"
         android:name="com.example.konsinyasiapp.ui.deposit.AddProductInDepositFragment"
         android:label="Tambah Produk &amp; Jumlah"
-        tools:layout="@layout/fragment_add_product_in_deposit"/>
+        tools:layout="@layout/fragment_add_product_in_deposit">
+        <action
+            android:id="@+id/action_addProductInDeposit_to_nav_deposit"
+            app:destination="@id/nav_deposit" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_myProduct"

@@ -24,7 +24,7 @@ class ProductAdapter(
 
 
         init {
-            // Set click listener for the entire item view
+            // Bagian Update Item
             binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -32,7 +32,7 @@ class ProductAdapter(
                     onItemClick(product)
                 }
             }
-            // Set click listener for the "Delete" option in the menu
+            // Bagian Delete Item
             binding.mMenus.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {

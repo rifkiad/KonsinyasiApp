@@ -44,10 +44,11 @@
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp">
 
-        <EditText
+            <EditText
                 android:id="@+id/edt_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_55sdp"
+                android:background="@drawable/item_background"
                 android:hint="Nama"
                 android:inputType="textPersonName"
                 android:maxLines="1" />

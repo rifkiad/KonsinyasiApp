@@ -35,7 +35,7 @@ class AddProductFragment : Fragment() {
     private var categoryData = arrayListOf<String>()
     private var listCategory = listOf<CategoryData>()
     private var categoryId = 0
-    private var categoryName = listOf<CategoryData>()
+    //private var categoryName = listOf<CategoryData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
