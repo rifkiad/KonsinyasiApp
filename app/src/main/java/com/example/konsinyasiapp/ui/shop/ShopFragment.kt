@@ -21,6 +21,7 @@ import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentShopBinding
 import com.example.konsinyasiapp.adapter.ShopAdapter
+import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -31,7 +32,7 @@ class ShopFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mShopViewModel: ShopViewModel by viewModels()
-
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     private lateinit var shopAdapter: ShopAdapter
 
@@ -58,6 +59,11 @@ class ShopFragment : Fragment() {
         //observe livedata
         mShopViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
             shopAdapter.setData(data as ArrayList<ShopData>)
+            mShopViewModel.checkDatabaseEmpty(data)
+        })
+
+        mShopViewModel.checkDatabaseEmptyLiveData().observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
         })
 
         val menuHost: MenuHost = requireActivity()
@@ -75,6 +81,17 @@ class ShopFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if (emptyDatabase) {
+            binding.noDataImageView.visibility = View.VISIBLE
+            binding.noDataTextView.visibility = View.VISIBLE
+        } else {
+            binding.noDataImageView.visibility = View.INVISIBLE
+            binding.noDataTextView.visibility = View.INVISIBLE
+        }
+    }
+
 
 
     private fun setupRecyclerView() {

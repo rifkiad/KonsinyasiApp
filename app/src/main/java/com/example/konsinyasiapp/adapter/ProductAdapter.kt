@@ -72,25 +72,4 @@ class ProductAdapter(
     }
 }
 
-//init {
-//    binding.mMenus.setOnClickListener {
-//        //val productData = productWithCategory[adapterPosition].productData
-//        val productWithCategory = productWithCategory[adapterPosition]
-//        showPopupMenu(productWithCategory)
-//    }
-//}
-
-
-//            binding.also {
-//                it.tvHargaProduct.text =
-//                    productWithCategory.productData.hargaProduct
-//                it.tvNamaProduct.text = productWithCategory.productData.namaProduct
-//                it.tvPilihanProduct.text =
-//                    productWithCategory.categoryData?.nameCategory
-//            }
-
-//            binding.mMenus.setOnClickListener {
-//                showMorePopupMenu(productWithCategory.productData)
-//            }
-
 

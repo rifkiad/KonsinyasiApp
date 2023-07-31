@@ -14,9 +14,9 @@ class DepositRepository(private val depositDao: DepositDao) {
         return depositDao.getDepositWithShop()
     }
 
-    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
-        return depositDao.getDepositWithProduct()
-    }
+//    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
+//        return depositDao.getDepositWithProduct()
+//    }
 
     suspend fun insertData(depositData: DepositData) {
         depositDao.insertData(depositData)
@@ -28,5 +28,9 @@ class DepositRepository(private val depositDao: DepositDao) {
 
     suspend fun deleteItem(depositData: DepositData) {
         depositDao.deleteItem(depositData)
+    }
+
+    suspend fun deleteAll() {
+        depositDao.deleteAll()
     }
 }

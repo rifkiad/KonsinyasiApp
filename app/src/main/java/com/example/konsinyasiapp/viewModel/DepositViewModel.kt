@@ -4,12 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.repository.DepositRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,12 +23,13 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
 
     private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
 
+    fun checkDatabaseEmpty(data: List<DepositWithShop>) {
+        checkDatabaseEmptyLiveData.value = data.isEmpty()
+    }
+    fun checkDatabaseEmptyLiveData(): LiveData<Boolean> = checkDatabaseEmptyLiveData
+
     fun getAllShopWithDeposit(): LiveData<List<DepositWithShop>> {
         return repository.getAllShopWithDeposit()
-    }
-
-    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
-        return repository.getAllProductWithDeposit()
     }
 
     fun insertData(depositData: DepositData) {
@@ -46,6 +47,12 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
     fun deleteItem(depositData: DepositData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteItem(depositData)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
         }
     }
 }

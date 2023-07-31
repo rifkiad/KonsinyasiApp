@@ -20,10 +20,6 @@ interface DepositDao {
 
     @Transaction
     @Query("SELECT * FROM deposit_table")
-    fun getDepositWithProduct(): LiveData<List<DepositWithProduct>>
-
-    @Transaction
-    @Query("SELECT * FROM deposit_table")
     fun getDepositWithShop(): LiveData<List<DepositWithShop>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -34,7 +30,7 @@ interface DepositDao {
 
     @Delete
     suspend fun deleteItem(depositData: DepositData)
-}
 
-//    @Query("SELECT * FROM deposit_table ORDER BY id_product")
-//    fun getAllDepositProduct(): LiveData<List<DepositData>>
+    @Query("DELETE FROM deposit_table")
+    suspend fun deleteAll()
+}

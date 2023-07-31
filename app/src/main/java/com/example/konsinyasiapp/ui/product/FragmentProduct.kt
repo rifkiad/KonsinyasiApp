@@ -14,6 +14,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -26,6 +27,7 @@ import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.entities.ProductWithCategory
 import com.example.konsinyasiapp.viewModel.CategoryViewModel
 import com.example.konsinyasiapp.viewModel.ProductViewModel
+import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
@@ -37,6 +39,7 @@ class FragmentProduct : Fragment() {
 
     private val mProductViewModel: ProductViewModel by viewModels()
     private val mCategoryViewModel: CategoryViewModel by viewModels()
+    private val mSharedViewModel:  SharedViewModel by viewModels()
 
     private val productAdapter by lazy {
         ProductAdapter(
@@ -69,7 +72,12 @@ class FragmentProduct : Fragment() {
         mProductViewModel.getAllProductsWithCategories()
             .observe(viewLifecycleOwner) { data ->
                 productAdapter.setData(data)
+                mProductViewModel.checkDatabaseEmpty(data)
             }
+
+        mProductViewModel.checkDatabaseEmptyLiveData().observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
+        })
 
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
@@ -86,6 +94,17 @@ class FragmentProduct : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if (emptyDatabase) {
+            binding.noDataImageView.visibility = View.VISIBLE
+            binding.noDataTextView.visibility = View.VISIBLE
+        } else {
+            binding.noDataImageView.visibility = View.INVISIBLE
+            binding.noDataTextView.visibility = View.INVISIBLE
+        }
+    }
+
 
     private fun setupRecyclerView() {
         val recyclerView = binding.rvProduct

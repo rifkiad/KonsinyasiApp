@@ -16,10 +16,10 @@ class DepositData(
     @ColumnInfo(name = "shop_id")
     var shopId: Long,
 
-    @ColumnInfo(name = "id_product")
-    var productId: Long,
-
     @ColumnInfo(name = "deposit_date")
     var depositDate: String,
 
-    ) : Parcelable
+    @ColumnInfo(name = "deposit_finish_date")
+    var depositFinish: String = ""
+
+) : Parcelable

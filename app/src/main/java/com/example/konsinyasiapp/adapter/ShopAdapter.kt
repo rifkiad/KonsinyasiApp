@@ -23,12 +23,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
+class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
+    RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(private val binding: ItemShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
 
 
         fun bind(shopData: ShopData) {
@@ -147,28 +147,28 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) : RecyclerV
             menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                 .invoke(menu, true)
         }
-}
-
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val binding =
-                ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return MyViewHolder(binding)
-        }
-
-        override fun getItemCount(): Int {
-            return userList.size
-        }
-
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            val currentItem = userList[position]
-            holder.bind(currentItem)
-        }
-
-        fun setData(shopdata: ArrayList<ShopData>) {
-            val shopDiffUtil = ShopDiffCallback(userList, shopdata)
-            val shopDiffUtilResult = DiffUtil.calculateDiff(shopDiffUtil)
-            this.userList = shopdata
-            shopDiffUtilResult.dispatchUpdatesTo(this)
-        }
     }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding =
+            ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
+    }
+
+    override fun getItemCount(): Int {
+        return userList.size
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val currentItem = userList[position]
+        holder.bind(currentItem)
+    }
+
+    fun setData(shopdata: ArrayList<ShopData>) {
+        val shopDiffUtil = ShopDiffCallback(userList, shopdata)
+        val shopDiffUtilResult = DiffUtil.calculateDiff(shopDiffUtil)
+        this.userList = shopdata
+        shopDiffUtilResult.dispatchUpdatesTo(this)
+    }
+}

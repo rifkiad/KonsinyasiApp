@@ -1,6 +1,7 @@
 package com.example.konsinyasiapp.ui.deposit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,8 +35,7 @@ class AddDepositFragment : Fragment() {
 
     private var shopData = arrayListOf<String>()
     private var listShop = listOf<ShopData>()
-    private var shopId = 0L
-    private var shopName = listOf<ShopData>()
+    private var shopId = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,10 +86,10 @@ class AddDepositFragment : Fragment() {
             }
         }
 
-        binding.autoCompleteTextViewShop
-        AdapterView.OnItemClickListener { _, _, p3, _ ->
-            val selectedShop = listShop[p3]
-            shopId = selectedShop.id.toLong()
+        binding.autoCompleteTextViewShop.onItemClickListener =
+        AdapterView.OnItemClickListener { _, _, p2, _ ->
+            val selectedShop = listShop[p2]
+            shopId = selectedShop.id
         }
     }
 
@@ -103,12 +103,12 @@ class AddDepositFragment : Fragment() {
             //insert to Database
             val newDeposit = DepositData(
                 0,
-                mShopData,
-                0,
-                mDate
+                mShopData.toLong(),
+                mDate,
+                ""
             )
             mDepositViewModel.insertData(newDeposit)
-            Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), "Deposit Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
                 .show()
             // Navigate back
             findNavController().navigate(R.id.action_deposit_add_to_addProductInDeposit)

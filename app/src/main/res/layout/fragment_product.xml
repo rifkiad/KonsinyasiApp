@@ -19,13 +19,24 @@
             tools:listitem="@layout/item_product" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
+            android:id="@+id/no_data_imageView"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_no_data"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="invisible" />
 
+        <TextView
+            android:id="@+id/no_data_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/no_data_imageView"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Tidak Ada Produk"
+            android:textSize="@dimen/_16ssp"
+            android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_add_myProduct"

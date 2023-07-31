@@ -9,7 +9,8 @@ import com.example.konsinyasiapp.utils.CategoryDiffCallback
 import com.example.konsinyasiapp.entities.CategoryData
 
 
-class CategoryAdapter(private val onDeleteItemClick: (deletedItem: CategoryData, categoryData: CategoryData) -> Unit)  : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+class CategoryAdapter(private val onDeleteItemClick: (deletedItem: CategoryData, categoryData: CategoryData) -> Unit) :
+    RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
 
     var dataCategory = emptyList<CategoryData>()
 

@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_background"
         android:fontFamily="@font/lato"
+        android:drawableStart="@drawable/ic_calender_black"
         android:hint="Tentukan Tanggal Deposit"
         android:padding="@dimen/_13sdp"
         android:textSize="@dimen/_15ssp" />
