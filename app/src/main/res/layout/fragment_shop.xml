@@ -58,30 +58,6 @@
             app:icon="@drawable/ic_add"
             app:iconTint="@color/white" />
 
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:id="@+id/nav_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="start"-->
-<!--            app:headerLayout="@layout/nav_header_main"-->
-<!--            app:menu="@menu/activity_main_drawer" />-->
-
-<!--        <androidx.drawerlayout.widget.DrawerLayout-->
-<!--            android:id="@+id/drawer_layout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            &lt;!&ndash; Konten utama aplikasi Anda &ndash;&gt;-->
-
-<!--            <com.google.android.material.appbar.MaterialToolbar-->
-<!--                android:id="@+id/toolbar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:title="@string/app_name" />-->
-
-<!--        </androidx.drawerlayout.widget.DrawerLayout>-->
-
     </RelativeLayout>
 
 </layout>

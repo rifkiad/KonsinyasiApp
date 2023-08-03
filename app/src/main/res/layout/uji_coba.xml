@@ -5,58 +5,46 @@
     <data>
 
         <variable
-            name="depositWithShop"
-            type="com.example.konsinyasiapp.entities.DepositWithShop" />
+            name="depositWithProduct"
+            type="com.example.konsinyasiapp.entities.DepositWithProduct" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
         android:elevation="@dimen/_4sdp"
-        android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/card_background"
-        android:radius="@dimen/_10sdp">
+        android:padding="@dimen/_16sdp"
+        android:radius="@dimen/_8sdp"
+        app:cardBackgroundColor="#344955">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/_16sdp">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tvNamaToko"
-                android:layout_width="match_parent"
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:fontFamily="@font/lato_bold"
-                android:gravity="center"
-                android:text="@{depositWithShop.shopData.name}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_17ssp" />
-
-            <TextView
-                android:id="@+id/tvTanggalStart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/lato"
-                android:gravity="center"
-                android:text="@{depositWithShop.depositData.depositDate}"
+                android:fontFamily="@font/montserrat"
+                android:text="@{depositWithProduct.productData.namaProduct}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvTanggalFinish"
-                android:layout_width="match_parent"
+                android:id="@+id/tvProductQuantity"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/lato"
-                android:gravity="center"
-                android:text="@{depositWithShop.depositData.depositFinish}"
+                android:layout_margin="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_15ssp" />
+                android:textSize="@dimen/_16ssp" />
+
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
 </layout>

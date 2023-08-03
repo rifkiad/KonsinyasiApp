@@ -64,10 +64,10 @@ class AddDepositFragment : Fragment() {
 
         binding.btnLanjut.setOnClickListener {
             insertDataToDeposit()
+            binding.autoCompleteTextViewShop.text = null
         }
 
         return binding.root
-
 
     }
 
@@ -87,10 +87,10 @@ class AddDepositFragment : Fragment() {
         }
 
         binding.autoCompleteTextViewShop.onItemClickListener =
-        AdapterView.OnItemClickListener { _, _, p2, _ ->
-            val selectedShop = listShop[p2]
-            shopId = selectedShop.id
-        }
+            AdapterView.OnItemClickListener { _, _, p2, _ ->
+                val selectedShop = listShop[p2]
+                shopId = selectedShop.id
+            }
     }
 
     private fun insertDataToDeposit() {

@@ -13,6 +13,9 @@ class ProductInDepositRepository(private val productInDepositDao: ProductInDepos
         return productInDepositDao.getDepositWithProduct()
     }
 
+    fun filterProduct(idProduct: Int): LiveData<List<DepositWithProduct>> =
+        productInDepositDao.filterProduct(idProduct)
+
     suspend fun insertData(productInDeposit: ProductInDeposit) {
         productInDepositDao.insertData(productInDeposit)
     }

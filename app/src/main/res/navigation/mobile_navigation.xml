@@ -37,10 +37,26 @@
         android:id="@+id/nav_deposit"
         android:name="com.example.konsinyasiapp.ui.deposit.DepositFragment"
         android:label="@string/deposit"
-        tools:layout="@layout/fragment_deposit" >
+        tools:layout="@layout/fragment_deposit">
         <action
             android:id="@+id/action_nav_deposit_to_deposit_add"
             app:destination="@id/deposit_add" />
+        <action
+            android:id="@+id/action_nav_deposit_to_depositDetail"
+            app:destination="@id/depositDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/depositDetail"
+        android:name="com.example.konsinyasiapp.ui.deposit.DetailDepositFragment"
+        android:label="Detail Deposit"
+        tools:layout="@layout/fragment_detail_deposit">
+        <action
+            android:id="@+id/action_depositDetail_to_nav_deposit"
+            app:destination="@id/nav_deposit" />
+        <argument
+            android:name="currentItem"
+            app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
     </fragment>
 
     <fragment

@@ -39,12 +39,6 @@ class DetailShopFragment : Fragment() {
         binding.tvPhoneNumber.text = shop?.phoneNumber
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.main, menu)
-//        menu.removeItem(R.id.menu_delete_all) // Menghapus item "Setting" dari menu
-//        menu.removeItem(R.id.menu_search) // Menghapus item "Setting" dari menu
-//    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

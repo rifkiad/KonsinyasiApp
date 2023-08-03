@@ -12,14 +12,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_9sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_9sdp"
+        android:layout_margin="@dimen/_10sdp"
         app:cardBackgroundColor="#344955"
         app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_8sdp"
-        app:cardMaxElevation="@dimen/_5sdp">
+        app:cardElevation="@dimen/_8sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,37 +24,41 @@
             android:padding="@dimen/_16sdp">
 
             <TextView
-                android:id="@+id/tvNamaToko"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/lato_bold"
-                android:gravity="center"
                 android:text="@{depositWithShop.shopData.name}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp"
-                app:drawableTopCompat="@drawable/ic_store" />
+                app:drawableStartCompat="@drawable/ic_store" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:background="@color/white" />
+                android:background="@drawable/styled_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/tvTanggalStart"
+                    android:id="@+id/tv_tanggal_deposit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:drawableEnd="@drawable/ic_calender"
                     android:fontFamily="@font/lato"
                     android:text="@{depositWithShop.depositData.depositDate}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_15ssp"
+                    app:drawableStartCompat="@drawable/ic_calender" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:text="-"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp" />
 
@@ -66,9 +66,8 @@
                     android:id="@+id/tvTanggalFinish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/lato"
-                    android:text="@{depositWithShop.depositData.depositFinish.isEmpty() ? `Belum Finish Deposit` : ``}"
+                    android:text="@{depositWithShop.depositData.depositFinish.isEmpty() ? `Proses` : depositWithShop.depositData.depositFinish}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp" />
             </LinearLayout>

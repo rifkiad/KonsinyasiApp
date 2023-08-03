@@ -17,6 +17,7 @@ import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.adapter.ProductInDepositAdapter
 import com.example.konsinyasiapp.databinding.FragmentAddProductInDepositBinding
 import com.example.konsinyasiapp.entities.DepositData
+import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.viewModel.DepositViewModel
@@ -34,13 +35,17 @@ class AddProductInDepositFragment : Fragment() {
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mProductInDeposit: ProductInDepositViewModel by viewModels()
     private val productViewModel: ProductViewModel by viewModels()
-    //private val mDepositViewModel: DepositViewModel by viewModels()
+    private val DepositViewModel: DepositViewModel by viewModels()
 
 
     private var productData = arrayListOf<String>()
     private var listProduct = listOf<ProductData>()
-    private var productId = 1
-    private var productName = listOf<ProductData>()
+    private var productId = 0L
+
+    private var depositData = arrayListOf<String>()
+    private var listDeposit = listOf<DepositData>()
+    private var idDeposit = 0L
+
 
     private var productInDepositAdapter: ProductInDepositAdapter = ProductInDepositAdapter()
 
@@ -65,6 +70,12 @@ class AddProductInDepositFragment : Fragment() {
                 productInDepositAdapter.setData(data)
             }
 
+        // Observer untuk hasil filter produk berdasarkan id deposit
+        mProductInDeposit.filterProduct(idDeposit.toInt()).observe(viewLifecycleOwner) { data ->
+            productInDepositAdapter.setData(data)
+        }
+
+        //pengundangan productData ke dalam ExposedDropdownMenu
         autoCompleteTexViewProduct = binding.autoCompleteTextViewProduct
         productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, productData)
 
@@ -77,14 +88,30 @@ class AddProductInDepositFragment : Fragment() {
             }
         }
 
-        binding.autoCompleteTextViewProduct
-        AdapterView.OnItemClickListener { _, _, Int, _ ->
-            val selectedProduct = listProduct[Int]
-            productId = selectedProduct.id
+        //bagian id dari deposit
+        DepositViewModel.gettAllDeposit.observe(viewLifecycleOwner) { deposits ->
+            listDeposit = deposits
+            for (deposit in listDeposit) {
+                depositData.add(deposit.id.toString())
+            }
         }
+
+        //mengundang untuk bagian idnya
+        binding.autoCompleteTextViewProduct.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, Int, _ ->
+                val selectedProduct = listProduct[Int]
+                productId = selectedProduct.id
+                //mProductInDeposit.filterProduct(idDeposit)
+            }
 
         binding.btnSimpanProduk.setOnClickListener {
             insertDataToProductDeposit()
+        }
+
+        binding.btnTambahProduk.setOnClickListener {
+            insertDataToAddProductDeposit()
+            binding.etJumlahBarang.text = null
+            binding.autoCompleteTextViewProduct.text = null
         }
     }
 
@@ -97,20 +124,46 @@ class AddProductInDepositFragment : Fragment() {
     private fun insertDataToProductDeposit() {
         val mProduct = productId
         val mJumlahQuantity = binding.etJumlahBarang.text.toString()
+        val mDeposit = idDeposit
 
-        val validation = mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
+        val validation =
+            mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
         if (validation) {
             //insert to Database
             val newDeposit = ProductInDeposit(
                 0,
-                mProduct.toLong(),
-                mJumlahQuantity
+                mProduct,
+                mJumlahQuantity,
+                mDeposit.toInt()
             )
             mProductInDeposit.insertData(newDeposit)
             Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
                 .show()
             // Navigate back
             findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
+        } else {
+            Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun insertDataToAddProductDeposit() {
+        val mProduct = productId
+        val mJumlahQuantity = binding.etJumlahBarang.text.toString()
+        val mDeposit = idDeposit
+
+        val validation =
+            mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
+        if (validation) {
+            //insert to Database
+            val newDeposit = ProductInDeposit(
+                0,
+                mProduct,
+                mJumlahQuantity,
+                mDeposit.toInt()
+            )
+            mProductInDeposit.insertData(newDeposit)
+            Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
+                .show()
         } else {
             Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
         }

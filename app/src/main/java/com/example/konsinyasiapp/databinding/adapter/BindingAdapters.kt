@@ -2,10 +2,15 @@ package com.example.konsinyasiapp.databinding.adapter
 
 import android.widget.Button
 import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import com.example.konsinyasiapp.R
+import com.example.konsinyasiapp.entities.DepositData
+import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.entities.ShopData
+import com.example.konsinyasiapp.ui.deposit.DepositFragmentDirections
+import com.example.konsinyasiapp.ui.deposit.DetailDepositFragmentDirections
 import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
@@ -53,26 +58,6 @@ class BindingAdapters {
                         .navigate(R.id.action_nav_deposit_to_deposit_add)
 
                 }
-            }
-        }
-
-        @BindingAdapter("android:NavigateToDepositFragment")
-        @JvmStatic
-        fun NavigateToDepositFragment(button: Button, navigate: Boolean) {
-            button.setOnClickListener {
-                if (navigate) {
-                    button.findNavController()
-                        .navigate(R.id.action_addProductInDeposit_to_nav_deposit)
-                }
-            }
-        }
-
-        @BindingAdapter("android:sendDataDetailFragment")
-        @JvmStatic
-        fun sendDataDetailFragment(view: LinearLayout, currentItem: ShopData) {
-            view.setOnClickListener {
-                val action = ShopFragmentDirections.actionNavShopToActionNavShopDetail(currentItem)
-                view.findNavController().navigate(action)
             }
         }
     }

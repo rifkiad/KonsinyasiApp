@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,45 +9,54 @@
             type="com.example.konsinyasiapp.entities.DepositWithProduct" />
     </data>
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@drawable/item_background"
-            android:elevation="@dimen/_4sdp"
-            android:padding="@dimen/_16sdp"
-            android:radius="@dimen/_8sdp">
+            android:layout_margin="@dimen/_5sdp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_nama_product_in_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/lato_bold"
+                android:text="Nama Produk : "
+                android:textSize="@dimen/_15ssp" />
 
-                <TextView
-                    android:id="@+id/tvProductName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_8sdp"
-                    android:fontFamily="@font/lato"
-                    android:text="@{depositWithProduct.productData.namaProduct}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_toEndOf="@id/tv_nama_product_in_deposit"
+                android:fontFamily="@font/montserrat"
+                android:text="@{depositWithProduct.productData.namaProduct}"
+                android:textSize="@dimen/_15ssp" />
 
-                <TextView
-                    android:id="@+id/tvProductQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
-                    android:textColor="@color/reply_blue"
-                    android:textSize="@dimen/_16ssp" />
+            <TextView
+                android:id="@+id/tv_jumlah_barang_product_in_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama_product_in_deposit"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/lato_bold"
+                android:text="Jumlah Produk : "
+                android:textSize="@dimen/_15ssp" />
 
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </ScrollView>
+            <TextView
+                android:id="@+id/tvProductQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama_product_in_deposit"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toEndOf="@id/tv_jumlah_barang_product_in_deposit"
+                android:fontFamily="@font/montserrat"
+                android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
+                android:textSize="@dimen/_15ssp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

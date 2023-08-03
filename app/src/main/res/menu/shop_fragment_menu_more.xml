@@ -3,11 +3,11 @@
     <item
         android:id="@+id/edit_text"
         android:icon="@drawable/ic_edit"
-        android:title="Edit Text" />
+        android:title="Edit" />
 
     <item
         android:id="@+id/delete"
         android:icon="@drawable/ic_delete"
-        android:title="Delete" />
+        android:title="Hapus" />
 
 </menu>

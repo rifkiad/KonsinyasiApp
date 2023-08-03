@@ -17,6 +17,9 @@ interface ProductInDepositDao {
     @Query("SELECT * FROM deposit_product_table ORDER BY id_deposit_product ASC")
     fun getAllDeposit(): LiveData<List<ProductInDeposit>>
 
+    @Query("SELECT * FROM deposit_product_table WHERE id_deposit = :idDeposit")
+    fun filterProduct(idDeposit: Int): LiveData<List<DepositWithProduct>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(productInDepositData: ProductInDeposit)
 
@@ -29,5 +32,4 @@ interface ProductInDepositDao {
     @Transaction
     @Query("SELECT * FROM deposit_product_table")
     fun getDepositWithProduct(): LiveData<List<DepositWithProduct>>
-
 }

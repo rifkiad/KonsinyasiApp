@@ -19,6 +19,9 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
 
     val gettAllDeposit: LiveData<List<ProductInDeposit>> = repository.getAllDeposit
 
+
+    fun filterProduct(idDeposit: Int) = repository.filterProduct(idDeposit)
+
     fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
         return repository.getAllProductWithDeposit()
     }

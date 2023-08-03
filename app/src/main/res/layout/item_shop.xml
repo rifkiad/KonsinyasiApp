@@ -42,7 +42,7 @@
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.name}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_20ssp" />
 
                 <TextView
                     android:id="@+id/tv_item_address"

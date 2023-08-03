@@ -42,7 +42,7 @@
                     android:fontFamily="@font/lato"
                     android:text="@{productWithCategory.productData.namaProduct}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_19ssp" />
 
                 <TextView
                     android:id="@+id/tv_pilihan_product"
