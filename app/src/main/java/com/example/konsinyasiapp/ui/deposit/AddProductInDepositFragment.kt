@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.adapter.ProductInDepositAdapter
 import com.example.konsinyasiapp.databinding.FragmentAddProductInDepositBinding
 import com.example.konsinyasiapp.entities.DepositData
-import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.viewModel.DepositViewModel
@@ -49,6 +49,8 @@ class AddProductInDepositFragment : Fragment() {
 
     private var productInDepositAdapter: ProductInDepositAdapter = ProductInDepositAdapter()
 
+    private val  args by navArgs<AddProductInDepositFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,18 +62,13 @@ class AddProductInDepositFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        idDeposit = args.idDeposit
 
         //setup RecylerView
         setupRecyclerView()
 
-        //observe liveData
-        mProductInDeposit.getAllProductWithDeposit()
-            .observe(viewLifecycleOwner) { data ->
-                productInDepositAdapter.setData(data)
-            }
-
         // Observer untuk hasil filter produk berdasarkan id deposit
-        mProductInDeposit.filterProduct(idDeposit.toInt()).observe(viewLifecycleOwner) { data ->
+        mProductInDeposit.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
             productInDepositAdapter.setData(data)
         }
 
@@ -105,7 +102,7 @@ class AddProductInDepositFragment : Fragment() {
             }
 
         binding.btnSimpanProduk.setOnClickListener {
-            insertDataToProductDeposit()
+            it.findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
         }
 
         binding.btnTambahProduk.setOnClickListener {
@@ -134,9 +131,9 @@ class AddProductInDepositFragment : Fragment() {
                 0,
                 mProduct,
                 mJumlahQuantity,
-                mDeposit.toInt()
+                mDeposit
             )
-            mProductInDeposit.insertData(newDeposit)
+            mProductInDeposit.insertDataProductInDeposit(newDeposit)
             Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
                 .show()
             // Navigate back
@@ -159,9 +156,9 @@ class AddProductInDepositFragment : Fragment() {
                 0,
                 mProduct,
                 mJumlahQuantity,
-                mDeposit.toInt()
+                mDeposit
             )
-            mProductInDeposit.insertData(newDeposit)
+            mProductInDeposit.insertDataProductInDeposit(newDeposit)
             Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
                 .show()
         } else {

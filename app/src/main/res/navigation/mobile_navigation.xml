@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_addProductInDeposit_to_nav_deposit"
             app:destination="@id/nav_deposit" />
+        <argument
+            android:name="idDeposit"
+            app:argType="long" />
     </fragment>
 
     <fragment

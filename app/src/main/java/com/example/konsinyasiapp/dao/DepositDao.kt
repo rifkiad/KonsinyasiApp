@@ -23,7 +23,7 @@ interface DepositDao {
     fun getDepositWithShop(): LiveData<List<DepositWithShop>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertData(depositData: DepositData)
+    suspend fun insertData(depositData: DepositData): Long
 
     @Update
     suspend fun updateData(depositData: DepositData)

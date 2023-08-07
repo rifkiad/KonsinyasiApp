@@ -18,8 +18,8 @@ class DepositRepository(private val depositDao: DepositDao) {
 //        return depositDao.getDepositWithProduct()
 //    }
 
-    suspend fun insertData(depositData: DepositData) {
-        depositDao.insertData(depositData)
+    suspend fun insertData(depositData: DepositData): Long {
+        return depositDao.insertData(depositData)
     }
 
     suspend fun updateData(depositData: DepositData) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -18,80 +19,127 @@
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/_8sdp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="@dimen/_16sdp">
 
             <TextView
+                android:id="@+id/tv_informasi_detail_deposit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold"
-                android:text="Informasi Detail Deposit"
+                android:text="@{args.currentItem.shopData.ownerName}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_17ssp" />
 
             <View
+                android:id="@+id/divider_top"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/tv_informasi_detail_deposit"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:background="@drawable/styled_divider" />
+                android:background="@drawable/divider" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_nama_toko_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/divider_top"
+                android:layout_alignParentStart="true"
                 android:fontFamily="@font/lato"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:text="Nama Toko: "
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
             <TextView
                 android:id="@+id/tv_nama_toko_deposit_detail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/divider_top"
+                android:layout_toEndOf="@id/tv_nama_toko_label"
                 android:fontFamily="@font/lato"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:text="@{args.currentItem.shopData.name}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_tanggal_deposit_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama_toko_label"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:fontFamily="@font/lato"
                 android:text="Tanggal Deposit: "
-                android:layout_marginTop="@dimen/_8sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
             <TextView
                 android:id="@+id/tv_tanggal_deposit_deposit_detail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama_toko_label"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_toEndOf="@id/tv_tanggal_deposit_label"
                 android:fontFamily="@font/lato"
                 android:text="@{args.currentItem.depositData.depositDate}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tv_tanggal_selesai_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tanggal_deposit_label"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:fontFamily="@font/lato"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:text="Tanggal Selesai Deposit: "
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
             <TextView
                 android:id="@+id/tv_finish_deposit_detail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tanggal_deposit_label"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_toEndOf="@id/tv_tanggal_selesai_label"
                 android:fontFamily="@font/lato"
                 android:text="@{args.currentItem.depositData.depositFinish.isEmpty() ? `Proses` : args.currentItem.depositData.depositFinish}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_detail_produk_in_detail_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tanggal_selesai_label"
+                android:layout_marginTop="@dimen/_13sdp"
+                android:fontFamily="@font/lato_bold"
+                android:text="Detail Produk"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_17ssp" />
+
+            <View
+                android:id="@+id/divider_top_detail_produk"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/tv_detail_produk_in_detail_deposit"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/divider" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_top_detail_produk"
+                android:layout_marginTop="@dimen/_4sdp"
+                tools:listitem="@layout/item_product_in_deposit" />
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

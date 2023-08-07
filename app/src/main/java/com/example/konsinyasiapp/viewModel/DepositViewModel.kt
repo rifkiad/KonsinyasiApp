@@ -21,6 +21,9 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
 
     val gettAllDeposit: LiveData<List<DepositData>> = repository.getAllDeposit
 
+    private val _idDeposit = MutableLiveData<Long>()
+    val idDeposit: LiveData<Long> = _idDeposit
+
     private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
 
     fun checkDatabaseEmpty(data: List<DepositWithShop>) {
@@ -34,7 +37,7 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
 
     fun insertData(depositData: DepositData) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertData(depositData)
+            _idDeposit.postValue(repository.insertData(depositData))
         }
     }
 

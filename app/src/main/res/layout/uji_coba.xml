@@ -3,48 +3,129 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
-            name="depositWithProduct"
-            type="com.example.konsinyasiapp.entities.DepositWithProduct" />
+            name="args"
+            type="com.example.konsinyasiapp.ui.deposit.DetailDepositFragmentArgs" />
+
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
-        android:elevation="@dimen/_4sdp"
-        android:padding="@dimen/_16sdp"
-        android:radius="@dimen/_8sdp"
-        app:cardBackgroundColor="#344955">
+        android:layout_margin="@dimen/_10sdp"
+        app:cardBackgroundColor="#344955"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_8sdp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="@dimen/_16sdp">
 
             <TextView
-                android:id="@+id/tvProductName"
+                android:id="@+id/tv_informasi_detail_deposit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="@{args.currentItem.shopData.ownerName}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_17ssp" />
+
+            <View
+                android:id="@+id/divider_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/tv_informasi_detail_deposit"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/divider" />
+
+            <TextView
+                android:id="@+id/tv_nama_toko_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_below="@id/divider_top"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/lato"
+                android:text="Nama Toko: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:id="@+id/tv_nama_toko_deposit_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_top"
+                android:layout_toEndOf="@id/tv_nama_toko_label"
+                android:fontFamily="@font/lato"
+                android:text="@{args.currentItem.shopData.name}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp" />
+
+            <TextView
+                android:id="@+id/tv_tanggal_deposit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nama_toko_label"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/montserrat"
-                android:text="@{depositWithProduct.productData.namaProduct}"
+                android:fontFamily="@font/lato"
+                android:text="Tanggal Deposit: "
                 android:textColor="@color/white"
-                android:textSize="@dimen/_18ssp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_15ssp" />
 
             <TextView
-                android:id="@+id/tvProductQuantity"
+                android:id="@+id/tv_tanggal_deposit_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:fontFamily="@font/montserrat"
-                android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
+                android:layout_below="@id/tv_nama_toko_label"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_toEndOf="@id/tv_tanggal_deposit_label"
+                android:fontFamily="@font/lato"
+                android:text="@{args.currentItem.depositData.depositDate}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_15ssp" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_tanggal_selesai_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tanggal_deposit_label"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:fontFamily="@font/lato"
+                android:text="Tanggal Selesai Deposit: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:visibility="@{args.currentItem.depositData.depositFinish.isEmpty() ? View.INVISIBLE : View.VISIBLE}" />
+
+            <TextView
+                android:id="@+id/tv_finish_deposit_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_tanggal_deposit_label"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_toEndOf="@id/tv_tanggal_selesai_label"
+                android:fontFamily="@font/lato"
+                android:text="@{args.currentItem.depositData.depositFinish.isEmpty() ? `Proses` : args.currentItem.depositData.depositFinish}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:visibility="@{args.currentItem.depositData.depositFinish.isEmpty() ? View.INVISIBLE : View.VISIBLE}" />
+
+            <View
+                android:id="@+id/divider_between_dates"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/tv_tanggal_selesai_label"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:background="@android:color/white"
+                android:visibility="@{args.currentItem.depositData.depositFinish.isEmpty() ? View.INVISIBLE : View.VISIBLE}" />
+
+
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
+
 </layout>

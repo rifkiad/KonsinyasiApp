@@ -14,11 +14,11 @@ import com.example.konsinyasiapp.entities.ProductInDeposit
 @Dao
 interface ProductInDepositDao {
 
-    @Query("SELECT * FROM deposit_product_table ORDER BY id_deposit_product ASC")
-    fun getAllDeposit(): LiveData<List<ProductInDeposit>>
+//    @Query("SELECT * FROM deposit_product_table ORDER BY id_deposit_product ASC")
+//    fun getAllDeposit(): LiveData<List<ProductInDeposit>>
 
     @Query("SELECT * FROM deposit_product_table WHERE id_deposit = :idDeposit")
-    fun filterProduct(idDeposit: Int): LiveData<List<DepositWithProduct>>
+    fun filterProduct(idDeposit: Long): LiveData<List<DepositWithProduct>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(productInDepositData: ProductInDeposit)

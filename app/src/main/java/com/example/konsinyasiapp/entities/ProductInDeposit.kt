@@ -21,6 +21,6 @@ class ProductInDeposit(
     var jumlahQuantity: String,
 
     @ColumnInfo(name = "id_deposit")
-    var idDeposit: Int,
+    var idDeposit: Long,
 
 ) : Parcelable

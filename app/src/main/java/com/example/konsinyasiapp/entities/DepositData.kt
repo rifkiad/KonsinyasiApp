@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 class DepositData(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_deposit")
-    var id: Int,
+    var id: Long,
 
     @ColumnInfo(name = "shop_id")
     var shopId: Long,

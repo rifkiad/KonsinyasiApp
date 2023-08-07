@@ -18,13 +18,16 @@ class DetailDepositFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by navArgs<DetailDepositFragmentArgs>()
+    private var idDeposit = 0L
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailDepositBinding.inflate(inflater, container, false)
-        binding.args = args
+       binding.args = args
+
 
         return binding.root
     }
