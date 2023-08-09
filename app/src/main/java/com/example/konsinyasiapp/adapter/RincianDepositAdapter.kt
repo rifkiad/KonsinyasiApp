@@ -4,43 +4,48 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.konsinyasiapp.databinding.ItemProductInDepositBinding
+import com.example.konsinyasiapp.databinding.ItemProductInDepositDetailBinding
+import com.example.konsinyasiapp.databinding.ItemRincianDepositBinding
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.utils.ProductInDepositDiffCallback
 
-class ProductInDepositAdapter : RecyclerView.Adapter<ProductInDepositAdapter.MyViewHolder>() {
+class RincianDepositAdapter : RecyclerView.Adapter<RincianDepositAdapter.MyViewHolder>() {
 
-    private var depositWithProduct = listOf<DepositWithProduct>()
+    private var depositRincian = listOf<DepositWithProduct>()
 
-    inner class MyViewHolder(private val binding: ItemProductInDepositBinding) :
+    inner class MyViewHolder(private val binding: ItemRincianDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         fun bind(depositWithProduct: DepositWithProduct) {
-            binding.depositWithProduct = depositWithProduct
+            binding.dataProductInDeposit = depositWithProduct
             binding.executePendingBindings()
-        }
 
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
-            ItemProductInDepositBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemRincianDepositBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return MyViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return depositWithProduct.size
+        return depositRincian.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(depositWithProduct[position])
+        holder.bind(depositRincian[position])
     }
 
     fun setData(dataProduct: List<DepositWithProduct>) {
-        val productDiffUtil = ProductInDepositDiffCallback(depositWithProduct, dataProduct)
+        val productDiffUtil = ProductInDepositDiffCallback(depositRincian, dataProduct)
         val productDiffUtilResult = DiffUtil.calculateDiff(productDiffUtil)
-        this.depositWithProduct = dataProduct
+        this.depositRincian = dataProduct
         productDiffUtilResult.dispatchUpdatesTo(this)
     }
+
 }

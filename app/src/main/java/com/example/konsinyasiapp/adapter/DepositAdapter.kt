@@ -21,8 +21,6 @@ class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
 
     private var shopWithDeposit = listOf<DepositWithShop>()
 
-    private var depositData: DepositData? = null
-
     inner class MyViewHolder(private val binding: ItemDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(depositWithShop: DepositWithShop) {
@@ -30,15 +28,8 @@ class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
             binding.executePendingBindings()
 
             itemView.setOnClickListener { view ->
-                val depositData = DepositData(
-                    id = depositWithShop.depositData.id,
-                    shopId = depositWithShop.depositData.shopId,
-                    depositDate = depositWithShop.depositData.depositDate,
-                    depositFinish = depositWithShop.depositData.depositFinish
-                )
                 val action = DepositFragmentDirections.actionNavDepositToDepositDetail(depositWithShop)
                 view.findNavController().navigate(action)
-                dataDeposit(depositData)
             }
         }
     }
@@ -64,16 +55,3 @@ class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
         productDiffUtilResult.dispatchUpdatesTo(this)
     }
 }
-
-//depositData = depositData?.let {
-//    DepositData(
-//        id = it.id,
-//        shopId = it.shopId,
-//        depositDate = it.depositDate,
-//        depositFinish = it.depositFinish
-//    )
-//}
-//
-//itemView.setOnClickListener { view ->
-//    depositData?.let { data ->
-//        dataDeposit(data)

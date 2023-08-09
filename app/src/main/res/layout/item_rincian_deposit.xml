@@ -92,7 +92,7 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_sisa_stok_label"
                 android:fontFamily="@font/montserrat"
-                android:text="@{dataProductInDeposit.productInDeposit.returnQuantity}"
+                android:text="@{dataProductInDeposit.productInDeposit.jumlahQuantity}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 

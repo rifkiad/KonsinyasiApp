@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/tv_shared_preference"
-        android:layout_width="318dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/kanit_medium"
-        android:text="Halo, Tolong Isi Data Dibawah Ini!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/lato_black"
+        android:text="@string/halo_tolong_isi_data_dibawah_ini"
         android:textColor="@color/black"
         android:textSize="@dimen/_24sdp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -49,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_55sdp"
                 android:background="@drawable/item_background"
-                android:hint="Nama"
+                android:hint="@string/nama"
                 android:inputType="textPersonName"
                 android:maxLines="1" />
 
@@ -62,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:background="@drawable/item_background"
-            android:text="Simpan" />
+            android:text="@string/simpan" />
 
     </LinearLayout>
 

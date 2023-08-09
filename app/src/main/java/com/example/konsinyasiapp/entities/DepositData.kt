@@ -20,6 +20,6 @@ class DepositData(
     var depositDate: String,
 
     @ColumnInfo(name = "deposit_finish_date")
-    var depositFinish: String = ""
+    var depositFinish: String
 
 ) : Parcelable

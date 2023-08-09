@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
-            android:hint="Nama Produk"
+            android:hint="@string/nama_produk"
             android:inputType="text"
             android:maxLines="1" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/autoCompleteTextViewCategory_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Pilih Category"
+            android:hint="@string/pilih_category"
             android:layout_weight="1"
             android:inputType="none" />
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
-            android:hint="Harga Produk"
+            android:hint="@string/harga_produk"
             android:inputType="numberDecimal"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>

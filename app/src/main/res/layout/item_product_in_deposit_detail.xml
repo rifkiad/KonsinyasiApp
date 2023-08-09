@@ -10,22 +10,24 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#344955">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp">
+            android:layout_margin="@dimen/_2sdp">
 
             <TextView
                 android:id="@+id/tv_nama_product_in_deposit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:fontFamily="@font/lato_bold"
+                android:fontFamily="@font/lato"
                 android:text="@string/nama_produk_product_in_deposit"
-                android:textSize="@dimen/_15ssp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
 
             <TextView
                 android:id="@+id/tvProductName"
@@ -35,7 +37,8 @@
                 android:layout_toEndOf="@id/tv_nama_product_in_deposit"
                 android:fontFamily="@font/montserrat"
                 android:text="@{depositWithProduct.productData.namaProduct}"
-                android:textSize="@dimen/_15ssp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
 
             <TextView
                 android:id="@+id/tv_jumlah_barang_product_in_deposit"
@@ -43,12 +46,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_nama_product_in_deposit"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:fontFamily="@font/lato_bold"
+                android:fontFamily="@font/lato"
                 android:text="@string/jumlah_produk_product_in_deposit"
-                android:textSize="@dimen/_15ssp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tvProductQuantity"
+                android:id="@+id/tv_jumlah_product_in_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_nama_product_in_deposit"
@@ -56,7 +60,33 @@
                 android:layout_toEndOf="@id/tv_jumlah_barang_product_in_deposit"
                 android:fontFamily="@font/montserrat"
                 android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
-                android:textSize="@dimen/_15ssp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+
+            <EditText
+                android:id="@+id/et_total_terjual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:hint="Jumlah Produk Kembali"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/_13ssp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/et_total_terjual"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/white" />
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>

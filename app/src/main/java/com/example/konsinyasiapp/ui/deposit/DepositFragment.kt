@@ -101,7 +101,6 @@ class DepositFragment : Fragment() {
         builder.create().show()
     }
 
-
     private fun setupRecyclerView() {
         val recyclerView = binding.rvDeposit
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

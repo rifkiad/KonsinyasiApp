@@ -11,14 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/_10sdp"
-        android:text="Light Theme"
+        android:text="@string/light_theme"
         android:fontFamily="@font/lato"
         android:textSize="@dimen/_24sdp"
-        android:textOff="Light Theme"
-        android:textOn="Dark Theme"
+        android:textOff="@string/light_theme"
+        android:textOn="@string/dark_theme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

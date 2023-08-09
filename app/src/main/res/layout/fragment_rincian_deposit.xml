@@ -1,0 +1,61 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.example.konsinyasiapp.ui.deposit.RincianDepositFragmentArgs" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardBackgroundColor="#344955"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_8sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_16sdp">
+
+            <TextView
+                android:id="@+id/tv_nama_toko_rincian_deposit"
+                style="@style/text2_deposit"
+                android:text="@{data.currentItem.shopData.name}"
+                android:textSize="@dimen/_16ssp" />
+
+            <View
+                android:id="@+id/divider_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/tv_nama_toko_rincian_deposit"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/divider" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProductInDepositRincian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider_top"
+                tools:listitem="@layout/item_rincian_deposit" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_rincian_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvProductInDepositRincian"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/lato_black"
+                android:textColor="@color/white"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/simpan" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

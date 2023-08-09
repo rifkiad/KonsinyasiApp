@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Nama Produk"
+            android:hint="@string/nama_produk"
             android:inputType="text"
-            android:maxLines="1" />
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/lato"
-            android:hint="Pilih Kategori"
+            android:hint="@string/pilih_kategori"
             android:inputType="none" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,9 +61,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Harga Produk"
-            android:inputType="numberDecimal"
-            android:maxLines="1" />
+            android:hint="@string/harga_produk"
+            android:inputType="numberDecimal" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -72,6 +72,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_background"
-        android:text="Tambah Produk" />
+        android:text="@string/tambah_produk" />
 
 </LinearLayout>

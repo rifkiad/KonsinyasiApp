@@ -10,7 +10,7 @@
             android:title="@string/beranda" />
         <item
             android:id="@+id/nav_shop"
-            android:icon="@drawable/ic_shopping_cart"
+            android:icon="@drawable/ic_store"
             android:title="@string/toko" />
         <item
             android:id="@+id/nav_deposit"
@@ -22,7 +22,7 @@
             android:title="@string/barang" />
         <item
             android:id="@+id/nav_kategori_produk"
-            android:icon="@drawable/ic_category"
+            android:icon="@drawable/ic_category_product"
             android:title="@string/kategori_produk" />
     </group>
 </menu>

@@ -1,7 +1,6 @@
 package com.example.konsinyasiapp.ui.deposit
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
@@ -31,6 +30,7 @@ class AddProductInDepositFragment : Fragment() {
 
     private lateinit var autoCompleteTexViewProduct: AutoCompleteTextView
     private lateinit var productAdapter: ArrayAdapter<String>
+    private var productInDepositAdapter: ProductInDepositAdapter = ProductInDepositAdapter()
 
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mProductInDeposit: ProductInDepositViewModel by viewModels()
@@ -46,10 +46,8 @@ class AddProductInDepositFragment : Fragment() {
     private var listDeposit = listOf<DepositData>()
     private var idDeposit = 0L
 
-
-    private var productInDepositAdapter: ProductInDepositAdapter = ProductInDepositAdapter()
-
-    private val  args by navArgs<AddProductInDepositFragmentArgs>()
+    private val args by navArgs<AddProductInDepositFragmentArgs>()
+    private var isDataAdded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,17 +96,31 @@ class AddProductInDepositFragment : Fragment() {
             AdapterView.OnItemClickListener { _, _, Int, _ ->
                 val selectedProduct = listProduct[Int]
                 productId = selectedProduct.id
-                //mProductInDeposit.filterProduct(idDeposit)
             }
 
         binding.btnSimpanProduk.setOnClickListener {
-            it.findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
+            if (!isDataAdded) {
+                // pesan bila user belum mengisi data dan belum menambah datanya menggunakan 'tambahProduk'
+                Toast.makeText(
+                    requireContext(),
+                    "Harap tambahkan produk terlebih dahulu",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                //action selanjutnya bila user sudah mengklik button simpan
+                it.findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
+            }
         }
 
         binding.btnTambahProduk.setOnClickListener {
             insertDataToAddProductDeposit()
+
+            //mengosongkan input datanya bila datanya sudah ditambahkan
             binding.etJumlahBarang.text = null
             binding.autoCompleteTextViewProduct.text = null
+
+            // Set isDataAdded menjadi true setelah data ditambahkan
+            isDataAdded = true
         }
     }
 
@@ -118,35 +130,10 @@ class AddProductInDepositFragment : Fragment() {
         recyclerView.adapter = this@AddProductInDepositFragment.productInDepositAdapter
     }
 
-    private fun insertDataToProductDeposit() {
-        val mProduct = productId
-        val mJumlahQuantity = binding.etJumlahBarang.text.toString()
-        val mDeposit = idDeposit
-
-        val validation =
-            mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
-        if (validation) {
-            //insert to Database
-            val newDeposit = ProductInDeposit(
-                0,
-                mProduct,
-                mJumlahQuantity,
-                mDeposit
-            )
-            mProductInDeposit.insertDataProductInDeposit(newDeposit)
-            Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
-                .show()
-            // Navigate back
-            findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
-        } else {
-            Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun insertDataToAddProductDeposit() {
         val mProduct = productId
-        val mJumlahQuantity = binding.etJumlahBarang.text.toString()
         val mDeposit = idDeposit
+        val mJumlahQuantity = binding.etJumlahBarang.text.toString()
 
         val validation =
             mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
@@ -155,8 +142,10 @@ class AddProductInDepositFragment : Fragment() {
             val newDeposit = ProductInDeposit(
                 0,
                 mProduct,
+                mDeposit,
                 mJumlahQuantity,
-                mDeposit
+                0
+
             )
             mProductInDeposit.insertDataProductInDeposit(newDeposit)
             Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)

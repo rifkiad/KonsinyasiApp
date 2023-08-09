@@ -2,6 +2,51 @@
 <resources>
 
 
-    <style name="TextInputLayout"/>
+    <style name="detail_deposit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_1sdp</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_below">@id/divider_top</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+    </style>
+
+    <style name="text_detail">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+    </style>
+
+    <style name="text1_deposit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/lato</item>
+    </style>
+
+    <style name="text2_deposit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/lato_black</item>
+    </style>
+    
+    <style name="text_item_product">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+    </style>
+        
+
+
+
 
 </resources>

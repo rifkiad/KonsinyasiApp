@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Nama Toko"
+            android:hint="@string/nama_toko"
             android:inputType="textPersonName"
-            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
@@ -49,9 +49,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Alamat"
-            android:maxLines="1"
+            android:hint="@string/alamat"
             android:inputType=""
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
@@ -70,9 +70,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Nama Pemilik"
+            android:hint="@string/nama_pemilik"
             android:inputType="textPersonName"
-            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
@@ -91,9 +91,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/item_background"
             android:fontFamily="@font/lato"
-            android:hint="Nomor Telepon"
+            android:hint="@string/nomor_telepon"
             android:inputType="phone"
-            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
 
@@ -105,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/item_background"
-        android:text="Tambah Toko"
+        android:text="@string/tambah_toko"
         android:textColor="@color/white" />
 
 </LinearLayout>

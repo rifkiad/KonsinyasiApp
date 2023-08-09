@@ -109,13 +109,14 @@ class AddDepositFragment : Fragment() {
             )
             mDepositViewModel.insertData(newDeposit)
             mDepositViewModel.idDeposit.observe(viewLifecycleOwner) { idDeposit ->
-                Toast.makeText(requireContext(), "Deposit Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
-                    .show()
-                // Navigate back
-                findNavController().navigate(AddDepositFragmentDirections.actionDepositAddToAddProductInDeposit(idDeposit))
+                findNavController().navigate(
+                    AddDepositFragmentDirections.actionDepositAddToAddProductInDeposit(
+                        idDeposit
+                    )
+                )
             }
         } else {
-            Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Harap Data Diisi Semuanya", Toast.LENGTH_SHORT).show()
         }
     }
 

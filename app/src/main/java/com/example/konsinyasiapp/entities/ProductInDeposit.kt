@@ -17,10 +17,13 @@ class ProductInDeposit(
     @ColumnInfo(name = "id_product")
     var productId: Long,
 
+    @ColumnInfo(name = "id_deposit")
+    var idDeposit: Long,
+
     @ColumnInfo(name = "quantity")
     var jumlahQuantity: String,
 
-    @ColumnInfo(name = "id_deposit")
-    var idDeposit: Long,
+    @ColumnInfo(name = "return_quantity")
+    var returnQuantity: Int
 
 ) : Parcelable

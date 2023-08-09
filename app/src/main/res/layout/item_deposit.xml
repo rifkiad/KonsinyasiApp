@@ -26,23 +26,18 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
+                android:drawablePadding="@dimen/_2sdp"
+                android:fontFamily="@font/lato_black"
+                android:gravity="center_vertical"
                 android:text="@{depositWithShop.shopData.name}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_15ssp"
                 app:drawableStartCompat="@drawable/ic_store" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:background="@drawable/styled_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -50,7 +45,9 @@
                     android:id="@+id/tv_tanggal_deposit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_2sdp"
                     android:fontFamily="@font/lato"
+                    android:gravity="center_vertical"
                     android:text="@{depositWithShop.depositData.depositDate}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15ssp"
@@ -59,22 +56,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:layout_marginStart="@dimen/_1sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:gravity="center_vertical"
                     android:text="-"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <TextView
                     android:id="@+id/tvTanggalFinish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:gravity="center_vertical"
                     android:text="@{depositWithShop.depositData.depositFinish.isEmpty() ? `Proses` : depositWithShop.depositData.depositFinish}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_13ssp" />
             </LinearLayout>
-
 
         </LinearLayout>
 

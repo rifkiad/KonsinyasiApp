@@ -106,7 +106,7 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
                         AlertDialog.Builder(c)
                             .setTitle("Hapus")
                             .setIcon(R.drawable.ic_warning)
-                            .setMessage("Apa Kamu Yakin Ingin Menghapus Informasi Ini?")
+                            .setMessage("Apa Kamu Yakin Ingin Menghapus Item Toko Ini?")
                             .setPositiveButton("Ya") { dialog, _ ->
                                 // delete data menggunakan Room Database
                                 val shopDao = MyDatabase.getDatabase(c).shopDao()

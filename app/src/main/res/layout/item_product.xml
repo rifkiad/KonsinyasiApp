@@ -39,31 +39,21 @@
                     android:id="@+id/tv_nama_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
+                    android:fontFamily="@font/lato_black"
                     android:text="@{productWithCategory.productData.namaProduct}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_19ssp" />
+                    android:textSize="@dimen/_17ssp" />
 
                 <TextView
                     android:id="@+id/tv_pilihan_product"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/lato"
-                    android:text="@{productWithCategory.categoryData.nameCategory}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16ssp" />
+                    style="@style/text_item_product"
+                    android:text="@{productWithCategory.categoryData.nameCategory}" />
 
                 <TextView
                     android:id="@+id/tv_harga_product"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/lato"
+                    style="@style/text_item_product"
                     android:text="@{productWithCategory.productData.hargaProduct}"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </LinearLayout>
 

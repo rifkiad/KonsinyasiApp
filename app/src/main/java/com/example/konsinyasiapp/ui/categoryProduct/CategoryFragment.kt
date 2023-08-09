@@ -35,10 +35,8 @@ class CategoryFragment : Fragment() {
             showDeleteAlertDialog(deletedItem, categoryData)
         }
     }
-    //private lateinit var adapter: CategoryAdapter
 
     private lateinit var categoryAdapter: CategoryAdapter
-
     private val mCategoryViewModel: CategoryViewModel by viewModels()
 
 
@@ -126,8 +124,8 @@ class CategoryFragment : Fragment() {
     private fun showDeleteAlertDialog(deletedItem: CategoryData, categoryData: CategoryData) {
 
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
-        alertDialogBuilder.setTitle("Hapus Title")
-        alertDialogBuilder.setMessage("Anda yakin ingin menghapus ini ${deletedItem.nameCategory}?")
+        alertDialogBuilder.setTitle("Hapus Kategori")
+        alertDialogBuilder.setMessage("Anda yakin ingin menghapus ${deletedItem.nameCategory}?")
         alertDialogBuilder.setPositiveButton("Hapus") { _, _ ->
             mCategoryViewModel.deleteItem(categoryData)
             Snackbar.make(

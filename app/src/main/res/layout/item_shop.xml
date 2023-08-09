@@ -39,10 +39,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_6sdp"
-                    android:fontFamily="@font/lato"
+                    android:fontFamily="@font/lato_black"
                     android:text="@{shopData.name}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_20ssp" />
+                    android:textSize="@dimen/_17ssp" />
 
                 <TextView
                     android:id="@+id/tv_item_address"
@@ -52,7 +52,7 @@
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.address}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:id="@+id/tv_item_product_owner"
@@ -62,7 +62,7 @@
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.ownerName}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:id="@+id/tv_item_phone_number"
@@ -72,7 +72,7 @@
                     android:fontFamily="@font/lato"
                     android:text="@{shopData.phoneNumber}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_14ssp" />
 
             </LinearLayout>
 

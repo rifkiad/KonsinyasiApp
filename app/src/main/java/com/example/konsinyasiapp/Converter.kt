@@ -1,10 +1,8 @@
-package com.example
+package com.example.konsinyasiapp
 
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
-import androidx.appcompat.widget.AppCompatEditText
-import com.google.android.material.textfield.TextInputEditText
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.text.NumberFormat

@@ -34,7 +34,7 @@
             android:layout_below="@id/no_data_imageView"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/_16sdp"
-            android:text="Tidak Ada Deposit"
+            android:text="@string/tidak_ada_deposit"
             android:textSize="@dimen/_16ssp"
             android:visibility="invisible" />
 
@@ -53,7 +53,7 @@
             android:clickable="true"
             android:navigateToAddDepositFragment="@{true}"
             android:focusable="true"
-            android:text="Tambah Deposit"
+            android:text="@string/tambah_deposit"
             android:textColor="@color/white"
             app:icon="@drawable/ic_add"
             app:iconTint="@color/white" />

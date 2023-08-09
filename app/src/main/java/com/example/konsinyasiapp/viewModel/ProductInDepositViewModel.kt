@@ -19,12 +19,7 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
 
     //val gettAllDeposit: LiveData<List<ProductInDeposit>> = repository.getAllDeposit
 
-
     fun filterProduct(idDeposit: Long) = repository.filterProduct(idDeposit)
-
-    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
-        return repository.getAllProductWithDeposit()
-    }
 
     fun insertDataProductInDeposit(productInDeposit: ProductInDeposit) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,15 +27,4 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
-    fun updateDataProductInDeposit(productInDeposit: ProductInDeposit) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updateData(productInDeposit)
-        }
-    }
-
-    fun deleteItemProductInDeposit(productInDeposit: ProductInDeposit) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteItem(productInDeposit)
-        }
-    }
 }

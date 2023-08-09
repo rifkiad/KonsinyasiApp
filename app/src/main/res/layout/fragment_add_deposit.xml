@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Pilih Toko">
+        android:hint="@string/pilih_toko">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextViewShop"
@@ -33,10 +34,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_background"
         android:fontFamily="@font/lato"
-        android:drawableStart="@drawable/ic_calender_black"
-        android:hint="Tentukan Tanggal Deposit"
+        android:hint="@string/tentukan_tanggal_deposit"
         android:padding="@dimen/_13sdp"
-        android:textSize="@dimen/_15ssp" />
+        android:singleLine="true"
+        android:textSize="@dimen/_15ssp"
+        app:drawableStartCompat="@drawable/ic_calender_black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +50,7 @@
             android:id="@+id/btn_lanjut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lanjut" />
+            android:text="@string/lanjut" />
 
     </LinearLayout>
 
