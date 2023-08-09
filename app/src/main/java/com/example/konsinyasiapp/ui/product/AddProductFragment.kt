@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.Converter
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.FragmentAddProductBinding
 import com.example.konsinyasiapp.entities.CategoryData
@@ -18,6 +20,7 @@ import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.viewModel.CategoryViewModel
 import com.example.konsinyasiapp.viewModel.ProductViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 
 class AddProductFragment : Fragment() {
@@ -42,6 +45,9 @@ class AddProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddProductBinding.inflate(inflater, container, false)
+
+        val edtHargaProduk: EditText = binding.edtHargaProduk
+        val converter = Converter(edtHargaProduk)
 
         return binding.root
 
