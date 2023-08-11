@@ -9,6 +9,7 @@ import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.repository.DepositRepository
 import kotlinx.coroutines.Dispatchers
@@ -41,9 +42,9 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updateData(depositData: DepositData) {
+    fun updateData(productInDepositData: ProductInDeposit) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateData(depositData)
+            repository.updateData(productInDepositData)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.konsinyasiapp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,7 +15,6 @@ class ProductInDepositAdapter : RecyclerView.Adapter<ProductInDepositAdapter.MyV
 
     inner class MyViewHolder(private val binding: ItemProductInDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
 
         fun bind(depositWithProduct: DepositWithProduct) {
             binding.depositWithProduct = depositWithProduct
@@ -38,9 +38,16 @@ class ProductInDepositAdapter : RecyclerView.Adapter<ProductInDepositAdapter.MyV
     }
 
     fun setData(dataProduct: List<DepositWithProduct>) {
+        Log.d("ProductInDepositAdapter", "setData: Setting new data")
+
+        // Log data before changes
+        Log.d("ProductInDepositAdapter", "Old data: $depositWithProduct")
         val productDiffUtil = ProductInDepositDiffCallback(depositWithProduct, dataProduct)
         val productDiffUtilResult = DiffUtil.calculateDiff(productDiffUtil)
         this.depositWithProduct = dataProduct
         productDiffUtilResult.dispatchUpdatesTo(this)
+
+        // Log data after changes
+        Log.d("ProductInDepositAdapter", "New data: $depositWithProduct")
     }
 }

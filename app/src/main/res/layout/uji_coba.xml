@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="dataProductInDeposit"
+            name="depositWithProduct"
             type="com.example.konsinyasiapp.entities.DepositWithProduct" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#344955">
 
@@ -21,40 +19,34 @@
             android:layout_margin="@dimen/_2sdp">
 
             <TextView
-                android:id="@+id/tv_nama_product_in_rincian_deposit"
+                android:id="@+id/tv_nama_product_in_deposit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:fontFamily="@font/lato"
-                android:text="Nama Produk         :"
+                android:text="Nama Produk:"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tv_data_nama_product_in_rincian_deposit"
+                android:id="@+id/tvProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_1sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_toEndOf="@id/tv_nama_product_in_rincian_deposit"
-                android:ellipsize="end"
+                android:layout_toEndOf="@id/tv_nama_product_in_deposit"
                 android:fontFamily="@font/montserrat"
-                android:maxLines="1"
-                android:text="@{dataProductInDeposit.productData.namaProduct}"
+                android:text="@{depositWithProduct.productData.namaProduct}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tv_data_jumlah_produk_in_rincian_deposit"
+                android:id="@+id/tv_jumlah_barang_product_in_deposit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_nama_product_in_rincian_deposit"
+                android:layout_below="@id/tv_nama_product_in_deposit"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:fontFamily="@font/lato"
-                android:text="Jumlah Produk      :"
+                android:text="Jumlah Produk:"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
@@ -62,49 +54,32 @@
                 android:id="@+id/tv_jumlah_product_in_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_nama_product_in_rincian_deposit"
-                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_below="@id/tv_nama_product_in_deposit"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:layout_toEndOf="@id/tv_data_jumlah_produk_in_rincian_deposit"
+                android:layout_toEndOf="@id/tv_jumlah_barang_product_in_deposit"
                 android:fontFamily="@font/montserrat"
-                android:text="@{dataProductInDeposit.productInDeposit.jumlahQuantity}"
+                android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tv_sisa_stok_label"
+                android:id="@+id/et_total_terjual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
-                android:layout_marginStart="@dimen/_43sdp"
-                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/lato"
-                android:text="Sisa Stok  :"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13ssp" />
-
-            <TextView
-                android:id="@+id/tv_sisa_stok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
-                android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_toEndOf="@id/tv_sisa_stok_label"
-                android:fontFamily="@font/montserrat"
-                android:text="@{dataProductInDeposit.productInDeposit.returnQuantity}"
+                android:text="Jumlah Produk Kembali:"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
             <View
-                android:id="@+id/view_rincian_deposit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@id/tv_sisa_stok_label"
+                android:layout_below="@id/et_total_terjual"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/white" />
 
         </RelativeLayout>
-
     </androidx.cardview.widget.CardView>
 </layout>

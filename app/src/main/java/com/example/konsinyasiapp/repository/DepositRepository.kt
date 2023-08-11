@@ -5,6 +5,7 @@ import com.example.konsinyasiapp.dao.DepositDao
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.entities.ProductInDeposit
 
 class DepositRepository(private val depositDao: DepositDao) {
 
@@ -14,16 +15,12 @@ class DepositRepository(private val depositDao: DepositDao) {
         return depositDao.getDepositWithShop()
     }
 
-//    fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
-//        return depositDao.getDepositWithProduct()
-//    }
-
     suspend fun insertData(depositData: DepositData): Long {
         return depositDao.insertData(depositData)
     }
 
-    suspend fun updateData(depositData: DepositData) {
-        depositDao.updateData(depositData)
+    suspend fun updateData(productInDepositData: ProductInDeposit) {
+        depositDao.updateData(productInDepositData)
     }
 
     suspend fun deleteItem(depositData: DepositData) {

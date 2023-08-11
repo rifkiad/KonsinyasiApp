@@ -60,5 +60,16 @@ class BindingAdapters {
                 }
             }
         }
+
+        @BindingAdapter("android:navigateToRincianDeposit")
+        @JvmStatic
+        fun navigateToRincianDeposit(button: Button, navigate: Boolean) {
+            button.setOnClickListener {
+                if (navigate) {
+                    button.findNavController()
+                        .navigate(R.id.action_depositDetail_to_rincian_deposit)
+                }
+            }
+        }
     }
 }

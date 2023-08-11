@@ -50,11 +50,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvProductInDepositRincian"
                 android:layout_alignParentEnd="true"
-                android:fontFamily="@font/lato_black"
-                android:textColor="@color/white"
-                android:background="@drawable/button_background"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/simpan" />
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/lato_black"
+                android:text="@string/simpan"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

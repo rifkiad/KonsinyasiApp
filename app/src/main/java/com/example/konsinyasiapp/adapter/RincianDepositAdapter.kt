@@ -3,25 +3,32 @@ package com.example.konsinyasiapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.konsinyasiapp.databinding.ItemProductInDepositDetailBinding
+import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.ItemRincianDepositBinding
 import com.example.konsinyasiapp.entities.DepositWithProduct
+import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.utils.ProductInDepositDiffCallback
 
-class RincianDepositAdapter : RecyclerView.Adapter<RincianDepositAdapter.MyViewHolder>() {
+class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>) :
+    RecyclerView.Adapter<RincianDepositAdapter.MyViewHolder>() {
 
-    private var depositRincian = listOf<DepositWithProduct>()
+    private lateinit var onItemClickCallback: DepositDetailAdapter.OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: DepositDetailAdapter.OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     inner class MyViewHolder(private val binding: ItemRincianDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(depositWithProduct: DepositWithProduct) {
             binding.dataProductInDeposit = depositWithProduct
             binding.executePendingBindings()
 
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding =
@@ -46,6 +53,10 @@ class RincianDepositAdapter : RecyclerView.Adapter<RincianDepositAdapter.MyViewH
         val productDiffUtilResult = DiffUtil.calculateDiff(productDiffUtil)
         this.depositRincian = dataProduct
         productDiffUtilResult.dispatchUpdatesTo(this)
+    }
+
+    interface OnItemClickCallback {
+        fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean)
     }
 
 }

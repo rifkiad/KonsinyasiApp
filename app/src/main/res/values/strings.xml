@@ -83,4 +83,8 @@
     <string name="jumlah_produk_product_in_deposit">Jumlah Produk :</string>
     <string name="jumlah_terjual">Jumlah Terjual</string>
 
+    <string name="format_show_list">%s</string>
+    <string name="input_jumlah_kembali">Input Jumlah Kembali</string>
+
+
 </resources>

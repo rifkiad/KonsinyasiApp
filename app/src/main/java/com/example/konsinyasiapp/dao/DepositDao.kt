@@ -11,6 +11,7 @@ import androidx.room.Update
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.entities.ProductInDeposit
 
 @Dao
 interface DepositDao {
@@ -26,7 +27,7 @@ interface DepositDao {
     suspend fun insertData(depositData: DepositData): Long
 
     @Update
-    suspend fun updateData(depositData: DepositData)
+    suspend fun updateData(productInDepositData: ProductInDeposit)
 
     @Delete
     suspend fun deleteItem(depositData: DepositData)

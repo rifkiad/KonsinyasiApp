@@ -24,7 +24,7 @@ class RincianDepositFragment : Fragment() {
     private val mProductInDeposit: ProductInDepositViewModel by viewModels()
 
     private var idDeposit = 0L
-    private var depositRincianAdapter: RincianDepositAdapter = RincianDepositAdapter()
+    private lateinit var depositDetailAdapter: DepositDetailAdapter
 
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class RincianDepositFragment : Fragment() {
 
 //        val idDeposit = args.idDeposit
         mProductInDeposit.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
-            depositRincianAdapter.setData(data)
+            depositDetailAdapter.setData(data)
         }
 
         // Inisialisasi navController
@@ -65,7 +65,7 @@ class RincianDepositFragment : Fragment() {
     private fun setupRecyclerView() {
         val recyclerView = binding.rvProductInDepositRincian
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = this@RincianDepositFragment.depositRincianAdapter
+        recyclerView.adapter = this@RincianDepositFragment.depositDetailAdapter
 
     }
 

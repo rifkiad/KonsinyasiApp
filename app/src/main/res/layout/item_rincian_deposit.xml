@@ -72,25 +72,24 @@
                 android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tv_sisa_stok_label"
+                android:id="@+id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
-                android:layout_marginStart="@dimen/_43sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:fontFamily="@font/lato"
-                android:text="Sisa Stok  :"
+                android:text="Jumlah Produk Kembali  :"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
             <TextView
-                android:id="@+id/tv_sisa_stok"
+                android:id="@+id/tv_data_jumlah_product_kembali_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
-                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_below="@id/tv_data_jumlah_produk_in_rincian_deposit"
+                android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:layout_toEndOf="@id/tv_sisa_stok_label"
+                android:layout_toEndOf="@id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:fontFamily="@font/montserrat"
                 android:text="@{dataProductInDeposit.productInDeposit.jumlahQuantity}"
                 android:textColor="@color/white"
@@ -100,9 +99,10 @@
                 android:id="@+id/view_rincian_deposit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@id/tv_sisa_stok_label"
+                android:layout_below="@id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/white" />
+
 
         </RelativeLayout>
 

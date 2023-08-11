@@ -1,5 +1,9 @@
 package com.example.konsinyasiapp
 
+import com.example.konsinyasiapp.adapter.DepositDetailAdapter
+import com.example.konsinyasiapp.entities.DepositWithProduct
+import com.example.konsinyasiapp.entities.ProductInDeposit
+
 class Code {
 
     //private fun deleteProduct() {
@@ -52,6 +56,66 @@ class Code {
 //
 //    val dialog = dialogBuilder.create()
 //    dialog.show()
+//}
+
+
+//    depositDetailAdapter.setOnItemClickCallback(object : DepositDetailAdapter.OnItemClickCallback {
+//        override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
+//            if (isEmpty) {
+//                requireView().customSnackbar("Jumlah Produk "), )
+//            } else if (data.returnQuantity > data.jumlahQuantity) {
+//                requireView().customSnackbar(""),)
+//            } else {
+//
+//            }
+//        }
+//    })
+
+    //            binding.also {
+//                val id = depositWithProduct.productInDeposit.id
+//                val idDeposit = depositWithProduct.productInDeposit.idDeposit
+//                val idProduct = depositWithProduct.productInDeposit.productId
+//                val quantity = depositWithProduct.productInDeposit.jumlahQuantity
+//                var returnQuantity = depositWithProduct.productInDeposit.returnQuantity
+
+
+//    fun bind(depositWithProduct: DepositWithProduct) {
+//        binding.also {
+//            val id = depositWithProduct.productInDeposit.id
+//            val idDeposit = depositWithProduct.productInDeposit.idDeposit
+//            val idProduct = depositWithProduct.productInDeposit.productId
+//            val quantity = depositWithProduct.productInDeposit.jumlahQuantity
+//            var returnQuantity = depositWithProduct.productInDeposit.returnQuantity
+//
+//            it.tvProductName.text = depositWithProduct.productData?.namaProduct
+//            it.tvJumlahProductInDepositDetail.text =
+//                itemView.context.getString(R.string.format_show_list, quantity.toString())
+//            it.tvJumlahProductKembaliInDepositDetail.text =
+//                itemView.context.getString(R.string.format_show_list, returnQuantity.toString())
+//
+//            it.btnDetailDeposit.setOnClickListener {
+//                val isEmpty: Boolean
+//                val valueReturnQuantity = binding.etReturnQuantity.text.toString()
+//                if (valueReturnQuantity.isNotEmpty()) {
+//                    returnQuantity = valueReturnQuantity.toInt()
+//                    isEmpty = false
+//                } else {
+//                    isEmpty = true
+//                }
+//                //returnQuantity = if (valueReturnQuantity.isEmpty()) 0 else valueReturnQuantity.toInt()
+//                depositWithProduct.productInDeposit.returnQuantity = returnQuantity
+//
+//                val productDeposit = ProductInDeposit(
+//                    id = id,
+//                    idDeposit = idDeposit,
+//                    productId = idProduct,
+//                    jumlahQuantity = quantity,
+//                    returnQuantity = returnQuantity
+//                )
+//                onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
+//            }
+//        }
+//    }
 //}
 
 
