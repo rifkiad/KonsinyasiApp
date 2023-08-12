@@ -1,5 +1,7 @@
 package com.example.konsinyasiapp.adapter
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -42,30 +44,83 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
                 it.tvJumlahProductKembaliInDepositDetail.text =
                     itemView.context.getString(R.string.format_show_list, returnQuantity.toString())
 
-                detailBinding.btnDetailDepositProduk.setOnClickListener {
-                    val isEmpty: Boolean
-                    val valueReturnQuantity = binding.etReturnQuantity.text.toString()
-                    if (valueReturnQuantity.isNotEmpty()) {
-                        returnQuantity = valueReturnQuantity.toInt()
-                        isEmpty = false
-                    } else {
-                        isEmpty = true
-                    }
-                    //returnQuantity = if (valueReturnQuantity.isEmpty()) 0 else valueReturnQuantity.toInt()
-                    depositWithProduct.productInDeposit.returnQuantity = returnQuantity
-
-                    val productDeposit = ProductInDeposit(
-                        id = id,
-                        idDeposit = idDeposit,
-                        productId = idProduct,
-                        jumlahQuantity = quantity,
-                        returnQuantity = returnQuantity
-                    )
-                    onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
+                val isEmpty: Boolean
+                val valueReturnQuantity = binding.etReturnQuantity.text.toString()
+                if (valueReturnQuantity.isNotEmpty()) {
+                    returnQuantity = valueReturnQuantity.toLong()
+                    isEmpty = false
+                } else {
+                    isEmpty = true
                 }
+                //returnQuantity = if (valueReturnQuantity.isEmpty()) 0 else valueReturnQuantity.toInt()
+                depositWithProduct.productInDeposit.returnQuantity = returnQuantity
+
+                val productDeposit = ProductInDeposit(
+                    id = id,
+                    idDeposit = idDeposit,
+                    productId = idProduct,
+                    jumlahQuantity = quantity,
+                    returnQuantity = returnQuantity
+                )
+                onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
+
+                binding.etReturnQuantity.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        // Handle text change if needed
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        val newValue = s.toString()
+                        if (newValue.isNotEmpty()) {
+                            val newQuantity = newValue.toLong()
+                            depositWithProduct.productInDeposit.returnQuantity = newQuantity
+                            onItemClickCallback.onButtonUpdateQuantity(
+                                depositWithProduct.productInDeposit,
+                                false
+                            )
+                        }
+                    }
+
+//                detailBinding.btnDetailDepositProduk.setOnClickListener {
+//                    val isEmpty: Boolean
+//                    val valueReturnQuantity = binding.etReturnQuantity.text.toString()
+//                    if (valueReturnQuantity.isNotEmpty()) {
+//                        returnQuantity = valueReturnQuantity.toInt()
+//                        isEmpty = false
+//                    } else {
+//                        isEmpty = true
+//                    }
+//                    //returnQuantity = if (valueReturnQuantity.isEmpty()) 0 else valueReturnQuantity.toInt()
+//                    depositWithProduct.productInDeposit.returnQuantity = returnQuantity
+//
+//                    val productDeposit = ProductInDeposit(
+//                        id = id,
+//                        idDeposit = idDeposit,
+//                        productId = idProduct,
+//                        jumlahQuantity = quantity,
+//                        returnQuantity = returnQuantity
+//                    )
+//                    onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
+//                }
+                })
             }
         }
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)

@@ -109,12 +109,10 @@
                 android:layout_below="@id/rvProductInDepositDetail"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:navigateToRincianDeposit="@{true}"
-                android:fontFamily="@font/lato_black"
                 android:backgroundTint="@color/button"
+                android:fontFamily="@font/lato_black"
                 android:text="@string/lanjut"
                 android:textColor="@color/white" />
-
 
         </RelativeLayout>
 

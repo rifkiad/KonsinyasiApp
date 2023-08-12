@@ -17,8 +17,6 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
     private val repository: ProductInDepositRepository =
         ProductInDepositRepository(productInDepositDao)
 
-    //val gettAllDeposit: LiveData<List<ProductInDeposit>> = repository.getAllDeposit
-
     fun filterProduct(idDeposit: Long) = repository.filterProduct(idDeposit)
 
     fun insertDataProductInDeposit(productInDeposit: ProductInDeposit) {

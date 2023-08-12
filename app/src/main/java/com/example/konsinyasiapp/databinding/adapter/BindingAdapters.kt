@@ -63,13 +63,41 @@ class BindingAdapters {
 
         @BindingAdapter("android:navigateToRincianDeposit")
         @JvmStatic
-        fun navigateToRincianDeposit(button: Button, navigate: Boolean) {
+        fun navigateToRincianDeposit(button: Button, depositWithShop: DepositWithShop?) {
             button.setOnClickListener {
-                if (navigate) {
-                    button.findNavController()
-                        .navigate(R.id.action_depositDetail_to_rincian_deposit)
+                depositWithShop?.let {
+                    val action =
+                        DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
+                            idDeposit = it.depositData.id,
+                            currentItem = it
+                        )
+                    button.findNavController().navigate(action)
                 }
             }
         }
     }
 }
+
+//        @BindingAdapter("android:navigateToDetailDeposit")
+//        @JvmStatic
+//        fun navigateToDetailDeposit(view: RelativeLayout, depositData: DepositWithStoreData) {
+//            view.setOnClickListener {
+//                val action = DepositFragmentDirections.actionDepositFragmentToDetailDepositFragment(
+//                    depositData
+//                )
+//                view.findNavController().navigate(action)
+//            }
+//        }
+//    }
+
+//@BindingAdapter("android:navigateToRincianDeposit")
+//@JvmStatic
+//fun navigateToRincianDeposit(button: Button, navigate: Boolean) {
+//    button.setOnClickListener {
+//        if (navigate) {
+//            button.findNavController()
+//                .navigate(R.id.action_depositDetail_to_rincian_deposit)
+//        }
+//    }
+//}
+

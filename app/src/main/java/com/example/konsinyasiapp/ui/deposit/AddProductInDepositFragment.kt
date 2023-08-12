@@ -25,19 +25,17 @@ import com.example.konsinyasiapp.viewModel.ProductViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
 
 class AddProductInDepositFragment : Fragment() {
+
     private var _binding: FragmentAddProductInDepositBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var autoCompleteTexViewProduct: AutoCompleteTextView
-    private lateinit var productAdapter: ArrayAdapter<String>
-    private var productInDepositAdapter: ProductInDepositAdapter = ProductInDepositAdapter()
-
-    private val mSharedViewModel: SharedViewModel by viewModels()
-    private val mProductInDeposit: ProductInDepositViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
+    private val productInDepositViewModel: ProductInDepositViewModel by viewModels()
     private val productViewModel: ProductViewModel by viewModels()
-    private val DepositViewModel: DepositViewModel by viewModels()
+    private val depositViewModel: DepositViewModel by viewModels()
 
-
+    private lateinit var productAdapter: ArrayAdapter<String>
+    private lateinit var autoCompleteTexViewProduct: AutoCompleteTextView
     private var productData = arrayListOf<String>()
     private var listProduct = listOf<ProductData>()
     private var productId = 0L
@@ -52,82 +50,81 @@ class AddProductInDepositFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddProductInDepositBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initArguments()
+        setupUI()
+        setupObservers()
+        setupListeners()
+    }
+
+    private fun initArguments() {
         idDeposit = args.idDeposit
+    }
 
-        //setup RecylerView
-        setupRecyclerView()
-
-        // Observer untuk hasil filter produk berdasarkan id deposit
-        mProductInDeposit.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
-            productInDepositAdapter.setData(data)
-        }
-
-        //pengundangan productData ke dalam ExposedDropdownMenu
+    private fun setupUI() {
         autoCompleteTexViewProduct = binding.autoCompleteTextViewProduct
         productAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, productData)
-
         autoCompleteTexViewProduct.setAdapter(productAdapter)
 
+        val recyclerView = binding.rvProductInDeposit
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = ProductInDepositAdapter()
+    }
+
+    private fun setupObservers() {
         productViewModel.getAllProduct.observe(viewLifecycleOwner) { products ->
             listProduct = products
+            productData.clear()
             for (product in listProduct) {
                 productData.add(product.namaProduct)
             }
+            productAdapter.notifyDataSetChanged()
         }
 
-        //bagian id dari deposit
-        DepositViewModel.gettAllDeposit.observe(viewLifecycleOwner) { deposits ->
+        depositViewModel.gettAllDeposit.observe(viewLifecycleOwner) { deposits ->
             listDeposit = deposits
+            depositData.clear()
             for (deposit in listDeposit) {
                 depositData.add(deposit.id.toString())
             }
         }
 
-        //mengundang untuk bagian idnya
-        binding.autoCompleteTextViewProduct.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, Int, _ ->
-                val selectedProduct = listProduct[Int]
+        productInDepositViewModel.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
+            (binding.rvProductInDeposit.adapter as ProductInDepositAdapter).setData(data)
+        }
+    }
+
+    private fun setupListeners() {
+        autoCompleteTexViewProduct.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val selectedProduct = listProduct[position]
                 productId = selectedProduct.id
             }
 
+        binding.btnTambahProduk.setOnClickListener {
+            insertDataToAddProductDeposit()
+            binding.etJumlahBarang.text = null
+            autoCompleteTexViewProduct.text = null
+            isDataAdded = true
+        }
+
         binding.btnSimpanProduk.setOnClickListener {
             if (!isDataAdded) {
-                // pesan bila user belum mengisi data dan belum menambah datanya menggunakan 'tambahProduk'
                 Toast.makeText(
                     requireContext(),
                     "Harap tambahkan produk terlebih dahulu",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                //action selanjutnya bila user sudah mengklik button simpan
-                it.findNavController().navigate(R.id.action_addProductInDeposit_to_nav_deposit)
+                navigateToDepositScreen()
             }
         }
-
-        binding.btnTambahProduk.setOnClickListener {
-            insertDataToAddProductDeposit()
-
-            //mengosongkan input datanya bila datanya sudah ditambahkan
-            binding.etJumlahBarang.text = null
-            binding.autoCompleteTextViewProduct.text = null
-
-            // Set isDataAdded menjadi true setelah data ditambahkan
-            isDataAdded = true
-        }
-    }
-
-    private fun setupRecyclerView() {
-        val recyclerView = binding.rvProductInDeposit
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = this@AddProductInDepositFragment.productInDepositAdapter
     }
 
     private fun insertDataToAddProductDeposit() {
@@ -136,23 +133,25 @@ class AddProductInDepositFragment : Fragment() {
         val mJumlahQuantity = binding.etJumlahBarang.text.toString()
 
         val validation =
-            mSharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
+            sharedViewModel.verifyDataFromProductToDeposit(mProduct.toString(), mJumlahQuantity)
         if (validation) {
-            //insert to Database
             val newDeposit = ProductInDeposit(
                 0,
                 mProduct,
                 mDeposit,
                 mJumlahQuantity,
                 0
-
             )
-            mProductInDeposit.insertDataProductInDeposit(newDeposit)
+            productInDepositViewModel.insertDataProductInDeposit(newDeposit)
             Toast.makeText(requireContext(), "Product Berhasil Ditambahkan!", Toast.LENGTH_SHORT)
                 .show()
         } else {
             Toast.makeText(requireContext(), "Harap Kolom Diisi", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun navigateToDepositScreen() {
+        view?.findNavController()?.navigate(R.id.action_addProductInDeposit_to_nav_deposit)
     }
 
     override fun onDestroyView() {

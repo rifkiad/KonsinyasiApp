@@ -13,6 +13,7 @@ import com.example.konsinyasiapp.adapter.DepositDetailAdapter
 import com.example.konsinyasiapp.adapter.RincianDepositAdapter
 import com.example.konsinyasiapp.databinding.FragmentRincianDepositBinding
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.viewModel.ProductInDepositViewModel
 
 class RincianDepositFragment : Fragment() {
@@ -39,7 +40,7 @@ class RincianDepositFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        depositDetailAdapter = DepositDetailAdapter(emptyList())
         //setupRecyclerView
         setupRecyclerView()
         args.currentItem.let { depositWithShop ->
@@ -48,7 +49,7 @@ class RincianDepositFragment : Fragment() {
             }
         }
 
-//        val idDeposit = args.idDeposit
+        //val idDeposit = args.idDeposit
         mProductInDeposit.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
             depositDetailAdapter.setData(data)
         }
@@ -66,6 +67,13 @@ class RincianDepositFragment : Fragment() {
         val recyclerView = binding.rvProductInDepositRincian
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = this@RincianDepositFragment.depositDetailAdapter
+
+        depositDetailAdapter.setOnItemClickCallback(object: DepositDetailAdapter.OnItemClickCallback {
+            override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
+
+            }
+
+        })
 
     }
 

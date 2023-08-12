@@ -24,6 +24,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,6 +39,8 @@ class DetailDepositFragment : Fragment() {
     private val depositViewModel: DepositViewModel by viewModels()
 
     private lateinit var depositDetailAdapter: DepositDetailAdapter
+
+    private var listData = listOf<DepositWithProduct>()
 
     private val menuProvider = object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -79,6 +82,7 @@ class DetailDepositFragment : Fragment() {
         setupObservers()
         setupListeners()
 
+//        binding.btnDetailDepositProduk.setOnClickListener {  }
         depositDetailAdapter.setOnItemClickCallback(object :
             DepositDetailAdapter.OnItemClickCallback {
             override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
@@ -89,7 +93,10 @@ class DetailDepositFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 } else {
-                    depositViewModel.updateData(data)
+                    listData.forEach {
+                        depositViewModel.updateData(it.productInDeposit)
+                    }
+                    setupListeners()
                 }
             }
         })
@@ -108,12 +115,14 @@ class DetailDepositFragment : Fragment() {
         args.currentItem.depositData.id.let { id ->
             productInDepositViewModel.filterProduct(id).observe(viewLifecycleOwner) { data ->
                 depositDetailAdapter.setData(data)
+                listData = data
             }
         }
     }
 
     private fun setupListeners() {
         binding.btnDetailDepositProduk.setOnClickListener {
+            Log.d("NavigationDebug", "Button clicked. Navigating to RincianDeposit.")
             val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
                 idDeposit = args.currentItem.depositData.id,
                 currentItem = args.currentItem

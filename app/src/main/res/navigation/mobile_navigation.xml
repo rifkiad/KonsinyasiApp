@@ -59,7 +59,15 @@
             app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
         <action
             android:id="@+id/action_depositDetail_to_rincian_deposit"
-            app:destination="@id/rincian_deposit" />
+            app:destination="@id/rincian_deposit">
+            <argument
+                android:name="idDeposit"
+                app:argType="long" />
+            <argument
+                android:name="currentItem"
+                app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
+        </action>
+
     </fragment>
 
     <fragment
