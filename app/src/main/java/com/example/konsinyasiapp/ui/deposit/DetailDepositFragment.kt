@@ -42,6 +42,8 @@ class DetailDepositFragment : Fragment() {
 
     private var listData = listOf<DepositWithProduct>()
 
+    private var isDataComplete = false
+
     private val menuProvider = object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
             menuInflater.inflate(R.menu.detail_deposit_menu, menu)
@@ -82,22 +84,17 @@ class DetailDepositFragment : Fragment() {
         setupObservers()
         setupListeners()
 
-//        binding.btnDetailDepositProduk.setOnClickListener {  }
         depositDetailAdapter.setOnItemClickCallback(object :
             DepositDetailAdapter.OnItemClickCallback {
             override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
                 if (isEmpty) {
-                    Snackbar.make(
-                        requireView(),
-                        "Isi Dulu Produk Yang Kembali",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    isDataComplete = false
+                } else if (data.returnQuantity > data.jumlahQuantity) {
+                    Snackbar.make(requireView(), "pepeq", Snackbar.LENGTH_SHORT).show()
                 } else {
-                    listData.forEach {
-                        depositViewModel.updateData(it.productInDeposit)
-                    }
                     setupListeners()
                 }
+                Log.d("DetailDepositFragment", "Product Deposit: $data, Is Empty: $isEmpty")
             }
         })
     }
@@ -122,13 +119,32 @@ class DetailDepositFragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnDetailDepositProduk.setOnClickListener {
-            Log.d("NavigationDebug", "Button clicked. Navigating to RincianDeposit.")
-            val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
-                idDeposit = args.currentItem.depositData.id,
-                currentItem = args.currentItem
-            )
-            findNavController().navigate(action)
+            if (isDataComplete()) {
+                listData.forEach { depositWithProduct ->
+                    depositViewModel.updateData(depositWithProduct.productInDeposit)
+                }
+                val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
+                    idDeposit = args.currentItem.depositData.id,
+                    currentItem = args.currentItem
+                )
+                findNavController().navigate(action)
+            } else {
+                Snackbar.make(
+                    requireView(),
+                    "Isi Dulu Produk Yang Kembali",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
+    }
+
+    private fun isDataComplete(): Boolean {
+        for (data in listData) {
+            if (data.productInDeposit.returnQuantity != 0L) {
+                return true
+            }
+        }
+        return false
     }
 
 

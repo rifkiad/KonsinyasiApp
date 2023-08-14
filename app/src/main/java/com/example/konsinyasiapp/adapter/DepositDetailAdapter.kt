@@ -17,8 +17,8 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
     RecyclerView.Adapter<DepositDetailAdapter.MyViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-
     private lateinit var detailBinding: FragmentDetailDepositBinding
+
     fun setDetailBinding(binding: FragmentDetailDepositBinding) {
         this.detailBinding = binding
     }
@@ -65,21 +65,11 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
                 onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
 
                 binding.etReturnQuantity.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                     }
 
-                    override fun onTextChanged(
-                        s: CharSequence?,
-                        start: Int,
-                        before: Int,
-                        count: Int
-                    ) {
-                        // Handle text change if needed
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
                     }
 
                     override fun afterTextChanged(s: Editable?) {
@@ -87,40 +77,12 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
                         if (newValue.isNotEmpty()) {
                             val newQuantity = newValue.toLong()
                             depositWithProduct.productInDeposit.returnQuantity = newQuantity
-                            onItemClickCallback.onButtonUpdateQuantity(
-                                depositWithProduct.productInDeposit,
-                                false
-                            )
                         }
                     }
-
-//                detailBinding.btnDetailDepositProduk.setOnClickListener {
-//                    val isEmpty: Boolean
-//                    val valueReturnQuantity = binding.etReturnQuantity.text.toString()
-//                    if (valueReturnQuantity.isNotEmpty()) {
-//                        returnQuantity = valueReturnQuantity.toInt()
-//                        isEmpty = false
-//                    } else {
-//                        isEmpty = true
-//                    }
-//                    //returnQuantity = if (valueReturnQuantity.isEmpty()) 0 else valueReturnQuantity.toInt()
-//                    depositWithProduct.productInDeposit.returnQuantity = returnQuantity
-//
-//                    val productDeposit = ProductInDeposit(
-//                        id = id,
-//                        idDeposit = idDeposit,
-//                        productId = idProduct,
-//                        jumlahQuantity = quantity,
-//                        returnQuantity = returnQuantity
-//                    )
-//                    onItemClickCallback.onButtonUpdateQuantity(productDeposit, isEmpty)
-//                }
                 })
             }
         }
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)

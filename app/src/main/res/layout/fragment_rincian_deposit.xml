@@ -29,19 +29,12 @@
                 android:text="@{data.currentItem.shopData.name}"
                 android:textSize="@dimen/_16ssp" />
 
-            <View
-                android:id="@+id/divider_top"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_below="@id/tv_nama_toko_rincian_deposit"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:background="@drawable/divider" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProductInDepositRincian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/divider_top"
+                android:layout_below="@id/tv_nama_toko_rincian_deposit"
+                android:layout_marginTop="@dimen/_3sdp"
                 tools:listitem="@layout/item_rincian_deposit" />
 
             <androidx.appcompat.widget.AppCompatButton

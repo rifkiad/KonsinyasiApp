@@ -55,7 +55,7 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_jumlah_barang_product_in_deposit"
                 android:fontFamily="@font/montserrat"
-                android:text="@{depositWithProduct.productInDeposit.jumlahQuantity}"
+                android:text="@{String.valueOf(depositWithProduct.productInDeposit.jumlahQuantity)}"
                 android:textSize="@dimen/_15ssp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

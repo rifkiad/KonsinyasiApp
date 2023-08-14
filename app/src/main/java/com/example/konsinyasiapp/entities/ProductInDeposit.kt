@@ -21,7 +21,7 @@ class ProductInDeposit(
     var idDeposit: Long,
 
     @ColumnInfo(name = "quantity")
-    var jumlahQuantity: String,
+    var jumlahQuantity: Long,
 
     @ColumnInfo(name = "return_quantity")
     var returnQuantity: Long

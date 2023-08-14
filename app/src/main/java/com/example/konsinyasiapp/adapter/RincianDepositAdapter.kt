@@ -14,12 +14,6 @@ import com.example.konsinyasiapp.utils.ProductInDepositDiffCallback
 class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>) :
     RecyclerView.Adapter<RincianDepositAdapter.MyViewHolder>() {
 
-    private lateinit var onItemClickCallback: DepositDetailAdapter.OnItemClickCallback
-
-    fun setOnItemClickCallback(onItemClickCallback: DepositDetailAdapter.OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
     inner class MyViewHolder(private val binding: ItemRincianDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(depositWithProduct: DepositWithProduct) {
@@ -54,9 +48,4 @@ class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>
         this.depositRincian = dataProduct
         productDiffUtilResult.dispatchUpdatesTo(this)
     }
-
-    interface OnItemClickCallback {
-        fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean)
-    }
-
 }

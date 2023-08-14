@@ -67,7 +67,7 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_data_jumlah_produk_in_rincian_deposit"
                 android:fontFamily="@font/montserrat"
-                android:text="@{dataProductInDeposit.productInDeposit.jumlahQuantity}"
+                android:text="@{String.valueOf(dataProductInDeposit.productInDeposit.jumlahQuantity)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
@@ -86,12 +86,12 @@
                 android:id="@+id/tv_data_jumlah_product_kembali_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_data_jumlah_produk_in_rincian_deposit"
+                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:fontFamily="@font/montserrat"
-                android:text="@{dataProductInDeposit.productInDeposit.jumlahQuantity}"
+                android:text="@{String.valueOf(dataProductInDeposit.productInDeposit.returnQuantity)}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
@@ -102,7 +102,6 @@
                 android:layout_below="@id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/white" />
-
 
         </RelativeLayout>
 

@@ -89,11 +89,7 @@ class DepositFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ya") { _, _ ->
             mDepositViewModel.deleteAll()
-            Snackbar.make(
-                requireView(),
-                "Berhasil Semua Item",
-                Snackbar.LENGTH_SHORT
-            ).show()
+            Snackbar.make(requireView(), "Berhasil Semua Item", Snackbar.LENGTH_SHORT).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
         builder.setTitle("Hapus semua item?")

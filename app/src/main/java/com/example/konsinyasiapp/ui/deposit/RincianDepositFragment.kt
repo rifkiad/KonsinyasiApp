@@ -24,9 +24,7 @@ class RincianDepositFragment : Fragment() {
     private val args: RincianDepositFragmentArgs by navArgs()
     private val mProductInDeposit: ProductInDepositViewModel by viewModels()
 
-    private var idDeposit = 0L
-    private lateinit var depositDetailAdapter: DepositDetailAdapter
-
+    private lateinit var rincianDepositAdapter: RincianDepositAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,41 +38,27 @@ class RincianDepositFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        depositDetailAdapter = DepositDetailAdapter(emptyList())
+
+        rincianDepositAdapter = RincianDepositAdapter(emptyList())
+
         //setupRecyclerView
         setupRecyclerView()
-        args.currentItem.let { depositWithShop ->
-            depositWithShop.let {
-                idDeposit = it.depositData.id
-            }
-        }
+        val idDeposit = args.currentItem.depositData.id
 
-        //val idDeposit = args.idDeposit
         mProductInDeposit.filterProduct(idDeposit).observe(viewLifecycleOwner) { data ->
-            depositDetailAdapter.setData(data)
+            rincianDepositAdapter.setData(data)
         }
 
-        // Inisialisasi navController
-        val navController = findNavController()
-
-        val deposit = arguments?.getParcelable<DepositWithShop>("deposit")
-
-        binding.tvNamaTokoRincianDeposit.text = deposit?.shopData?.name
-
+        // Set nama toko di tampilan
+        val depositWithShop = args.currentItem
+        binding.tvNamaTokoRincianDeposit.text = depositWithShop.shopData?.name
     }
+
 
     private fun setupRecyclerView() {
         val recyclerView = binding.rvProductInDepositRincian
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = this@RincianDepositFragment.depositDetailAdapter
-
-        depositDetailAdapter.setOnItemClickCallback(object: DepositDetailAdapter.OnItemClickCallback {
-            override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
-
-            }
-
-        })
-
+        recyclerView.adapter = this@RincianDepositFragment.rincianDepositAdapter
     }
 
     override fun onDestroyView() {
