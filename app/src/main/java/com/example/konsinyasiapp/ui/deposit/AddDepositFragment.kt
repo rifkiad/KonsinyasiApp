@@ -17,6 +17,7 @@ import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.FragmentAddDepositBinding
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.ShopData
+import com.example.konsinyasiapp.entities.StatusDeposit
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
@@ -97,15 +98,13 @@ class AddDepositFragment : Fragment() {
         val mShopData = shopId
         val mDate = binding.tvDatePickerDeposit.text.toString()
 
-
-        val validation = mSharedViewModel.verifyDataFromDeposit(mShopData.toString(), mDate)
-        if (validation) {
-            //insert to Database
+        if (mSharedViewModel.verifyDataFromDeposit(mShopData.toString(), mDate)) {
             val newDeposit = DepositData(
-                0,
-                mShopData.toLong(),
-                mDate,
-                ""
+                id = 0,
+                shopId = mShopData.toLong(),
+                depositDate = mDate,
+                depositFinish = "",
+                statusDeposit = StatusDeposit.DEPOSIT
             )
             mDepositViewModel.insertData(newDeposit)
             mDepositViewModel.idDeposit.observe(viewLifecycleOwner) { idDeposit ->

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.konsinyasiapp.ConverterDeposit
 import com.example.konsinyasiapp.dao.CategoryDao
 import com.example.konsinyasiapp.dao.DepositDao
 import com.example.konsinyasiapp.dao.ProductDao
@@ -16,6 +18,7 @@ import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.entities.ShopData
 
 @Database(entities = [ProductData::class, CategoryData::class, ShopData::class, DepositData::class, ProductInDeposit::class], version = 1, exportSchema = false)
+@TypeConverters(ConverterDeposit::class)
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao

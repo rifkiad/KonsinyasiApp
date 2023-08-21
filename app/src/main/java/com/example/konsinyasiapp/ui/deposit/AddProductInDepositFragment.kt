@@ -140,6 +140,7 @@ class AddProductInDepositFragment : Fragment() {
                 mProduct,
                 mDeposit,
                 mJumlahQuantity.toLong(),
+                0,
                 0
             )
             productInDepositViewModel.insertDataProductInDeposit(newDeposit)

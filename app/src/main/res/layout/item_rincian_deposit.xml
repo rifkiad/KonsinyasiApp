@@ -8,6 +8,11 @@
         <variable
             name="dataProductInDeposit"
             type="com.example.konsinyasiapp.entities.DepositWithProduct" />
+
+        <variable
+            name="dataTerjual"
+            type="com.example.konsinyasiapp.entities.ProductInDeposit" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -36,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_toEndOf="@id/tv_nama_product_in_rincian_deposit"
@@ -63,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_nama_product_in_rincian_deposit"
-                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_data_jumlah_produk_in_rincian_deposit"
                 android:fontFamily="@font/montserrat"
@@ -75,7 +80,7 @@
                 android:id="@+id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
+                android:layout_below="@id/tv_data_jumlah_produk_in_rincian_deposit"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:fontFamily="@font/lato"
                 android:text="Jumlah Produk Kembali  :"
@@ -86,8 +91,8 @@
                 android:id="@+id/tv_data_jumlah_product_kembali_deposit_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_jumlah_product_in_deposit_detail"
-                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_below="@id/tv_data_jumlah_produk_in_rincian_deposit"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/tv_jumlah_product_kembali_in_rincian_detail"
                 android:fontFamily="@font/montserrat"
@@ -95,11 +100,35 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp" />
 
+            <TextView
+                android:id="@+id/tv_jumlah_barang_terjual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_jumlah_product_kembali_in_rincian_detail"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:fontFamily="@font/lato"
+                android:text="Jumlah Produk Yang Terjual :"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:id="@+id/tv_jumlah_produk_yang_terjual_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_jumlah_product_kembali_in_rincian_detail"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toEndOf="@id/tv_jumlah_barang_terjual"
+                android:fontFamily="@font/montserrat"
+                android:text="@{String.valueOf(dataTerjual.soldProduct)}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp" />
+
             <View
                 android:id="@+id/view_rincian_deposit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_below="@id/tv_jumlah_product_kembali_in_rincian_detail"
+                android:layout_below="@id/tv_jumlah_barang_terjual"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/white" />
 

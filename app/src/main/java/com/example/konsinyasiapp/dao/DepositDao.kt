@@ -34,4 +34,8 @@ interface DepositDao {
 
     @Query("DELETE FROM deposit_table")
     suspend fun deleteAll()
+
+    @Query("UPDATE deposit_table SET deposit_finish_date = :date WHERE id_deposit = :depositId")
+    suspend fun updateDepositFinishDate(depositId: Long, date: String)
+
 }

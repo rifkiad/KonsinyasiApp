@@ -82,6 +82,12 @@
         <argument
             android:name="currentItem"
             app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
+        <argument
+            android:name="soldProduct"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_rincian_deposit_to_nav_deposit"
+            app:destination="@id/nav_deposit" />
 
     </fragment>
 
@@ -178,7 +184,7 @@
     <fragment
         android:id="@+id/action_navShopDetail"
         android:name="com.example.konsinyasiapp.ui.shop.DetailShopFragment"
-        android:label="Rincian Toko"
+        android:label="Detail Toko"
         tools:layout="@layout/fragment_detail_shop">
 
         <action

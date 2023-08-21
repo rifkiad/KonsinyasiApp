@@ -2,9 +2,11 @@ package com.example.konsinyasiapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.ItemDepositBinding
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithShop
@@ -28,7 +30,8 @@ class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
             binding.executePendingBindings()
 
             itemView.setOnClickListener { view ->
-                val action = DepositFragmentDirections.actionNavDepositToDepositDetail(depositWithShop)
+                val action =
+                    DepositFragmentDirections.actionNavDepositToDepositDetail(depositWithShop)
                 view.findNavController().navigate(action)
             }
         }

@@ -29,4 +29,7 @@ interface ProductInDepositDao {
     @Transaction
     @Query("SELECT * FROM deposit_product_table")
     fun getDepositWithProduct(): LiveData<List<DepositWithProduct>>
+
+    @Query("SELECT * FROM deposit_product_table WHERE id_deposit_product = :id")
+    suspend fun getProductById(id: Long): ProductInDeposit?
 }

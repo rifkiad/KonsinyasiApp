@@ -7,14 +7,16 @@ import com.example.konsinyasiapp.entities.ProductInDeposit
 
 class ProductInDepositRepository(private val productInDepositDao: ProductInDepositDao) {
 
-    //val getAllDeposit: LiveData<List<ProductInDeposit>> = productInDepositDao.getAllDeposit()
-
     fun getAllProductWithDeposit(): LiveData<List<DepositWithProduct>> {
         return productInDepositDao.getDepositWithProduct()
     }
 
     fun filterProduct(idDeposit: Long): LiveData<List<DepositWithProduct>> =
         productInDepositDao.filterProduct(idDeposit)
+
+    suspend fun updateSoldProduct(productInDepositData: ProductInDeposit) {
+        productInDepositDao.updateData(productInDepositData)
+    }
 
     suspend fun insertData(productInDeposit: ProductInDeposit) {
         productInDepositDao.insertData(productInDeposit)
@@ -26,5 +28,9 @@ class ProductInDepositRepository(private val productInDepositDao: ProductInDepos
 
     suspend fun deleteItem(productInDeposit: ProductInDeposit) {
         productInDepositDao.deleteItem(productInDeposit)
+    }
+
+    suspend fun getProductById(id: Long): ProductInDeposit? {
+        return productInDepositDao.getProductById(id)
     }
 }

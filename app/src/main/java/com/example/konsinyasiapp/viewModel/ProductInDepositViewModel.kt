@@ -25,4 +25,13 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
+    fun updateSoldProduct(id: Long, newSoldProduct: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val productInDeposit = repository.getProductById(id)
+            productInDeposit?.let {
+                it.soldProduct = newSoldProduct.toLong()
+                repository.updateData(it)
+            }
+        }
+    }
 }

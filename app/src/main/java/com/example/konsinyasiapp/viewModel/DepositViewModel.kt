@@ -11,6 +11,7 @@ import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.entities.ShopData
+import com.example.konsinyasiapp.entities.StatusDeposit
 import com.example.konsinyasiapp.repository.DepositRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,11 +26,24 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
     private val _idDeposit = MutableLiveData<Long>()
     val idDeposit: LiveData<Long> = _idDeposit
 
+    private val _depositFinishDate = MutableLiveData<String>()
+    val depositFinishDate: LiveData<String> = _depositFinishDate
+
+    fun updateDepositFinishDate(date: String) {
+        _depositFinishDate.value = date
+    }
+
+    suspend fun finishDeposit(depositData: DepositData) {
+        repository.updateDepositFinishDate(depositData.id, depositData.depositFinish)
+    }
+
     private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
+    private val updateStatusDeposit = MutableLiveData<StatusDeposit>()
 
     fun checkDatabaseEmpty(data: List<DepositWithShop>) {
         checkDatabaseEmptyLiveData.value = data.isEmpty()
     }
+
     fun checkDatabaseEmptyLiveData(): LiveData<Boolean> = checkDatabaseEmptyLiveData
 
     fun getAllShopWithDeposit(): LiveData<List<DepositWithShop>> {
@@ -59,4 +73,10 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
             repository.deleteAll()
         }
     }
+
+    fun getUpdateStatusDeposit(data: StatusDeposit) {
+        updateStatusDeposit.value = data
+    }
+
+    fun getUpdateStatusDepositLiveData(): LiveData<StatusDeposit> = updateStatusDeposit
 }

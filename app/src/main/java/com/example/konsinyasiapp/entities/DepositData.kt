@@ -20,6 +20,14 @@ class DepositData(
     var depositDate: String,
 
     @ColumnInfo(name = "deposit_finish_date")
-    var depositFinish: String
+    var depositFinish: String,
+
+    @ColumnInfo(name = "status_deposit")
+    var statusDeposit: StatusDeposit
 
 ) : Parcelable
+
+enum class StatusDeposit{
+    DEPOSIT,
+    SELESAI
+}

@@ -24,6 +24,9 @@ class ProductInDeposit(
     var jumlahQuantity: Long,
 
     @ColumnInfo(name = "return_quantity")
-    var returnQuantity: Long
+    var returnQuantity: Long,
+
+    @ColumnInfo(name = "sold_product")
+    var soldProduct: Long,
 
 ) : Parcelable

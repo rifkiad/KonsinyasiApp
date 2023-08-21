@@ -9,24 +9,28 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.adapter.DepositDetailAdapter
 import com.example.konsinyasiapp.databinding.FragmentDetailDepositBinding
-import com.example.konsinyasiapp.viewModel.DepositViewModel
-import com.example.konsinyasiapp.viewModel.ProductInDepositViewModel
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.ProductInDeposit
+import com.example.konsinyasiapp.viewModel.DepositViewModel
+import com.example.konsinyasiapp.viewModel.ProductInDepositViewModel
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DetailDepositFragment : Fragment() {
 
@@ -41,9 +45,7 @@ class DetailDepositFragment : Fragment() {
     private lateinit var depositDetailAdapter: DepositDetailAdapter
 
     private var listData = listOf<DepositWithProduct>()
-
-    private var isDataComplete = false
-    private var soldProductQuantity: Long = 0
+    private var totalSoldProduct: Long = 0L
 
     private val menuProvider = object : MenuProvider {
         override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -68,15 +70,10 @@ class DetailDepositFragment : Fragment() {
         _binding = FragmentDetailDepositBinding.inflate(inflater, container, false)
         binding.args = args
 
-        depositDetailAdapter = DepositDetailAdapter(emptyList())
-        depositDetailAdapter.setDetailBinding(binding)
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        setupAdapter()
 
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,18 +81,12 @@ class DetailDepositFragment : Fragment() {
         setupRecyclerView()
         setupObservers()
         setupListeners()
+        setupMenuProvider()
+    }
 
-        depositDetailAdapter.setOnItemClickCallback(object :
-            DepositDetailAdapter.OnItemClickCallback {
-            override fun onButtonUpdateQuantity(data: ProductInDeposit, isEmpty: Boolean) {
-                if (isEmpty) {
-                    isDataComplete = false
-                } else {
-                    setupListeners()
-                }
-                Log.d("DetailDepositFragment", "Product Deposit: $data, Is Empty: $isEmpty")
-            }
-        })
+    private fun setupAdapter() {
+        depositDetailAdapter = DepositDetailAdapter(emptyList())
+        depositDetailAdapter.setDetailBinding(binding)
     }
 
     private fun setupUI() {
@@ -108,57 +99,75 @@ class DetailDepositFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        args.currentItem.depositData.id.let { id ->
-            productInDepositViewModel.filterProduct(id).observe(viewLifecycleOwner) { data ->
+        val depositId = args.currentItem.depositData.id
+        productInDepositViewModel.filterProduct(depositId)
+            .observe(viewLifecycleOwner, Observer { data ->
                 depositDetailAdapter.setData(data)
                 listData = data
-            }
-        }
+            })
     }
 
     private fun setupListeners() {
         binding.btnDetailDepositProduk.setOnClickListener {
-            if (isDataComplete()) {
-                val invalidReturnQuantityData = listData.find { data ->
-                    data.productInDeposit.returnQuantity > data.productInDeposit.jumlahQuantity
-                }
-
-                if (invalidReturnQuantityData != null) {
-                    Snackbar.make(
-                        requireView(),
-                        "Jumlah Kembali melewati batas stok",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                } else {
-                    listData.forEach { depositWithProduct ->
-                        depositViewModel.updateData(depositWithProduct.productInDeposit)
-                    }
-                    val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
-                        idDeposit = args.currentItem.depositData.id,
-                        currentItem = args.currentItem
-                    )
-                    findNavController().navigate(action)
-                }
-            } else {
-                Snackbar.make(
-                    requireView(),
-                    "Isi Dulu Produk Yang Kembali",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-            }
+            handleProductReturn()
         }
     }
 
+    private fun handleProductReturn() {
+        if (isDataComplete()) {
+            val invalidReturnQuantityData =
+                listData.find { it.productInDeposit.returnQuantity > it.productInDeposit.jumlahQuantity }
+            if (invalidReturnQuantityData != null) {
+                showSnackbar("Jumlah Kembali melewati batas stok")
+            } else {
+                updateDepositData()
+                navigateToRincianDeposit()
+            }
+        } else {
+            showSnackbar("Isi Dulu Produk Yang Kembali")
+        }
+    }
 
     private fun isDataComplete(): Boolean {
-        for (data in listData) {
-            if (data.productInDeposit.returnQuantity != 0L) {
-                return true
-            }
-        }
-        return false
+        return listData.any { it.productInDeposit.returnQuantity != 0L }
     }
 
+    private fun updateDepositData() {
+        listData.forEach { depositWithProduct ->
+            depositViewModel.updateData(depositWithProduct.productInDeposit)
+        }
+
+        val depositData = args.currentItem.depositData
+        val currentDate = Date()
+        val formattedDate = currentDate.formatDate("EEEE, dd-MM-yyyy", Locale("id", "ID"))
+        depositData.depositFinish = formattedDate
+
+        totalSoldProduct = listData.sumOf { it.productInDeposit.soldProduct }
+    }
+
+    private fun navigateToRincianDeposit() {
+        val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
+        val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
+        val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
+
+        val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
+            idDeposit = args.currentItem.depositData.id,
+            currentItem = args.currentItem,
+            soldProduct = jumlahProdukTerjual
+        )
+        findNavController().navigate(action)
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvProductInDepositDetail.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = depositDetailAdapter
+        }
+    }
 
     private fun confirmRemoveItem() {
         AlertDialog.Builder(requireContext()).apply {
@@ -182,11 +191,14 @@ class DetailDepositFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView() {
-        binding.rvProductInDepositDetail.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = depositDetailAdapter
-        }
+    private fun Date.formatDate(format: String, locale: Locale): String {
+        val dateFormat = SimpleDateFormat(format, locale)
+        return dateFormat.format(this)
+    }
+
+    private fun setupMenuProvider() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {

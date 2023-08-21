@@ -12,7 +12,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         app:cardBackgroundColor="#344955"
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/_8sdp">
@@ -21,18 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/_16sdp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_2sdp"
-                android:fontFamily="@font/lato_black"
-                android:gravity="center_vertical"
-                android:text="@{depositWithShop.shopData.name}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_15ssp"
-                app:drawableStartCompat="@drawable/ic_store" />
+            android:padding="@dimen/_5sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"

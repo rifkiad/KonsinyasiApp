@@ -15,6 +15,10 @@ class DepositRepository(private val depositDao: DepositDao) {
         return depositDao.getDepositWithShop()
     }
 
+    suspend fun updateDepositFinishDate(depositId: Long, date: String) {
+        depositDao.updateDepositFinishDate(depositId, date)
+    }
+
     suspend fun insertData(depositData: DepositData): Long {
         return depositDao.insertData(depositData)
     }

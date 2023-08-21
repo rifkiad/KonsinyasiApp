@@ -37,17 +37,17 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 tools:listitem="@layout/item_rincian_deposit" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/btn_rincian_deposit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvProductInDepositRincian"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@drawable/button_background"
+                android:backgroundTint="@color/button"
                 android:fontFamily="@font/lato_black"
-                android:text="@string/simpan"
+                android:text="Selesaikan Deposit"
                 android:textColor="@color/white" />
 
         </RelativeLayout>

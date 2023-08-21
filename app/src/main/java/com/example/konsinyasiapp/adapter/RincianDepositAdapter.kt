@@ -17,9 +17,15 @@ class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>
     inner class MyViewHolder(private val binding: ItemRincianDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(depositWithProduct: DepositWithProduct) {
-            binding.dataProductInDeposit = depositWithProduct
-            binding.executePendingBindings()
+            binding.also {
+                binding.dataProductInDeposit = depositWithProduct
+                binding.executePendingBindings()
 
+                val soldProduct = depositWithProduct.productInDeposit.soldProduct
+                it.tvJumlahProdukYangTerjualData.text =
+                    itemView.context.getString(R.string.format_show_list, soldProduct.toString())
+
+            }
         }
     }
 
