@@ -3,7 +3,10 @@ package com.example.konsinyasiapp.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.example.konsinyasiapp.entities.CategoryData
 
-class CategoryDiffCallback(private val oldCategoryList: List<CategoryData>, private val newCategoryList: List<CategoryData>) : DiffUtil.Callback() {
+class CategoryDiffCallback(
+    private val oldCategoryList: List<CategoryData>,
+    private val newCategoryList: List<CategoryData>
+) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldCategoryList.size
 

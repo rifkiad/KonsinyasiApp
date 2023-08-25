@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
+import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.ProductWithCategory
 import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.repository.ShopRepository
@@ -25,11 +26,30 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
     fun checkDatabaseEmpty(data: List<ShopData>) {
         checkDatabaseEmptyLiveData.value = data.isEmpty()
     }
+
     fun checkDatabaseEmptyLiveData(): LiveData<Boolean> = checkDatabaseEmptyLiveData
+
+    fun checkDepositInShop(data: List<DepositData>) {
+        checkDatabaseEmptyLiveData.value = data.isEmpty()
+    }
+
+    fun checkDepositInShopLiveData(): LiveData<Boolean> = checkDatabaseEmptyLiveData
 
     fun insertData(shopData: ShopData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(shopData)
+        }
+    }
+
+    fun updateData(shopData: ShopData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateData(shopData)
+        }
+    }
+
+    fun deleteItem(shopData: ShopData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(shopData)
         }
     }
 
@@ -39,7 +59,5 @@ class ShopViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun searchDatabase(searchQuery: String): LiveData<List<ShopData>> {
-        return repository.searchDatabase(searchQuery)
-    }
+    fun getAllDepositInShop(shopId: Int) = repository.getAllDepositInStore(shopId)
 }

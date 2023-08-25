@@ -3,6 +3,7 @@ package com.example.konsinyasiapp.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.DepositWithProduct
@@ -17,6 +18,11 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
     private val repository: ProductInDepositRepository =
         ProductInDepositRepository(productInDepositDao)
 
+    private val _totalSoldProductLiveData = MutableLiveData<Long>()
+    val totalSoldProductLiveData: LiveData<Long>
+        get() = _totalSoldProductLiveData
+
+
     fun filterProduct(idDeposit: Long) = repository.filterProduct(idDeposit)
 
     fun insertDataProductInDeposit(productInDeposit: ProductInDeposit) {
@@ -25,13 +31,10 @@ class ProductInDepositViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
-    fun updateSoldProduct(id: Long, newSoldProduct: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val productInDeposit = repository.getProductById(id)
-            productInDeposit?.let {
-                it.soldProduct = newSoldProduct.toLong()
-                repository.updateData(it)
-            }
+    fun updateTotalSoldProduct(idDeposit: Long) {
+        viewModelScope.launch(Dispatchers.Main) {
+            val totalSoldProduct = repository.getTotalSoldProduct(idDeposit)
+            _totalSoldProductLiveData.value = totalSoldProduct
         }
     }
 }

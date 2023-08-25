@@ -9,7 +9,12 @@
         android:id="@+id/nav_home"
         android:name="com.example.konsinyasiapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_nav_home_to_depositDetail"
+            app:destination="@id/depositDetail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_shop"
@@ -40,7 +45,11 @@
         tools:layout="@layout/fragment_deposit">
         <action
             android:id="@+id/action_nav_deposit_to_deposit_add"
-            app:destination="@id/deposit_add" />
+            app:destination="@id/deposit_add"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_nav_deposit_to_depositDetail"
             app:destination="@id/depositDetail" />
@@ -53,15 +62,26 @@
         tools:layout="@layout/fragment_detail_deposit">
         <action
             android:id="@+id/action_depositDetail_to_nav_deposit"
-            app:destination="@id/nav_deposit" />
+            app:destination="@id/nav_deposit"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="currentItem"
             app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
         <action
             android:id="@+id/action_depositDetail_to_rincian_deposit"
-            app:destination="@id/rincian_deposit">
+            app:destination="@id/rincian_deposit"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right">
             <argument
                 android:name="idDeposit"
+                app:argType="long" />
+            <argument
+                android:name="soldProduct"
                 app:argType="long" />
             <argument
                 android:name="currentItem"
@@ -87,7 +107,11 @@
             app:argType="long" />
         <action
             android:id="@+id/action_rincian_deposit_to_nav_deposit"
-            app:destination="@id/nav_deposit" />
+            app:destination="@id/nav_deposit"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
 
     </fragment>
 
@@ -98,10 +122,16 @@
         tools:layout="@layout/fragment_add_deposit">
         <action
             android:id="@+id/action_deposit_add_to_nav_deposit"
-            app:destination="@id/nav_deposit" />
+            app:destination="@id/nav_deposit"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_deposit_add_to_addProductInDeposit"
-            app:destination="@id/addProductInDeposit" />
+            app:destination="@id/addProductInDeposit"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 
     <fragment
@@ -111,7 +141,11 @@
         tools:layout="@layout/fragment_add_product_in_deposit">
         <action
             android:id="@+id/action_addProductInDeposit_to_nav_deposit"
-            app:destination="@id/nav_deposit" />
+            app:destination="@id/nav_deposit"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <argument
             android:name="idDeposit"
             app:argType="long" />
@@ -195,6 +229,7 @@
         <argument
             android:name="currentItem"
             app:argType="com.example.konsinyasiapp.entities.ShopData" />
+
     </fragment>
 
 </navigation>

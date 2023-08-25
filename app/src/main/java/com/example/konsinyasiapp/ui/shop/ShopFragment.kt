@@ -32,7 +32,6 @@ class ShopFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mShopViewModel: ShopViewModel by viewModels()
-    private val mSharedViewModel: SharedViewModel by viewModels()
 
     private lateinit var shopAdapter: ShopAdapter
 
@@ -42,7 +41,7 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentShopBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -91,7 +90,6 @@ class ShopFragment : Fragment() {
             binding.noDataTextView.visibility = View.INVISIBLE
         }
     }
-
 
 
     private fun setupRecyclerView() {

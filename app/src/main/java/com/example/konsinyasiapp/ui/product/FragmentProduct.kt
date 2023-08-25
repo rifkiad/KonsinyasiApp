@@ -38,8 +38,6 @@ class FragmentProduct : Fragment() {
     private val binding get() = _binding!!
 
     private val mProductViewModel: ProductViewModel by viewModels()
-    private val mCategoryViewModel: CategoryViewModel by viewModels()
-    private val mSharedViewModel:  SharedViewModel by viewModels()
 
     private val productAdapter by lazy {
         ProductAdapter(

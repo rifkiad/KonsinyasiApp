@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.databinding.ItemDepositDateBinding
+import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithShop
+import com.example.konsinyasiapp.utils.DepositDiffCallback
 import com.example.konsinyasiapp.utils.ShopInDepositDiffCallback
 
 class DetailShopAdapter : RecyclerView.Adapter<DetailShopAdapter.DetailViewHolder>() {
 
-    private var shopWithDeposit = listOf<DepositWithShop>()
-
+    private var shopWithDeposit = listOf<DepositData>()
 
     inner class DetailViewHolder(private val binding: ItemDepositDateBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(depositWithShop: DepositWithShop) {
-            binding.depositWithShop = depositWithShop
+        fun bind(depositData: DepositData) {
+            binding.depositWithShop = depositData
             binding.executePendingBindings()
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -36,10 +36,12 @@ class DetailShopAdapter : RecyclerView.Adapter<DetailShopAdapter.DetailViewHolde
         return shopWithDeposit.size
     }
 
-    fun setData(dataDeposit: List<DepositWithShop>) {
-        val depositDiffUtil = ShopInDepositDiffCallback(shopWithDeposit, dataDeposit)
-        val productDiffUtilResult = DiffUtil.calculateDiff(depositDiffUtil)
-        this.shopWithDeposit = dataDeposit
-        productDiffUtilResult.dispatchUpdatesTo(this)
+    fun setData(dataDeposit: List<DepositData>) {
+        val depositDiffUtil = DepositDiffCallback(shopWithDeposit, dataDeposit)
+        val depositDiffUtilResult = DiffUtil.calculateDiff(depositDiffUtil)
+        shopWithDeposit = dataDeposit
+        depositDiffUtilResult.dispatchUpdatesTo(this)
     }
 }
+
+

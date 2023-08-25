@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.ShopData
 
 @Dao
@@ -26,6 +27,6 @@ interface ShopDao {
     @Query("DELETE FROM shop_table")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM shop_table WHERE name LIKE :searchQuery")
-    fun searchDatabase(searchQuery: String): LiveData<List<ShopData>>
+    @Query("SELECT * FROM deposit_table WHERE shop_id= :shopId")
+    fun getAllDepositInStore(shopId: Int): LiveData<List<DepositData>>
 }

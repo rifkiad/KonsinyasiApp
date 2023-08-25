@@ -8,10 +8,6 @@
         <variable
             name="args"
             type="com.example.konsinyasiapp.ui.shop.DetailShopFragmentArgs" />
-
-        <variable
-            name="depositdata"
-            type="com.example.konsinyasiapp.entities.DepositWithShop" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,7 +22,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="@dimen/_16sdp">
 
             <TextView
@@ -42,10 +37,12 @@
 
             <View
                 android:id="@+id/view_shop"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_shop_name_detail" />
 
             <LinearLayout
@@ -141,43 +138,29 @@
                 android:text="Riwayat Deposit :"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18ssp"
-                app:layout_constraintStart_toStartOf="@id/rv_item_deposit_date"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nomor_telepon_shop_detail" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_item_deposit_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_riwayat_deposit_shop"
                 tools:listitem="@layout/item_deposit_date" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/no_data_imageView"
-                android:layout_width="@dimen/_140sdp"
-                android:layout_height="@dimen/_140sdp"
-                android:src="@drawable/ic_no_data"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/rv_item_deposit_date"
-                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/no_data_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_9sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:text="Tidak Ada Riwayat Deposit"
                 android:textSize="@dimen/_16ssp"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/no_data_imageView" />
+                app:layout_constraintTop_toBottomOf="@id/tv_riwayat_deposit_shop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
-
-
 </layout>

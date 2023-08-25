@@ -87,7 +87,7 @@ class AddProductInDepositFragment : Fragment() {
             productAdapter.notifyDataSetChanged()
         }
 
-        depositViewModel.gettAllDeposit.observe(viewLifecycleOwner) { deposits ->
+        depositViewModel.getAllDeposit.observe(viewLifecycleOwner) { deposits ->
             listDeposit = deposits
             depositData.clear()
             for (deposit in listDeposit) {

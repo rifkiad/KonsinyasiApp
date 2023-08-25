@@ -129,11 +129,17 @@ class DetailDepositFragment : Fragment() {
     }
 
     private fun isDataComplete(): Boolean {
-        return listData.any { it.productInDeposit.returnQuantity != 0L }
+        return listData.any { it.productInDeposit.returnQuantity <= it.productInDeposit.jumlahQuantity }
     }
 
     private fun updateDepositData() {
+//        listData.forEach { depositWithProduct ->
+//            depositViewModel.updateData(depositWithProduct.productInDeposit)
+//        }
         listData.forEach { depositWithProduct ->
+            val soldProduct =
+                depositWithProduct.productInDeposit.jumlahQuantity - depositWithProduct.productInDeposit.returnQuantity
+            depositWithProduct.productInDeposit.soldProduct = soldProduct
             depositViewModel.updateData(depositWithProduct.productInDeposit)
         }
 
@@ -143,12 +149,18 @@ class DetailDepositFragment : Fragment() {
         depositData.depositFinish = formattedDate
 
         totalSoldProduct = listData.sumOf { it.productInDeposit.soldProduct }
+        // Memanggil updateTotalSoldProduct untuk memperbarui totalSoldProduct di ViewModel
+        productInDepositViewModel.updateTotalSoldProduct(depositData.id)
     }
 
     private fun navigateToRincianDeposit() {
         val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
         val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
         val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
+
+//        listData.forEach {
+//            it.productInDeposit.soldProduct = it.productInDeposit.jumlahQuantity - it.productInDeposit.returnQuantity
+//        }
 
         val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
             idDeposit = args.currentItem.depositData.id,
@@ -157,6 +169,7 @@ class DetailDepositFragment : Fragment() {
         )
         findNavController().navigate(action)
     }
+
 
     private fun showSnackbar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()

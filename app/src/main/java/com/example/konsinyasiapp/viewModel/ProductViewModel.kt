@@ -19,12 +19,12 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
 
     val getAllProduct: LiveData<List<ProductData>> = repository.getAllProduct
 
-
     private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
 
     fun checkDatabaseEmpty(data: List<ProductWithCategory>) {
         checkDatabaseEmptyLiveData.value = data.isEmpty()
     }
+
     fun checkDatabaseEmptyLiveData(): LiveData<Boolean> = checkDatabaseEmptyLiveData
 
     fun getAllProductsWithCategories(): LiveData<List<ProductWithCategory>> {

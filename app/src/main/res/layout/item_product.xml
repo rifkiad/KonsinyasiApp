@@ -7,6 +7,10 @@
         <variable
             name="productWithCategory"
             type="com.example.konsinyasiapp.entities.ProductWithCategory" />
+
+        <variable
+            name="productData"
+            type="com.example.konsinyasiapp.entities.ProductData" />
     </data>
 
 

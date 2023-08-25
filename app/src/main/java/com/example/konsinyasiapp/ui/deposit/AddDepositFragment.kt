@@ -41,7 +41,7 @@ class AddDepositFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddDepositBinding.inflate(inflater, container, false)
 
         //datePicker
@@ -101,7 +101,7 @@ class AddDepositFragment : Fragment() {
         if (mSharedViewModel.verifyDataFromDeposit(mShopData.toString(), mDate)) {
             val newDeposit = DepositData(
                 id = 0,
-                shopId = mShopData.toLong(),
+                shopId = mShopData,
                 depositDate = mDate,
                 depositFinish = "",
                 statusDeposit = StatusDeposit.DEPOSIT

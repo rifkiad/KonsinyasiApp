@@ -85,6 +85,7 @@
 
     <string name="format_show_list">%s</string>
     <string name="input_jumlah_kembali">Input Jumlah Kembali</string>
+    <string name="total_penjualan">Total Penjualan</string>
 
 
 </resources>

@@ -23,7 +23,6 @@ import com.example.konsinyasiapp.databinding.FragmentDepositBinding
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.google.android.material.snackbar.Snackbar
 
-
 class DepositFragment : Fragment() {
 
     private var _binding: FragmentDepositBinding? = null

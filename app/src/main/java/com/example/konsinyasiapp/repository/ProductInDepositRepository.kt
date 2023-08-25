@@ -14,8 +14,8 @@ class ProductInDepositRepository(private val productInDepositDao: ProductInDepos
     fun filterProduct(idDeposit: Long): LiveData<List<DepositWithProduct>> =
         productInDepositDao.filterProduct(idDeposit)
 
-    suspend fun updateSoldProduct(productInDepositData: ProductInDeposit) {
-        productInDepositDao.updateData(productInDepositData)
+    suspend fun getTotalSoldProduct(idDeposit: Long): Long {
+        return productInDepositDao.getTotalSoldProduct(idDeposit)
     }
 
     suspend fun insertData(productInDeposit: ProductInDeposit) {

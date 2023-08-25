@@ -1,5 +1,6 @@
 package com.example.konsinyasiapp.ui.deposit
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -46,7 +47,6 @@ class RincianDepositFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
 
-        // Dapatkan nilai soldProduct dari args
         totalSoldProduct = args.soldProduct
 
         // Inisialisasi adapter untuk daftar produk dalam deposit
@@ -67,21 +67,17 @@ class RincianDepositFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setupListeners() {
         binding.btnRincianDeposit.setOnClickListener {
             val depositData = args.currentItem.depositData
 
-            // Dapatkan tanggal saat ini dalam format yang diinginkan
             val formattedDate = Date().formatDate("EEEE, dd-MM-yyyy", Locale("id", "ID"))
 
-            // Memanggil finishDeposit dari dalam coroutine
             viewLifecycleOwner.lifecycleScope.launch {
                 mDeposit.finishDeposit(depositData)
 
-                // Perbarui data soldProduct di ViewModel
-                mProductInDeposit.updateSoldProduct(depositData.id, totalSoldProduct.toInt())
-
-                // Navigasi kembali ke DepositFragment
+                rincianDepositAdapter.notifyDataSetChanged() // Perbarui adapter di sini
                 val action = RincianDepositFragmentDirections.actionRincianDepositToNavDeposit()
                 findNavController().navigate(action)
             }

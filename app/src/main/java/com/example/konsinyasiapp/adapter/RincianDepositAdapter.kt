@@ -14,29 +14,36 @@ import com.example.konsinyasiapp.utils.ProductInDepositDiffCallback
 class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>) :
     RecyclerView.Adapter<RincianDepositAdapter.MyViewHolder>() {
 
+    private var totalSoldProduct: Long = 0
+
+    fun setTotalSoldProduct(total: Long) {
+        totalSoldProduct = total
+    }
+
     inner class MyViewHolder(private val binding: ItemRincianDepositBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(depositWithProduct: DepositWithProduct) {
-            binding.also {
-                binding.dataProductInDeposit = depositWithProduct
-                binding.executePendingBindings()
+            binding.apply {
+                dataProductInDeposit = depositWithProduct
+                executePendingBindings()
 
+                // Mengambil data jumlah produk dari depositWithProduct
                 val soldProduct = depositWithProduct.productInDeposit.soldProduct
-                it.tvJumlahProdukYangTerjualData.text =
-                    itemView.context.getString(R.string.format_show_list, soldProduct.toString())
 
+                // Mengatur nilai TextView
+                tvJumlahProdukYangTerjualData.text =
+                    itemView.context.getString(R.string.format_show_list, soldProduct.toString())
             }
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemRincianDepositBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val binding = ItemRincianDepositBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return MyViewHolder(binding)
     }
 

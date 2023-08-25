@@ -32,4 +32,7 @@ interface ProductInDepositDao {
 
     @Query("SELECT * FROM deposit_product_table WHERE id_deposit_product = :id")
     suspend fun getProductById(id: Long): ProductInDeposit?
+
+    @Query("SELECT SUM(sold_product) FROM deposit_product_table WHERE id_deposit = :idDeposit")
+    suspend fun getTotalSoldProduct(idDeposit: Long): Long
 }

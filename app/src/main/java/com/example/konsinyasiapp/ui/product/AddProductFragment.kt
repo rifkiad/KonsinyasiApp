@@ -46,7 +46,7 @@ class AddProductFragment : Fragment() {
         _binding = FragmentAddProductBinding.inflate(inflater, container, false)
 
         val edtHargaProduk: EditText = binding.edtHargaProduk
-        val converter = Converter(edtHargaProduk)
+        val converter = Converter(null, edtHargaProduk)
 
         return binding.root
 
