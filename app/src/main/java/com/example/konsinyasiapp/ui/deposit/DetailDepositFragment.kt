@@ -24,6 +24,7 @@ import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.adapter.DepositDetailAdapter
 import com.example.konsinyasiapp.databinding.FragmentDetailDepositBinding
 import com.example.konsinyasiapp.entities.DepositWithProduct
+import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.ProductInDepositViewModel
@@ -44,6 +45,7 @@ class DetailDepositFragment : Fragment() {
 
     private lateinit var depositDetailAdapter: DepositDetailAdapter
 
+    private var idDeposit = 0L
     private var listData = listOf<DepositWithProduct>()
     private var totalSoldProduct: Long = 0L
 
@@ -69,6 +71,13 @@ class DetailDepositFragment : Fragment() {
     ): View {
         _binding = FragmentDetailDepositBinding.inflate(inflater, container, false)
         binding.args = args
+        args.currentItem.let { depositWithShop ->
+            depositWithShop.let {
+                idDeposit = it.depositData.id
+                setupUI(it)
+                depositViewModel.getUpdateStatusDeposit(it.depositData.statusDeposit)
+            }
+        }
 
         setupAdapter()
 
@@ -77,7 +86,6 @@ class DetailDepositFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUI()
         setupRecyclerView()
         setupObservers()
         setupListeners()
@@ -89,12 +97,13 @@ class DetailDepositFragment : Fragment() {
         depositDetailAdapter.setDetailBinding(binding)
     }
 
-    private fun setupUI() {
+    private fun setupUI(dataDepositWithShop: DepositWithShop) {
         val depositWithShop = args.currentItem
         binding.apply {
             tvNamaTokoDepositDetail.text = depositWithShop.shopData?.name
             tvTanggalDepositDepositDetail.text = depositWithShop.depositData.depositDate
             tvFinishDepositDetail.text = depositWithShop.depositData.depositFinish
+            depositViewModel.getUpdateStatusDeposit(dataDepositWithShop.depositData.statusDeposit)
         }
     }
 
@@ -113,23 +122,27 @@ class DetailDepositFragment : Fragment() {
         }
     }
 
+
     private fun handleProductReturn() {
-        if (isDataComplete()) {
-            val invalidReturnQuantityData =
-                listData.find { it.productInDeposit.returnQuantity > it.productInDeposit.jumlahQuantity }
-            if (invalidReturnQuantityData != null) {
-                showSnackbar("Jumlah Kembali melewati batas stok")
-            } else {
-                updateDepositData()
-                navigateToRincianDeposit()
-            }
-        } else {
+        val isReturnQuantityEmpty = listData.none { it.productInDeposit.returnQuantity != 0L }
+        val isReturnQuantityValid = isReturnQuantityValid() && !isReturnQuantityEmpty
+
+        if (isReturnQuantityEmpty) {
             showSnackbar("Isi Dulu Produk Yang Kembali")
+        } else if (!isReturnQuantityValid) {
+            showSnackbar("Jumlah Kembali melewati batas stok atau tidak valid")
+        } else {
+            updateDepositData()
+            navigateToRincianDeposit()
         }
     }
 
-    private fun isDataComplete(): Boolean {
-        return listData.any { it.productInDeposit.returnQuantity <= it.productInDeposit.jumlahQuantity }
+    private fun isReturnQuantityValid(): Boolean {
+        return listData.all { depositWithProduct ->
+            val returnQuantity = depositWithProduct.productInDeposit.returnQuantity
+            val jumlahQuantity = depositWithProduct.productInDeposit.jumlahQuantity
+            returnQuantity in 0..jumlahQuantity
+        }
     }
 
     private fun updateDepositData() {
@@ -149,27 +162,31 @@ class DetailDepositFragment : Fragment() {
         depositData.depositFinish = formattedDate
 
         totalSoldProduct = listData.sumOf { it.productInDeposit.soldProduct }
-        // Memanggil updateTotalSoldProduct untuk memperbarui totalSoldProduct di ViewModel
         productInDepositViewModel.updateTotalSoldProduct(depositData.id)
     }
 
-    private fun navigateToRincianDeposit() {
-        val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
-        val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
-        val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
 
+    private fun navigateToRincianDeposit() {
+        val isReturnQuantityValid = isReturnQuantityValid()
 //        listData.forEach {
 //            it.productInDeposit.soldProduct = it.productInDeposit.jumlahQuantity - it.productInDeposit.returnQuantity
 //        }
 
-        val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
-            idDeposit = args.currentItem.depositData.id,
-            currentItem = args.currentItem,
-            soldProduct = jumlahProdukTerjual
-        )
-        findNavController().navigate(action)
-    }
+        if (isReturnQuantityValid) {
+            val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
+            val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
+            val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
 
+            val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
+                idDeposit = args.currentItem.depositData.id,
+                currentItem = args.currentItem,
+                soldProduct = jumlahProdukTerjual
+            )
+            findNavController().navigate(action)
+        } else {
+            showSnackbar("Isi Dulu Produk Yang Kembali atau Jumlah Kembali Tidak Valid")
+        }
+    }
 
     private fun showSnackbar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
@@ -185,7 +202,7 @@ class DetailDepositFragment : Fragment() {
     private fun confirmRemoveItem() {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("Hapus Item")
-            setMessage("Anda yakin ingin menghapus item ini?")
+            setMessage("Anda yakin ingin menghapus item Deposit ini?")
             setPositiveButton("Ya") { dialog, _ ->
                 deleteSelectedItem()
                 dialog.dismiss()
