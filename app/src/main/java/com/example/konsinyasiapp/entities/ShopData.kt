@@ -25,4 +25,14 @@ class ShopData(
     @ColumnInfo(name = "phoneNumber")
     var phoneNumber: String? = null
 
-) : Parcelable
+) : Parcelable {
+    fun copy(
+        id: Int = this.id,
+        name: String? = this.name,
+        address: String? = this.address,
+        ownerName: String? = this.ownerName,
+        phoneNumber: String? = this.phoneNumber
+    ): ShopData {
+        return ShopData(id, name, address, ownerName, phoneNumber)
+    }
+}

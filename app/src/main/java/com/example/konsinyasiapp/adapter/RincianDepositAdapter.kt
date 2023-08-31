@@ -34,7 +34,9 @@ class RincianDepositAdapter(private var depositRincian: List<DepositWithProduct>
                 // Mengatur nilai TextView
                 tvJumlahProdukYangTerjualData.text =
                     itemView.context.getString(R.string.format_show_list, soldProduct.toString())
+
             }
+
         }
     }
 

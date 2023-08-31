@@ -1,5 +1,6 @@
 package com.example.konsinyasiapp.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.example.konsinyasiapp.databinding.EditProductBinding
 import com.example.konsinyasiapp.databinding.ItemProductBinding
 import com.example.konsinyasiapp.entities.ProductData
 import com.example.konsinyasiapp.utils.ProductDiffCallbackNew
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,6 +37,8 @@ class ProductAdapterNew(val c: Context, var userList: ArrayList<ProductData>) :
             }
         }
 
+        @OptIn(DelicateCoroutinesApi::class)
+        @SuppressLint("DiscouragedPrivateApi", "NotifyDataSetChanged")
         private fun popupMenus(v: View) {
             val position = userList[adapterPosition]
             val popupMenus = PopupMenu(c, v)

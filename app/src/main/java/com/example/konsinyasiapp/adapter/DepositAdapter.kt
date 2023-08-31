@@ -2,24 +2,17 @@ package com.example.konsinyasiapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.ItemDepositBinding
-import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithShop
-import com.example.konsinyasiapp.entities.ProductWithCategory
 import com.example.konsinyasiapp.ui.deposit.DepositFragmentDirections
-import com.example.konsinyasiapp.ui.deposit.DetailDepositFragment
-import com.example.konsinyasiapp.ui.shop.ShopFragmentDirections
-import com.example.konsinyasiapp.utils.ProductDiffCallback
-import com.example.konsinyasiapp.utils.ShopDiffCallback
+import com.example.konsinyasiapp.ui.home.HomeFragmentDirections
 import com.example.konsinyasiapp.utils.ShopInDepositDiffCallback
 
-class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
-    RecyclerView.Adapter<DepositAdapter.MyViewHolder>() {
+class DepositAdapter : RecyclerView.Adapter<DepositAdapter.MyViewHolder>() {
 
     private var shopWithDeposit = listOf<DepositWithShop>()
 
@@ -30,12 +23,20 @@ class DepositAdapter(var dataDeposit: (DepositData) -> Unit) :
             binding.executePendingBindings()
 
             itemView.setOnClickListener { view ->
-                val action =
-                    DepositFragmentDirections.actionNavDepositToDepositDetail(depositWithShop)
-                view.findNavController().navigate(action)
+                when (view.findNavController().currentDestination?.id) {
+                    R.id.nav_deposit -> {
+                        val action = DepositFragmentDirections.actionNavDepositToDepositDetail(depositWithShop, false)
+                        view.findNavController().navigate(action)
+                    }
+                    R.id.nav_home -> {
+                        val actionToDetailDeposit = HomeFragmentDirections.actionNavHomeToDepositDetail(depositWithShop, true)
+                        view.findNavController().navigate(actionToDetailDeposit)
+                    }
+                }
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemDepositBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -13,6 +13,7 @@ import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.entities.ProductInDepositWithProduct
+import com.example.konsinyasiapp.entities.StatusDeposit
 
 @Dao
 interface DepositDao {
@@ -51,6 +52,9 @@ interface DepositDao {
     fun getDepositWithShopForShop(shopId: Long): LiveData<List<DepositWithShop>>
 
     @Transaction
-    @Query("SELECT * FROM deposit_table WHERE status_deposit = 'DEPOSIT'")
+    @Query("SELECT * FROM deposit_table WHERE status_deposit = 'MENUNGGU'")
     fun getAllUnfinishedDeposit(): LiveData<List<DepositWithShop>>
+
+    @Query("UPDATE deposit_table SET status_deposit = :newStatus WHERE id_deposit = :depositId")
+    suspend fun updateDepositStatus(depositId: Long, newStatus: StatusDeposit)
 }

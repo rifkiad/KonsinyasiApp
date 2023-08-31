@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.Converter
 import com.example.konsinyasiapp.adapter.DepositAdapter
@@ -22,9 +20,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mDepositViewModel: DepositViewModel by viewModels()
-    private var depositAdapter: DepositAdapter = DepositAdapter {
-
-    }
+    private val depositAdapter: DepositAdapter by lazy { DepositAdapter() }
 
     private val totalAmountTextView: TextView
         get() = binding.tvJumlahHargaYangTerjualHome
@@ -44,16 +40,27 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecyclerView()
+        setupObservers()
+    }
 
+    private fun setupRecyclerView() {
+        binding.rvDepositHome.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = depositAdapter
+        }
+    }
+
+    private fun setupObservers() {
         mDepositViewModel.getAllUnfinishedDeposit().observe(viewLifecycleOwner) { depositList ->
             mDepositViewModel.checkDatabaseEmpty(depositList)
             depositAdapter.setData(depositList)
         }
+
         mDepositViewModel.checkDatabaseEmptyLiveData().observe(viewLifecycleOwner, Observer {
             showEmptyDatabaseViews(it)
         })
+
         mDepositViewModel.getAllDepositHome().observe(viewLifecycleOwner) { deposit ->
             mDepositViewModel.getAllDepositProduct().observe(viewLifecycleOwner) { depositProduct ->
                 mDepositViewModel.getProductDepositsForCurrentMonth(deposit, depositProduct)
@@ -64,25 +71,14 @@ class HomeFragment : Fragment() {
                     }
                 mDepositViewModel.calculateTotalAmountLiveData()
                     .observe(viewLifecycleOwner) { totalAmount ->
-                        binding.tvJumlahHargaYangTerjualHome.text =
-                            (converter.formatRupiah(totalAmount.toString()))
+                        binding.tvJumlahHargaYangTerjualHome.text = converter.formatRupiah(totalAmount.toString())
                     }
             }
         }
     }
 
     private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
-        if (emptyDatabase) {
-            binding.noDataTextView.visibility = View.VISIBLE
-        } else {
-            binding.noDataTextView.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun setupRecyclerView() {
-        val recyclerView = binding.rvDepositHome
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = this@HomeFragment.depositAdapter
+        binding.noDataTextView.visibility = if (emptyDatabase) View.VISIBLE else View.INVISIBLE
     }
 
     override fun onDestroyView() {

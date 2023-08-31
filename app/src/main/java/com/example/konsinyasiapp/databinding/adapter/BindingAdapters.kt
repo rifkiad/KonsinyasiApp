@@ -61,16 +61,16 @@ class BindingAdapters {
             }
         }
 
-        @BindingAdapter("android:navigateToDepositDetail")
-        @JvmStatic
-        fun navigateTolistDeposit(button: Button, navigate: Boolean) {
-            button.setOnClickListener {
-                if (navigate) {
-                    button.findNavController()
-                        .navigate(R.id.action_rincian_deposit_to_nav_deposit)
-                }
-            }
-        }
+//        @BindingAdapter("android:navigateToDepositDetail")
+//        @JvmStatic
+//        fun navigateTolistDeposit(button: Button, navigate: Boolean) {
+//            button.setOnClickListener {
+//                if (navigate) {
+//                    button.findNavController()
+//                        .navigate(R.id.action_rincian_deposit_to_nav_deposit)
+//                }
+//            }
+//        }
     }
 }
 

@@ -13,14 +13,16 @@
     <color name="background">#F0F0F0</color>
     <color name="dark_grey">#AAAAAA</color>
     <color name="hint_Text">#808080</color>
+    <color name="reply_blue_800">#232F34</color>
+    <color name="reply_blue_600">#4A6572</color>
     <color name="gray">#DDDDDD</color>
     <color name="teal">#FF009688</color>
 
     <color name="card_background_color">#344955</color>
-    <color name="divider_color">#FFFFFF</color>
+    <color name="divider_color">#E6E6E6</color>
     <color name="primary_text_color">#000000</color>
     <color name="secondary_text_color">#808080</color>
 
-    <color name="button">#1E8A8A</color>
+    <color name="button">#4A6572</color>
 
 </resources>

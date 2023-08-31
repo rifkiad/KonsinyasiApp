@@ -27,7 +27,6 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
 
         fun bind(depositWithProduct: DepositWithProduct) {
             val productInDeposit = depositWithProduct.productInDeposit
-            //val soldProduct = productInDeposit.soldProduct
             val quantity = productInDeposit.jumlahQuantity
 
             binding.apply {
@@ -41,6 +40,7 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -67,7 +67,7 @@ class DepositDetailAdapter(private var depositDetail: List<DepositWithProduct>) 
             override fun afterTextChanged(s: Editable?) {
                 val newValue = s.toString()
                 if (newValue.isNotEmpty()) {
-                    val newQuantity = newValue.toLong()
+                    val newQuantity = newValue.toInt()
                     depositWithProduct.productInDeposit.returnQuantity = newQuantity
                 }
             }

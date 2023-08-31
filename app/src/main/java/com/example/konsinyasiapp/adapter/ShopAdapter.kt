@@ -23,121 +23,51 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
-    RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
-
+class ShopAdapter(
+    val context: Context,
+    var userList: ArrayList<ShopData>
+) : RecyclerView.Adapter<ShopAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(private val binding: ItemShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            setupClickListeners()
+        }
 
         fun bind(shopData: ShopData) {
             binding.shopData = shopData
             binding.executePendingBindings()
-            binding.mMenus.setOnClickListener {
-                popupMenus(it)
-            }
-            itemView.setOnClickListener { view ->
-                val action = ShopFragmentDirections.actionNavShopToActionNavShopDetail(shopData)
-                view.findNavController().navigate(action)
+        }
+
+        private fun setupClickListeners() {
+            binding.mMenus.setOnClickListener { popupMenus(it) }
+            itemView.setOnClickListener {
+                val action = ShopFragmentDirections.actionNavShopToActionNavShopDetail(
+                    userList[adapterPosition]
+                )
+                it.findNavController().navigate(action)
             }
         }
 
-        @SuppressLint("InflateParams", "NotifyDataSetChanged")
-        private fun popupMenus(v: View) {
+        @SuppressLint("DiscouragedPrivateApi")
+        private fun popupMenus(view: View) {
             val position = userList[adapterPosition]
-            val popupMenus = PopupMenu(c, v)
+            val popupMenus = PopupMenu(context, view)
             popupMenus.inflate(R.menu.shop_fragment_menu_more)
             popupMenus.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.edit_text -> {
-                        val binding = EditShopBinding.inflate(LayoutInflater.from(c))
-                        val name = binding.edtNamaTokoEdit
-                        val address = binding.edtAlamatEdit
-                        val ownerShop = binding.edtNamaPemilikEdit
-                        val phoneNumber = binding.edtNomorTeleponEdit
-
-                        // mengeset data akan muncul di edit text
-                        name.setText(position.name)
-                        address.setText(position.address)
-                        ownerShop.setText(position.ownerName)
-                        phoneNumber.setText(position.phoneNumber)
-
-                        val dialogView = binding.root
-
-                        val dialogBuilder = AlertDialog.Builder(c)
-                            .setTitle("Edit Toko")
-                            .setView(dialogView)
-                            .setPositiveButton("Ok", null)
-                            .setNegativeButton("Cancel", null)
-
-                        val dialog = dialogBuilder.create()
-                        dialog.setOnShowListener {
-                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                                position.name = name.text.toString()
-                                position.address = address.text.toString()
-                                position.ownerName = ownerShop.text.toString()
-                                position.phoneNumber = phoneNumber.text.toString()
-
-                                // Update data menggunakan Room Database
-                                val shopDao = MyDatabase.getDatabase(c).shopDao()
-                                GlobalScope.launch {
-                                    shopDao.updateData(position)
-
-                                    withContext(Dispatchers.Main) {
-                                        notifyDataSetChanged()
-                                        Toast.makeText(
-                                            c,
-                                            "Informasi Telah TerUpdate",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        dialog.dismiss()
-                                    }
-                                }
-                            }
-                        }
-
-                        dialog.show()
-
+                        showEditDialog(position)
                         true
                     }
 
                     R.id.delete -> {
-                        AlertDialog.Builder(c)
-                            .setTitle("Hapus")
-                            .setIcon(R.drawable.ic_warning)
-                            .setMessage("Apa Kamu Yakin Ingin Menghapus Item Toko Ini?")
-                            .setPositiveButton("Ya") { dialog, _ ->
-                                // delete data menggunakan Room Database
-                                val shopDao = MyDatabase.getDatabase(c).shopDao()
-                                GlobalScope.launch {
-                                    shopDao.deleteItem(position)
-
-                                    withContext(Dispatchers.Main) {
-                                        //perlu digaris bawahi khususnya saya sendiri 'userList' harus berupa arrayList agar dapat memanggil sebuah removeAt terimakasih
-                                        userList.removeAt(adapterPosition)
-                                        notifyItemRemoved(adapterPosition)
-                                        notifyDataSetChanged()
-                                        Toast.makeText(
-                                            c,
-                                            "Informasi Terhapus",
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
-                                        dialog.dismiss()
-                                    }
-                                }
-                            }
-                            .setNegativeButton("Tidak") { dialog, _ ->
-                                dialog.dismiss()
-                            }
-                            .create()
-                            .show()
-
+                        showDeleteDialog(position)
                         true
                     }
 
-                    else -> true
+                    else -> false
                 }
             }
             popupMenus.show()
@@ -147,12 +77,92 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
             menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
                 .invoke(menu, true)
         }
+
+        private fun showEditDialog(shopData: ShopData) {
+            val dialogBinding = EditShopBinding.inflate(LayoutInflater.from(context))
+            dialogBinding.edtNamaTokoEdit.setText(shopData.name)
+            dialogBinding.edtAlamatEdit.setText(shopData.address)
+            dialogBinding.edtNamaPemilikEdit.setText(shopData.ownerName)
+            dialogBinding.edtNomorTeleponEdit.setText(shopData.phoneNumber)
+
+            val dialogView = dialogBinding.root
+
+            val dialogBuilder = AlertDialog.Builder(context)
+                .setTitle("Edit Toko")
+                .setView(dialogView)
+                .setPositiveButton("Ok", null)
+                .setNegativeButton("Cancel", null)
+
+            val dialog = dialogBuilder.create()
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                    val newName = dialogBinding.edtNamaTokoEdit.text.toString()
+                    val newAddress = dialogBinding.edtAlamatEdit.text.toString()
+                    val newOwnerName = dialogBinding.edtNamaPemilikEdit.text.toString()
+                    val newPhoneNumber = dialogBinding.edtNomorTeleponEdit.text.toString()
+
+                    if (newName.isNotEmpty()) {
+                        val updatedShopData = shopData.copy(
+                            name = newName,
+                            address = newAddress,
+                            ownerName = newOwnerName,
+                            phoneNumber = newPhoneNumber
+                        )
+
+                        val shopDao = MyDatabase.getDatabase(context).shopDao()
+                        GlobalScope.launch {
+                            shopDao.updateData(updatedShopData)
+
+                            withContext(Dispatchers.Main) {
+                                notifyDataSetChanged()
+                                Toast.makeText(
+                                    context,
+                                    "Informasi Telah TerUpdate",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                dialog.dismiss()
+                            }
+                        }
+                    }
+                }
+            }
+
+            dialog.show()
+        }
+
+        private fun showDeleteDialog(shopData: ShopData) {
+            AlertDialog.Builder(context)
+                .setTitle("Hapus")
+                .setIcon(R.drawable.ic_warning)
+                .setMessage("Apa Kamu Yakin Ingin Menghapus Item Toko Ini?")
+                .setPositiveButton("Ya") { dialog, _ ->
+                    val shopDao = MyDatabase.getDatabase(context).shopDao()
+                    GlobalScope.launch {
+                        shopDao.deleteItem(shopData)
+
+                        withContext(Dispatchers.Main) {
+                            userList.remove(shopData)
+                            notifyItemRemoved(adapterPosition)
+                            notifyDataSetChanged()
+                            Toast.makeText(
+                                context,
+                                "Informasi Terhapus",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dialog.dismiss()
+                        }
+                    }
+                }
+                .setNegativeButton("Tidak") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+        }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -165,10 +175,10 @@ class ShopAdapter(val c: Context, var userList: ArrayList<ShopData>) :
         holder.bind(currentItem)
     }
 
-    fun setData(shopdata: ArrayList<ShopData>) {
-        val shopDiffUtil = ShopDiffCallback(userList, shopdata)
-        val shopDiffUtilResult = DiffUtil.calculateDiff(shopDiffUtil)
-        this.userList = shopdata
-        shopDiffUtilResult.dispatchUpdatesTo(this)
+    fun setData(newList: ArrayList<ShopData>) {
+        val shopDiffUtil = ShopDiffCallback(userList, newList)
+        val shopDiffResult = DiffUtil.calculateDiff(shopDiffUtil)
+        userList = newList
+        shopDiffResult.dispatchUpdatesTo(this)
     }
 }

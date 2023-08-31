@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KonsinyasiApp</string>
+    <string name="app_name">TitipJual</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -18,67 +18,52 @@
     <string name="search">Search</string>
     <string name="name">Name</string>
 
-    //sharedPreferences
     <string name="halo_tolong_isi_data_dibawah_ini">Halo, Tolong Isi Data Dibawah Ini!</string>
     <string name="nama">Nama</string>
     <string name="simpan">Simpan</string>
 
-    //setting
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
 
-    //editProduct
     <string name="nama_produk">Nama Produk</string>
     <string name="pilih_category">Pilih Category</string>
     <string name="harga_produk">Harga Produk</string>
 
-    //editShop - addShop
     <string name="nama_toko">Nama Toko</string>
     <string name="alamat">Alamat</string>
     <string name="nama_pemilik">Nama Pemilik</string>
     <string name="nomor_telepon">Nomor Telepon</string>
 
-    //addCategory
     <string name="kategori_nama_produk">Kategori Nama Produk</string>
     <string name="tambah_kategori">Tambah Kategori</string>
 
-    //addDeposit
     <string name="pilih_toko">Pilih Toko</string>
     <string name="tentukan_tanggal_deposit">Tentukan Tanggal Deposit</string>
     <string name="lanjut">Lanjut</string>
 
-    //addProduct
     <string name="pilih_kategori">Pilih Kategori</string>
     <string name="tambah_produk">Tambah Produk</string>
 
-    //addProductInDeposit
     <string name="pilih_produk">Pilih Produk</string>
     <string name="jumlah_produk">Jumlah Produk</string>
     <string name="simpan_produk">Simpan Produk</string>
 
-    //addShop
     <string name="tambah_toko">Tambah Toko</string>
 
-    //category
     <string name="tidak_ada_kategori">Tidak Ada Kategori</string>
 
-    //deposit
     <string name="tidak_ada_deposit">Tidak Ada Deposit</string>
     <string name="tambah_deposit">Tambah Deposit</string>
 
-    //detailDeposit
     <string name="nama_toko_deposit_detail">Nama Toko:</string>
     <string name="tanggal_deposit_detail_deposit">Tanggal Deposit:</string>
     <string name="tanggal_selesai_deposit_detail_deposit">Tanggal Selesai Deposit:</string>
     <string name="list_produk">List Produk</string>
 
-    //product
     <string name="tidak_ada_produk">Tidak Ada Produk</string>
 
-    //shop
     <string name="tidak_ada_toko">Tidak Ada Toko</string>
 
-    //item productDeposit
     <string name="nama_produk_product_in_deposit">Nama Produk :</string>
     <string name="jumlah_produk_product_in_deposit">Jumlah Produk :</string>
     <string name="jumlah_terjual">Jumlah Terjual</string>
@@ -86,6 +71,8 @@
     <string name="format_show_list">%s</string>
     <string name="input_jumlah_kembali">Input Jumlah Kembali</string>
     <string name="total_penjualan">Total Penjualan</string>
+    <string name="DEPOSIT">DEPOSIT</string>
+    <string name="range">-</string>
 
 
 </resources>

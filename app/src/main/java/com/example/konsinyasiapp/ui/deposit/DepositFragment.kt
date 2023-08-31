@@ -29,10 +29,7 @@ class DepositFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mDepositViewModel: DepositViewModel by viewModels()
-
-    private var depositAdapter: DepositAdapter = DepositAdapter { _ ->
-
-    }
+    private val depositAdapter: DepositAdapter by lazy { DepositAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +43,6 @@ class DepositFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setup recyclerView
         setupRecyclerView()
 
         mDepositViewModel.getAllShopWithDeposit().observe(viewLifecycleOwner) { data ->
@@ -62,7 +58,6 @@ class DepositFragment : Fragment() {
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.shop_fragment_menu, menu)
-
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -75,31 +70,32 @@ class DepositFragment : Fragment() {
     }
 
     private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
-        if (emptyDatabase) {
-            binding.noDataImageView.visibility = View.VISIBLE
-            binding.noDataTextView.visibility = View.VISIBLE
-        } else {
-            binding.noDataImageView.visibility = View.INVISIBLE
-            binding.noDataTextView.visibility = View.INVISIBLE
-        }
+        binding.noDataImageView.visibility = if (emptyDatabase) View.VISIBLE else View.INVISIBLE
+        binding.noDataTextView.visibility = if (emptyDatabase) View.VISIBLE else View.INVISIBLE
     }
 
     private fun confirmRemoval() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ya") { _, _ ->
             mDepositViewModel.deleteAll()
-            Snackbar.make(requireView(), "Berhasil Semua Item", Snackbar.LENGTH_SHORT).show()
+            showSnackbar("Berhasil Semua Item", 800)
         }
-        builder.setNegativeButton("No") { _, _ -> }
+        builder.setNegativeButton("Batal") { _, _ -> }
         builder.setTitle("Hapus semua item?")
         builder.setMessage("Anda akan menghapus seluruh isi. Lanjutkan?")
         builder.create().show()
     }
 
     private fun setupRecyclerView() {
-        val recyclerView = binding.rvDeposit
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = this@DepositFragment.depositAdapter
+        binding.rvDeposit.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = depositAdapter
+        }
+    }
+
+    private fun showSnackbar(message: String, duration: Int) {
+        val snackbar = Snackbar.make(requireView(), message, duration)
+        snackbar.show()
     }
 
     override fun onDestroyView() {

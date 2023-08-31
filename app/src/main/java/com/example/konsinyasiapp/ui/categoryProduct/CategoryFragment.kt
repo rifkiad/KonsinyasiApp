@@ -2,7 +2,6 @@ package com.example.konsinyasiapp.ui.categoryProduct
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -11,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -18,8 +18,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.databinding.FragmentCategoryBinding
 import com.example.konsinyasiapp.adapter.CategoryAdapter
+import com.example.konsinyasiapp.databinding.FragmentCategoryBinding
 import com.example.konsinyasiapp.entities.CategoryData
 import com.example.konsinyasiapp.viewModel.CategoryViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -91,11 +91,9 @@ class CategoryFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ya") { _, _ ->
             mCategoryViewModel.deleteAll()
-            Snackbar.make(
-                requireView(),
-                "Berhasil Semua Item",
-                Snackbar.LENGTH_SHORT
-            ).show()
+            showSnackbar(
+                "Berhasil Semua Item", 800
+            )
         }
         builder.setNegativeButton("No") { _, _ -> }
         builder.setTitle("Hapus semua item?")
@@ -128,15 +126,16 @@ class CategoryFragment : Fragment() {
         alertDialogBuilder.setMessage("Anda yakin ingin menghapus ${deletedItem.nameCategory}?")
         alertDialogBuilder.setPositiveButton("Hapus") { _, _ ->
             mCategoryViewModel.deleteItem(categoryData)
-            Snackbar.make(
-                requireView(),
-                "Berhasil Menghapus Item",
-                Snackbar.LENGTH_SHORT
-            ).show()
+            showSnackbar("Berhasil Menghapus Item", 800)
         }
         alertDialogBuilder.setNegativeButton("Batal", null)
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun showSnackbar(message: String, duration: Int) {
+        val snackbar = Snackbar.make(requireView(), message, duration)
+        snackbar.show()
     }
 
     override fun onDestroy() {

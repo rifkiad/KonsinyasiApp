@@ -25,11 +25,23 @@
             android:padding="@dimen/_10sdp">
 
             <TextView
+                android:id="@+id/tv_deposit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_black"
+                android:text="@{depositWithShop.depositData.statusDeposit.displayString}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/tv_nama_toko_list_deposit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:drawablePadding="@dimen/_2sdp"
-                android:fontFamily="@font/lato_black"
+                android:fontFamily="@font/lato_bold"
                 android:gravity="center_vertical"
                 android:text="@{depositWithShop.shopData.name}"
                 android:textColor="@color/white"
@@ -37,7 +49,7 @@
                 app:drawableStartCompat="@drawable/ic_store"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_deposit_label" />
 
             <TextView
                 android:id="@+id/tv_tanggal_deposit_detail_toko"
@@ -59,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:gravity="center_vertical"
-                android:text="-"
+                android:text="@string/range"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_tanggal_deposit_detail_toko"

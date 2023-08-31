@@ -16,7 +16,7 @@
             android:id="@+id/rv_deposit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_deposit"/>
+            tools:listitem="@layout/item_deposit" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/no_data_imageView"
@@ -34,7 +34,9 @@
             android:layout_below="@id/no_data_imageView"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/_16sdp"
+            android:fontFamily="@font/lato"
             android:text="@string/tidak_ada_deposit"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:visibility="invisible" />
 
@@ -51,8 +53,8 @@
             android:layout_marginBottom="@dimen/_18sdp"
             android:backgroundTint="@color/reply_blue"
             android:clickable="true"
-            android:navigateToAddDepositFragment="@{true}"
             android:focusable="true"
+            android:navigateToAddDepositFragment="@{true}"
             android:text="@string/tambah_deposit"
             android:textColor="@color/white"
             app:icon="@drawable/ic_add"

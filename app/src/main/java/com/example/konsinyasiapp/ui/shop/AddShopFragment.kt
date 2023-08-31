@@ -1,17 +1,16 @@
 package com.example.konsinyasiapp.ui.shop
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.konsinyasiapp.R
-import com.example.konsinyasiapp.viewModel.SharedViewModel
-import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.databinding.FragmentAddShopBinding
+import com.example.konsinyasiapp.entities.ShopData
+import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -24,8 +23,6 @@ class AddShopFragment : Fragment() {
     private val mShopViewModel: ShopViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
-
-    lateinit var btnTambahToko: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +43,8 @@ class AddShopFragment : Fragment() {
         val mProductOwner = binding.edtNamaPemilik.text.toString()
         val mPhoneNumber = binding.edtNomorTelepon.text.toString()
 
-        val validation = mSharedViewModel.verifyDataFromUser(mName, mAddress, mProductOwner, mPhoneNumber)
+        val validation =
+            mSharedViewModel.verifyDataFromUser(mName, mAddress, mProductOwner, mPhoneNumber)
         if (validation) {
             //insert to Database
             val newData = ShopData(
@@ -57,13 +55,18 @@ class AddShopFragment : Fragment() {
                 mPhoneNumber
             )
             mShopViewModel.insertData(newData)
-            Snackbar.make(requireView(), "Berhasil Ditambahkan!", Snackbar.LENGTH_SHORT).show()
+            showSnackbar("Berhasil Ditambahkan!", 800)
             //navigateBack
             findNavController().navigate(R.id.action_action_navshop_topshop_to_nav_shop)
         } else {
-            Snackbar.make(requireView(), "Harap semua kolom diisi!", Snackbar.LENGTH_SHORT)
-                .show()
+            showSnackbar("Harap semua kolom diisi!", 800)
+
         }
+    }
+
+    private fun showSnackbar(message: String, duration: Int) {
+        val snackbar = Snackbar.make(requireView(), message, duration)
+        snackbar.show()
     }
 
     override fun onDestroyView() {

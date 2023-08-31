@@ -1,7 +1,6 @@
 package com.example.konsinyasiapp.ui.deposit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.SharedViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
 
-
 class AddDepositFragment : Fragment() {
     private var _binding: FragmentAddDepositBinding? = null
     private val binding get() = _binding!!
@@ -34,7 +32,7 @@ class AddDepositFragment : Fragment() {
     private val mDepositViewModel: DepositViewModel by viewModels()
     private val shopViewModel: ShopViewModel by viewModels()
 
-    private var shopData = arrayListOf<String>()
+    private val shopData = ArrayList<String>()
     private var listShop = listOf<ShopData>()
     private var shopId = 1
 
@@ -44,13 +42,16 @@ class AddDepositFragment : Fragment() {
     ): View {
         _binding = FragmentAddDepositBinding.inflate(inflater, container, false)
 
-        //datePicker
-        binding.apply {
-            tvDatePickerDeposit.setOnClickListener {
-                //membuat contoh untuk DatePickerFragment
-                val datePickerFragment = DatePickerFragment()
-                datePickerFragment.show(requireActivity().supportFragmentManager, "DatePicker")
-            }
+        setupDatePicker()
+        setupButtonClick()
+
+        return binding.root
+    }
+
+    private fun setupDatePicker() {
+        binding.tvDatePickerDeposit.setOnClickListener {
+            val datePickerFragment = DatePickerFragment()
+            datePickerFragment.show(requireActivity().supportFragmentManager, "DatePicker")
         }
 
         requireActivity().supportFragmentManager.setFragmentResultListener(
@@ -62,14 +63,13 @@ class AddDepositFragment : Fragment() {
                 binding.tvDatePickerDeposit.text = date
             }
         }
+    }
 
+    private fun setupButtonClick() {
         binding.btnLanjut.setOnClickListener {
             insertDataToDeposit()
             binding.autoCompleteTextViewShop.text = null
         }
-
-        return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,9 +82,8 @@ class AddDepositFragment : Fragment() {
 
         shopViewModel.getAllData.observe(viewLifecycleOwner) { shops ->
             listShop = shops
-            for (shop in listShop) {
-                shop.name?.let { shopData.add(it) }
-            }
+            shopData.clear()
+            shopData.addAll(listShop.mapNotNull { it.name })
         }
 
         binding.autoCompleteTextViewShop.onItemClickListener =
@@ -104,7 +103,7 @@ class AddDepositFragment : Fragment() {
                 shopId = mShopData,
                 depositDate = mDate,
                 depositFinish = "",
-                statusDeposit = StatusDeposit.DEPOSIT
+                statusDeposit = StatusDeposit.MENUNGGU
             )
             mDepositViewModel.insertData(newDeposit)
             mDepositViewModel.idDeposit.observe(viewLifecycleOwner) { idDeposit ->

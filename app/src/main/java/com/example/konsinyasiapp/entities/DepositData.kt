@@ -27,7 +27,7 @@ class DepositData(
 
 ) : Parcelable
 
-enum class StatusDeposit{
-    DEPOSIT,
-    SELESAI
+enum class StatusDeposit(val displayString: String) {
+    MENUNGGU("MENUNGGU"),
+    SELESAI("SELESAI")
 }

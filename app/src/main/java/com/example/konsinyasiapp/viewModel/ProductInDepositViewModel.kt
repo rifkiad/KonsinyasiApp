@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
-import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.repository.ProductInDepositRepository
 import kotlinx.coroutines.Dispatchers

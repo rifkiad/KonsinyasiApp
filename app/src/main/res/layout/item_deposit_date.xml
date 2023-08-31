@@ -7,15 +7,16 @@
         <variable
             name="depositWithShop"
             type="com.example.konsinyasiapp.entities.DepositData" />
+
+        <variable
+            name="data"
+            type="com.example.konsinyasiapp.entities.DepositWithShop" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_2sdp"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_margin="@dimen/_7sdp"
         app:cardBackgroundColor="#344955"
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardElevation="@dimen/_8sdp">
@@ -24,6 +25,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/tv_deposit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_black"
+                android:text="@{data.depositData.statusDeposit.displayString}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_tanggal_deposit_detail_toko"
@@ -37,7 +49,7 @@
                 android:textSize="@dimen/_13ssp"
                 app:drawableStartCompat="@drawable/ic_calender"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_deposit_label" />
 
             <TextView
                 android:id="@+id/view_detail_toko"

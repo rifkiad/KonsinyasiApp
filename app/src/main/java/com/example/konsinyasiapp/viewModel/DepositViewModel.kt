@@ -1,7 +1,6 @@
 package com.example.konsinyasiapp.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +21,9 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
     private val repository: DepositRepository = DepositRepository(depositDao)
     private val filteredDepositLiveData = MutableLiveData<List<ProductInDepositWithProduct>>()
     private val totalAmountLiveData = MutableLiveData<Int>()
+    private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
+    private val updateStatusDeposit = MutableLiveData<StatusDeposit>()
+
     fun getAllFilterdDepositLiveData(): LiveData<List<ProductInDepositWithProduct>> = filteredDepositLiveData
 
     fun calculateTotalAmountLiveData(): LiveData<Int> = totalAmountLiveData
@@ -38,8 +40,6 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
         repository.updateDepositFinishDate(depositData.id, depositData.depositFinish)
     }
 
-    private val checkDatabaseEmptyLiveData = MutableLiveData<Boolean>()
-    private val updateStatusDeposit = MutableLiveData<StatusDeposit>()
 
     fun checkDatabaseEmpty(data: List<DepositWithShop>) {
         checkDatabaseEmptyLiveData.value = data.isEmpty()
@@ -105,10 +105,9 @@ class DepositViewModel(application: Application) : AndroidViewModel(application)
 
     fun getUpdateStatusDepositLiveData(): LiveData<StatusDeposit> = updateStatusDeposit
 
-    private val _depositFinishDate = MutableLiveData<String>()
-    val depositFinishDate: LiveData<String> = _depositFinishDate
-
-    fun updateDepositFinishDate(date: String) {
-        _depositFinishDate.value = date
+    fun updateDepositStatus(id: Long, newStatus: StatusDeposit) {
+        viewModelScope.launch {
+            repository.updateDepositStatus(id, newStatus)
+        }
     }
 }

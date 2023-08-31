@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.konsinyasiapp.adapter.DetailShopAdapter
 import com.example.konsinyasiapp.databinding.FragmentDetailShopBinding
 import com.example.konsinyasiapp.entities.ShopData
-import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.ShopViewModel
 
 class DetailShopFragment : Fragment() {

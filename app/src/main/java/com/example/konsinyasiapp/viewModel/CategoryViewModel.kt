@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.konsinyasiapp.database.MyDatabase
 import com.example.konsinyasiapp.entities.CategoryData
-import com.example.konsinyasiapp.entities.ProductData
-import com.example.konsinyasiapp.entities.ShopData
 import com.example.konsinyasiapp.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

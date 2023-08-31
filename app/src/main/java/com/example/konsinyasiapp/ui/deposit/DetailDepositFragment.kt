@@ -2,7 +2,6 @@ package com.example.konsinyasiapp.ui.deposit
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -25,7 +24,6 @@ import com.example.konsinyasiapp.adapter.DepositDetailAdapter
 import com.example.konsinyasiapp.databinding.FragmentDetailDepositBinding
 import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
-import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.viewModel.DepositViewModel
 import com.example.konsinyasiapp.viewModel.ProductInDepositViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -49,21 +47,21 @@ class DetailDepositFragment : Fragment() {
     private var listData = listOf<DepositWithProduct>()
     private var totalSoldProduct: Long = 0L
 
-    private val menuProvider = object : MenuProvider {
-        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-            menuInflater.inflate(R.menu.detail_deposit_menu, menu)
-        }
-
-        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-            when (menuItem.itemId) {
-                R.id.delete_item_detail_deposit -> confirmRemoveItem()
-            }
-            return NavigationUI.onNavDestinationSelected(
-                menuItem,
-                requireView().findNavController()
-            )
-        }
-    }
+//    private val menuProvider = object : MenuProvider {
+//        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//            menuInflater.inflate(R.menu.detail_deposit_menu, menu)
+//        }
+//
+//        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//            when (menuItem.itemId) {
+//                R.id.delete_item_detail_deposit -> confirmRemoveItem()
+//            }
+//            return NavigationUI.onNavDestinationSelected(
+//                menuItem,
+//                requireView().findNavController()
+//            )
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,26 +120,29 @@ class DetailDepositFragment : Fragment() {
         }
     }
 
-
     private fun handleProductReturn() {
-        val isReturnQuantityEmpty = listData.none { it.productInDeposit.returnQuantity != 0L }
-        val isReturnQuantityValid = isReturnQuantityValid() && !isReturnQuantityEmpty
-
-        if (isReturnQuantityEmpty) {
-            showSnackbar("Isi Dulu Produk Yang Kembali")
-        } else if (!isReturnQuantityValid) {
-            showSnackbar("Jumlah Kembali melewati batas stok atau tidak valid")
-        } else {
+        if (isReturnQuantityValid()) {
             updateDepositData()
             navigateToRincianDeposit()
         }
     }
 
     private fun isReturnQuantityValid(): Boolean {
-        return listData.all { depositWithProduct ->
-            val returnQuantity = depositWithProduct.productInDeposit.returnQuantity
-            val jumlahQuantity = depositWithProduct.productInDeposit.jumlahQuantity
-            returnQuantity in 0..jumlahQuantity
+        val invalidReturnQuantityData = listData.find {
+            it.productInDeposit.returnQuantity > it.productInDeposit.jumlahQuantity ||
+                    it.productInDeposit.returnQuantity < 0
+        }
+
+        return if (invalidReturnQuantityData != null) {
+            val errorMessage = if (invalidReturnQuantityData.productInDeposit.returnQuantity < 0) {
+                "Jumlah Kembali tidak boleh negatif"
+            } else {
+                "Jumlah Kembali melewati batas stok"
+            }
+            showSnackbar(errorMessage, 350)
+            false
+        } else {
+            true
         }
     }
 
@@ -152,7 +153,7 @@ class DetailDepositFragment : Fragment() {
         listData.forEach { depositWithProduct ->
             val soldProduct =
                 depositWithProduct.productInDeposit.jumlahQuantity - depositWithProduct.productInDeposit.returnQuantity
-            depositWithProduct.productInDeposit.soldProduct = soldProduct
+            depositWithProduct.productInDeposit.soldProduct = soldProduct.toLong()
             depositViewModel.updateData(depositWithProduct.productInDeposit)
         }
 
@@ -162,34 +163,32 @@ class DetailDepositFragment : Fragment() {
         depositData.depositFinish = formattedDate
 
         totalSoldProduct = listData.sumOf { it.productInDeposit.soldProduct }
+        // Memanggil updateTotalSoldProduct untuk memperbarui totalSoldProduct di ViewModel
         productInDepositViewModel.updateTotalSoldProduct(depositData.id)
     }
 
 
     private fun navigateToRincianDeposit() {
-        val isReturnQuantityValid = isReturnQuantityValid()
 //        listData.forEach {
 //            it.productInDeposit.soldProduct = it.productInDeposit.jumlahQuantity - it.productInDeposit.returnQuantity
 //        }
 
-        if (isReturnQuantityValid) {
-            val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
-            val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
-            val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
+        val jumlahProdukKembali = listData.sumOf { it.productInDeposit.returnQuantity }
+        val jumlahProdukDititipkan = listData.sumOf { it.productInDeposit.jumlahQuantity }
+        val jumlahProdukTerjual = jumlahProdukDititipkan - jumlahProdukKembali
 
-            val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
-                idDeposit = args.currentItem.depositData.id,
-                currentItem = args.currentItem,
-                soldProduct = jumlahProdukTerjual
-            )
-            findNavController().navigate(action)
-        } else {
-            showSnackbar("Isi Dulu Produk Yang Kembali atau Jumlah Kembali Tidak Valid")
-        }
+        val action = DetailDepositFragmentDirections.actionDepositDetailToRincianDeposit(
+            idDeposit = args.currentItem.depositData.id,
+            currentItem = args.currentItem,
+            soldProduct = jumlahProdukTerjual.toLong(),
+            state = true
+        )
+        findNavController().navigate(action)
     }
 
-    private fun showSnackbar(message: String) {
-        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+    private fun showSnackbar(message: String, duration: Int) {
+        val snackbar = Snackbar.make(requireView(), message, duration)
+        snackbar.show()
     }
 
     private fun setupRecyclerView() {
@@ -228,7 +227,21 @@ class DetailDepositFragment : Fragment() {
 
     private fun setupMenuProvider() {
         val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.detail_deposit_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.delete_item_detail_deposit -> confirmRemoveItem()
+                }
+                return NavigationUI.onNavDestinationSelected(
+                    menuItem,
+                    requireView().findNavController()
+                )
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {

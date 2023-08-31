@@ -29,6 +29,7 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+
         <action
             android:id="@+id/action_nav_shop_to_action_navShopDetail"
             app:destination="@id/action_navShopDetail"
@@ -60,13 +61,6 @@
         android:name="com.example.konsinyasiapp.ui.deposit.DetailDepositFragment"
         android:label="Detail Deposit"
         tools:layout="@layout/fragment_detail_deposit">
-        <action
-            android:id="@+id/action_depositDetail_to_nav_deposit"
-            app:destination="@id/nav_deposit"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="currentItem"
             app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
@@ -87,6 +81,10 @@
                 android:name="currentItem"
                 app:argType="com.example.konsinyasiapp.entities.DepositWithShop" />
         </action>
+        <argument
+            android:name="state"
+            app:argType="boolean"
+            android:defaultValue="false" />
 
     </fragment>
 
@@ -107,11 +105,14 @@
             app:argType="long" />
         <action
             android:id="@+id/action_rincian_deposit_to_nav_deposit"
-            app:destination="@id/nav_deposit"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:destination="@id/nav_deposit" />
+        <action
+            android:id="@+id/action_rincian_deposit_to_nav_home"
+            app:destination="@id/nav_home" />
+        <argument
+            android:name="state"
+            app:argType="boolean"
+            android:defaultValue="false" />
 
     </fragment>
 
@@ -120,11 +121,6 @@
         android:name="com.example.konsinyasiapp.ui.deposit.AddDepositFragment"
         android:label="Tambah Deposit"
         tools:layout="@layout/fragment_add_deposit">
-        <action
-            android:id="@+id/action_deposit_add_to_nav_deposit"
-            app:destination="@id/nav_deposit"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_deposit_add_to_addProductInDeposit"
             app:destination="@id/addProductInDeposit"

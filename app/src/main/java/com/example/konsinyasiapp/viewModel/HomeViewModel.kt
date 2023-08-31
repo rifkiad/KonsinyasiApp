@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.example.konsinyasiapp.entities.DepositWithShop
-import com.example.konsinyasiapp.entities.ProductWithCategory
 import com.example.konsinyasiapp.setting.SettingPrefereces
 
 class HomeViewModel(private val preferences: SettingPrefereces) : ViewModel() {

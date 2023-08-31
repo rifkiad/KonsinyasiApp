@@ -20,10 +20,10 @@ class ProductInDeposit(
     var idDeposit: Long,
 
     @ColumnInfo(name = "quantity")
-    var jumlahQuantity: Long,
+    var jumlahQuantity: Int,
 
     @ColumnInfo(name = "return_quantity")
-    var returnQuantity: Long,
+    var returnQuantity: Int,
 
     @ColumnInfo(name = "sold_product")
     var soldProduct: Long,

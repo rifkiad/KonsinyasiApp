@@ -2,8 +2,10 @@ package com.example.konsinyasiapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.konsinyasiapp.R
 import com.example.konsinyasiapp.databinding.ItemDepositDateBinding
 import com.example.konsinyasiapp.entities.DepositData
 import com.example.konsinyasiapp.entities.DepositWithShop
@@ -19,6 +21,9 @@ class DetailShopAdapter : RecyclerView.Adapter<DetailShopAdapter.DetailViewHolde
         fun bind(depositData: DepositData) {
             binding.depositWithShop = depositData
             binding.executePendingBindings()
+
+            val statusTextView = binding.root.findViewById<TextView>(R.id.tv_deposit_label)
+            statusTextView.text = depositData.statusDeposit.displayString
         }
     }
 

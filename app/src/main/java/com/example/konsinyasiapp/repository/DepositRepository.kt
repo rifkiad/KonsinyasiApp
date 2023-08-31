@@ -7,6 +7,7 @@ import com.example.konsinyasiapp.entities.DepositWithProduct
 import com.example.konsinyasiapp.entities.DepositWithShop
 import com.example.konsinyasiapp.entities.ProductInDeposit
 import com.example.konsinyasiapp.entities.ProductInDepositWithProduct
+import com.example.konsinyasiapp.entities.StatusDeposit
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -42,14 +43,6 @@ class DepositRepository(private val depositDao: DepositDao) {
 
     suspend fun deleteAll() {
         depositDao.deleteAll()
-    }
-
-    fun getDepositWithShopForShop(shopId: Long): LiveData<List<DepositWithShop>> {
-        return if (shopId == -1L) {
-            depositDao.getDepositWithShop()
-        } else {
-            depositDao.getDepositWithShopForShop(shopId)
-        }
     }
 
     fun getAllUnfinishedDeposit(): LiveData<List<DepositWithShop>> =
@@ -91,5 +84,9 @@ class DepositRepository(private val depositDao: DepositDao) {
             }
         }
         return totalAmount
+    }
+
+    suspend fun updateDepositStatus(id: Long, newStatus: StatusDeposit) {
+        depositDao.updateDepositStatus(id, newStatus)
     }
 }

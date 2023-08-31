@@ -139,7 +139,7 @@ class AddProductInDepositFragment : Fragment() {
                 0,
                 mProduct,
                 mDeposit,
-                mJumlahQuantity.toLong(),
+                mJumlahQuantity.toInt(),
                 0,
                 0
             )
